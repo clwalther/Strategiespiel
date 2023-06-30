@@ -1,0 +1,7 @@
+# FILES
+.env
+.env.old
+*.conf
+
+# FOLDERS
+/*.d
