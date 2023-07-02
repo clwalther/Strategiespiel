@@ -5,7 +5,11 @@ function add_to_integer(int $current, int $add_points, int $n_category, int $max
 }
 
 function get_value_form_integer(int $current, int $n_category, int $max_points): int {
-    return floor($current / pow($max_points, $n_category)) - floor(pow($max_points, $n_category - 1)) * pow($max_points, $n_category);
+    $points = floor($current / pow($max_points, $n_category)) - floor(pow($max_points, $n_category - 1)) * pow($max_points, $n_category);
+    if($points < 0) {
+        return 0;
+    }
+    return $points;
 }
 
 ?>

@@ -109,7 +109,11 @@ class Database
 
     private function format_query_response(object $query_response): array {
         if($query_response->num_rows > 0) {
-            return $query_response->fetch_assoc();
+            $results = [];
+            while($signle_result = $query_response->fetch_assoc()) {
+                array_push($results, $signle_result);
+            }
+            return $results;
         } else {
             return [];
         }

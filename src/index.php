@@ -6,6 +6,8 @@
     <title>The Wizard Schools</title>
 </head>
 <body>
-
+<?php
+include "scripts/global.php";
+?>
 </body>
 </html>

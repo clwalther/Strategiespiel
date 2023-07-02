@@ -72,4 +72,6 @@ body {
 
                 border-right: none;
                 border-radius: 0;
+
+                transition: width 1.5s ease;
             }

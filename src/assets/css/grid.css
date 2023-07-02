@@ -2,14 +2,17 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+
     margin: 0;
     padding: 0;
 }
 
 section {
-    display: flex;
     height: 50vh;
     width: 100vw;
+
+    display: flex;
+
     justify-content: space-around;
     align-items: center;
 }
@@ -17,5 +20,6 @@ section {
     section iframe {
         height: min(calc(50vh - 32px), calc(25vw - 32px));
         width:  min(calc(50vh - 32px), calc(25vw - 32px));
+
         border: none;
     }
