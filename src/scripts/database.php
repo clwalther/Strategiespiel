@@ -12,18 +12,18 @@ class Database
     function __construct() {
         global $environment;
 
-        $this->database_name = $environment->access("database_name");
-        $this->servername    = $environment->access("servername");
-        $this->user_login    = $environment->access("user_login");
-        $this->user_name     = $environment->access("user_name");
+        $this->database_name = "WIZARD_SCHOOLS";
+        $this->servername    = "localhost";
+        $this->user_login    = "Et76ESefdCzTzkHHeSJxrexePDbC8m";
+        $this->user_name     = "PjFrmotTq";
     }
 
     // === METHODS ===
     public function connect(): int {
         $this->connection = new mysqli($this->servername,
-                                       $this->user_name,
-                                       $this->user_login,
-                                       $this->database_name);
+                                        $this->user_name,
+                                        $this->user_login,
+                                        $this->database_name);
         return 0;
     }
 
@@ -31,14 +31,30 @@ class Database
         return $this->connection->query($query);
     }
 
+    public function close(): int {
+        return $this->connection->close();
+    }
+
     // === ACTIONS ===
-    public function select(string $table_name, array $columns) {
+    public function select(string $table_name, array $columns): array {
         // SELECT column1, column2, ... FROM table_name;
         $sql_query = "SELECT %s FROM %s;";
 
         $str_columns = $this->format_one_dimensional($columns, false);
 
-        $this->query(sprintf($sql_query, $str_columns, $table_name));
+        $query_response = $this->query(sprintf($sql_query, $str_columns, $table_name));
+        return $this->format_query_response($query_response);
+    }
+
+    public function select_where(string $table_name, array $columns, array $conditions): array {
+        // SELECT column1, column2, ... FROM table_name;
+        $sql_query = "SELECT %s FROM %s WHERE %s;";
+
+        $str_columns = $this->format_one_dimensional($columns, false);
+        $str_conditions = $this->format_two_dimensional($conditions);
+
+        $query_response = $this->query(sprintf($sql_query, $str_columns, $table_name, $str_conditions));
+        return $this->format_query_response($query_response);
     }
 
     public function insert(string $table_name, array $data) {
@@ -91,18 +107,28 @@ class Database
         return implode(", ", $new_array);
     }
 
+    private function format_query_response(object $query_response): array {
+        if($query_response->num_rows > 0) {
+            return $query_response->fetch_assoc();
+        } else {
+            return [];
+        }
+    }
+
     // === SECRUITY AND THREAT PREVENTION ===
     private function secure(string $string): string {
-        $string = prevent_corss_site_scripting($string);
-        $string = prevent_sql_injection($string);
+        $string = $this->prevent_corss_site_scripting($string);
+        $string = $this->prevent_sql_injection($string);
         return $string;
     }
 
     private function prevent_corss_site_scripting(string $string): string {
+        // TODO: implement prevention for XSS
         return $string;
     }
 
     private function prevent_sql_injection(string $string): string {
+        // TODO: implement prevention for SQL_Injection
         return $string;
     }
 }
