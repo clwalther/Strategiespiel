@@ -8,6 +8,7 @@
         display: flex;
         margin: 0;
         padding: 0;
+        font-size: 13pt;
       }
 
       #team-selection-container {
@@ -74,12 +75,11 @@
       }
 
       .graduate-button {
-        width: 80%;
+        width: 70%;
         height: 100%;
-
         background-color: rgb(209, 209, 209);
         font-weight: bold;
-        font-size: 14px;
+        font-size: 15px;
         cursor: pointer;
       }
 
@@ -95,19 +95,16 @@
 
       #prestige-details-container {
         flex-grow: 1;
-        margin-left: 10px;
+        margin-left: 20px;
       }
 
-      #add-graduates-container table,
-      #prestige-details-container table {
+      #bottom-details-container table {
         width: 100%;
         border-collapse: collapse;
       }
 
-      #add-graduates-container th,
-      #add-graduates-container td,
-      #prestige-details-container th,
-      #prestige-details-container td {
+      #bottom-details-container th,
+      #bottom-details-container td {
         padding: 4px;
         text-align: left;
         border-bottom: 1px solid #ddd;
@@ -115,6 +112,10 @@
 
       #add-graduates-container th {
         background-color: #f2f2f2;
+      }
+
+      #sabotage-container{
+        margin-left: 20px;
       }
 
       #add-graduates-container input[type="number"],
@@ -155,7 +156,7 @@
       </table>
       <div id="bottom-details-container">
         <div id="add-graduates-container">
-          <h3>Neuer Absolvent</h3>
+          <h3>Neuer Arbeitnehmer</h3>
           <table>
             <thead>
               <tr>
@@ -196,8 +197,8 @@
           </table>
         </div>
         <div id="prestige-details-container">
+          <h3>Team</h3>
           <table>
-            <h3>Team</h3>
               <td>Prestige:</td>
               <td id="team-prestige">999</td>
             </tr>
@@ -221,7 +222,26 @@
               <td id="order-place">999</td>
             </tr>
           </table>
-          
+        </div>
+        <div id="sabotage-container">
+          <h3>Sabotage</h3>
+          <table>
+            <tr>
+              <td>Einfluss verdecken:</td>
+              <td><input type="number" min="0" max="999" value="0" /></td>
+              <td><button id="freeze-prestige-button">V</button></td>
+            </tr>
+            <tr>
+              <td>Prestige verdecken:</td>
+              <td><input type="number" min="0" max="999" value="0" /></td>
+              <td><button id="freeze-prestige-button">V</button></td>
+            </tr>
+            <tr>
+              <td>Prestige verdecken:</td>
+              <td><input type="number" min="0" max="999" value="0" /></td>
+              <td><button id="freeze-prestige-button">V</button></td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
