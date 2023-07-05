@@ -11,18 +11,18 @@
 <body class="noselect">
     <section>
         <!-- first set of jobs -->
-        <iframe src="/ministry_labour/dashboard/view/index.php?Job=0"></iframe>
-        <iframe src="/ministry_labour/dashboard/view/index.php?Job=1"></iframe>
-        <iframe src="/ministry_labour/dashboard/view/index.php?Job=2"></iframe>
-        <iframe src="/ministry_labour/dashboard/view/index.php?Job=3"></iframe>
+        <iframe src="/ministry_labour/dashboard/view.php?Job=0"></iframe>
+        <iframe src="/ministry_labour/dashboard/view.php?Job=1"></iframe>
+        <iframe src="/ministry_labour/dashboard/view.php?Job=2"></iframe>
+        <iframe src="/ministry_labour/dashboard/view.php?Job=3"></iframe>
     </section>
     <section>
         <!-- second set of jobs -->
-        <iframe src="/ministry_labour/dashboard/view/index.php?Job=4"></iframe>
-        <iframe src="/ministry_labour/dashboard/view/index.php?Job=5"></iframe>
-        <iframe src="/ministry_labour/dashboard/view/index.php?Job=6"></iframe>
+        <iframe src="/ministry_labour/dashboard/view.php?Job=4"></iframe>
+        <iframe src="/ministry_labour/dashboard/view.php?Job=5"></iframe>
+        <iframe src="/ministry_labour/dashboard/view.php?Job=6"></iframe>
         <!-- prestige -->
-        <iframe src="/ministry_labour/dashboard/view/index.php?Prestige=13"></iframe>
+        <iframe src="/ministry_labour/dashboard/view.php?Prestige=13"></iframe>
     </section>
 </body>
 </html>

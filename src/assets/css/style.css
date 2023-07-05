@@ -1,18 +1,48 @@
 :root {
+	--color-gryffindor-red: #B50000;
+	--color-gryffindor-gold: #FFC500;
+	--color-hufflepuff-yellow: #FFEE00;
+	--color-hufflepuff-black: #2E2E2E;
+	--color-ravenclaw-blue: #222F5F;
+	--color-ravenclaw-silver: #CCCCCC;
+	--color-slytherin-green: #1A681A;
+	--color-slytherin-silver: #B3B3B3;
+	--color-beauxbatons-blue: #0055FF;
+	--color-beauxbatons-silver: #E0E0E0;
+	--color-durmstrang-red: #FF2A2A;
+	--color-durmstrang-gold: #FFD700;
+}
 
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 @font-face {
     font-family: HarryPotter;
-    src: url(../fonts/HarryP-MVZ6w.ttf);
+    src: url(../fonts/HarryPotter.ttf);
 }
 
-.noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Old versions of Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome, Edge, Opera and Firefox */
-  }
+img {
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+	-user-drag: none;
+}
+
+body {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	margin: 0;
+	padding: 0;
+
+	width: 100vw;
+    height: 100vh;
+}
