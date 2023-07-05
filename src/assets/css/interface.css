@@ -1,0 +1,19 @@
+body {
+    /* display: grid; */
+}
+    body section {
+        width: 100%;
+        height: 33.3%;
+
+        /* display: flex;
+        justify-content: space-around; */
+    }
+        body section button {
+            width: 20%;
+            height: 95%;
+            margin: 2.5%;
+            border: 0;
+            padding: 0;
+
+            border: none;
+        }

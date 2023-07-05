@@ -13,24 +13,36 @@
 	--color-durmstrang-gold: #FFD700;
 }
 
-@font-face {
-    font-family: HarryPotter;
-    src: url(../fonts/HarryP-MVZ6w.ttf);
-}
-
 .noselect {
-    -webkit-touch-callout: none;
+	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-  }
+}
+
+@font-face {
+    font-family: HarryPotter;
+    src: url(../fonts/HarryPotter.ttf);
+}
 
 img {
 	-webkit-user-drag: none;
 	-khtml-user-drag: none;
 	-moz-user-drag: none;
 	-o-user-drag: none;
-	user-drag: none;
+	-user-drag: none;
+}
+
+body {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	margin: 0;
+	padding: 0;
+
+	width: 100vw;
+    height: 100vh;
 }
