@@ -24,15 +24,34 @@
 
 @font-face {
     font-family: HarryPotter;
-    src: url(../fonts/HarryPotter.ttf);
+    src: url(../fonts/HarryPotter/HarryPotter.ttf);
 }
 
-img {
-	-webkit-user-drag: none;
-	-khtml-user-drag: none;
-	-moz-user-drag: none;
-	-o-user-drag: none;
-	-user-drag: none;
+@font-face {
+	font-family: Roboto-Regular;
+	src: url(../fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+	font-family: Roboto-Medium;
+	src: url(../fonts/Roboto/Roboto-Medium.ttf);
+}
+
+code {
+	background-color: #21262d;
+
+	border: 1px solid #4f5051;
+	border-radius: 5px;
+	padding: 2px;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+i {
+	color: #707781;
+
+	font-weight: 900;
+	font-style: normal;
 }
 
 body {
@@ -45,4 +64,28 @@ body {
 
 	width: 100vw;
     height: 100vh;
+
+	font-family: Roboto-Regular;
+
+	color: #dbe2e8;
+    background-color: #0d1117;
 }
+    body header {
+        height: 32px;
+        width: calc(100% - 32px);
+
+        display: flex;
+        align-items: center;
+
+        padding: 16px;
+        box-shadow: 0.5px 0.5px 1px #4f5051;
+
+        font-size: 14px;
+        font-family: Roboto-Regular;
+
+        background-color: #010409;
+    }
+		body header a {
+			text-decoration: none;
+			color: #dbe2e8;
+		}

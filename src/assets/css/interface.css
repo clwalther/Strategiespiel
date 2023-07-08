@@ -1,19 +1,79 @@
-body {
-    /* display: grid; */
+body aside {
+    width: calc(270px - 32px);
+    height: calc(100vh - 64px);
+
+    box-shadow: 0.5px 0.5px 1px #4f5051;
+
+    display: grid;
+    align-content: start;
+
+    padding-left: 16px;
+    padding-right: 16px;
 }
-    body section {
-        width: 100%;
-        height: 33.3%;
-
-        /* display: flex;
-        justify-content: space-around; */
+    body aside h3 {
+        font-size: 16px;
+        margin: 24px;
     }
-        body section button {
-            width: 20%;
-            height: 95%;
-            margin: 2.5%;
-            border: 0;
-            padding: 0;
+    body aside button {
+        height: 32px;
 
-            border: none;
+        border-radius: 8px;
+        border: 0;
+        padding-left: 16px;
+
+        background-color: #0d1117;
+        color: #dbe2e8;
+
+        display: flex;
+        align-items: center;
+
+        font-size: 14px;
+
+        cursor: pointer;
+    }
+    body aside button:hover {
+        background-color: #21262d;
+    }
+    body aside .active_button {
+        background-color: #1a1f25;
+    }
+        body aside button img {
+            height: 24px;
+            width: 24px;
+        }
+
+body section {
+    position: absolute;
+    right: 0;
+    top: 64px;
+
+    padding: 16px;
+
+    height: calc(100% - 32px - 64px);
+    width: calc(100% - 270px - 32px);
+}
+    body section h1 {
+        display: flex;
+        align-items: center;
+    }
+        body section h1 img {
+            width: 32px;
+        }
+
+    body section section {
+        position: relative;
+        top: 0;
+
+        height: auto;
+        width: 100%;
+
+        padding: 0;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #4f5051;
+    }
+        body section section h2 {
+            font-size: 20px;
+        }
+        body section section p {
+            font-size: 14px;
         }
