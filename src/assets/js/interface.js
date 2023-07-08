@@ -3,7 +3,7 @@ function highligth_team() {
         let team = window.location.search.split("=")[1];
         document.getElementById(team).classList.add("active_button");
     } else {
-        window.open('/die-zauberer-schulen/minesterium-schulverwaltung/interface/index.php?Team=1', '_self');
+        window.open('/die-zauberer-schulen/ministerium-schulverwaltung/interface/index.php?Team=1', '_self');
     }
 }
 
