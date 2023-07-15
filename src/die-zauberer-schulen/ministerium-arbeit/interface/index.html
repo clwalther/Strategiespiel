@@ -187,7 +187,7 @@
         <!-- Tabelle der Berufsbilder mit Informationen der Teams -->
         <table id="job-table">
           <thead>
-            <tr id="header-row"></tr>
+            <tr id="nav-row"></tr>
           </thead>
           <tbody></tbody>
         </table>
@@ -292,12 +292,12 @@
           "Besenfliegen",
         ];
 
-        // Fill the table header with jobArray values
-        var headerRow = document.getElementById("header-row");
+        // Fill the table nav with jobArray values
+        var navRow = document.getElementById("nav-row");
         jobArray.forEach(function (job) {
           var th = document.createElement("th");
           th.textContent = job;
-          headerRow.appendChild(th);
+          navRow.appendChild(th);
         });
 
         teamItems.forEach(function (item) {

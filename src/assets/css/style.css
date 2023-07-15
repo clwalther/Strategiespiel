@@ -1,26 +1,16 @@
 :root {
-	--color-gryffindor-red: #B50000;
-	--color-gryffindor-gold: #FFC500;
-	--color-hufflepuff-yellow: #FFEE00;
-	--color-hufflepuff-black: #2E2E2E;
-	--color-ravenclaw-blue: #222F5F;
-	--color-ravenclaw-silver: #CCCCCC;
-	--color-slytherin-green: #1A681A;
-	--color-slytherin-silver: #B3B3B3;
-	--color-beauxbatons-blue: #0055FF;
-	--color-beauxbatons-silver: #E0E0E0;
-	--color-durmstrang-red: #FF2A2A;
-	--color-durmstrang-gold: #FFD700;
+	--colour-colour: #dbe2e8;
+	--colour-background: #0d1117;
+	--colour-header-background: #010409;
+
+	--colour-border-edge: #4f5051;
+	--colour-selected: #1a1f25;
+	--colour-accent: #21262d;
+
+	--colour-green: #20a239;
+	--colour-green-accent: #23bf41;
 }
 
-.noselect {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
 
 @font-face {
     font-family: HarryPotter;
@@ -37,10 +27,11 @@
 	src: url(../fonts/Roboto/Roboto-Medium.ttf);
 }
 
-code {
-	background-color: #21262d;
 
-	border: 1px solid #4f5051;
+code {
+	background-color: var(--colour-accent);
+
+	border: 1px solid var(--colour-border-edge);
 	border-radius: 5px;
 	padding: 2px;
 	padding-left: 6px;
@@ -53,6 +44,16 @@ i {
 	font-weight: 900;
 	font-style: normal;
 }
+
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 
 body {
 	position: absolute;
@@ -67,10 +68,12 @@ body {
 
 	font-family: Roboto-Regular;
 
-	color: #dbe2e8;
-    background-color: #0d1117;
+	color: var(--colour-colour);
+    background-color: var(--colour-background);
+
+	overflow: hidden;
 }
-    body header {
+    body nav {
         height: 32px;
         width: calc(100% - 32px);
 
@@ -78,14 +81,70 @@ body {
         align-items: center;
 
         padding: 16px;
-        box-shadow: 0.5px 0.5px 1px #4f5051;
+        box-shadow: 0.5px 0.5px 1px var(--colour-border-edge);
 
         font-size: 14px;
         font-family: Roboto-Regular;
 
-        background-color: #010409;
+        background-color: var(--colour-header-background);
     }
-		body header a {
+		body nav a {
 			text-decoration: none;
-			color: #dbe2e8;
+			color: var(--colour-colour);
 		}
+
+	body dialog {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		height: 100%;
+		width: 100%;
+
+		margin: 0;
+		border: 0;
+		padding: 0;
+
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+		body dialog div {
+			position: absolute;
+
+			height: calc(56vh - 16px);
+			width: calc(90vh - 16px);
+
+			margin-left: calc(50% - 45vh - 0.8px - 8px);
+			margin-right: calc(50% - 45vh - 0.8px - 8px);
+			margin-top: calc(50vh - 28vh - 0.8px - 8px);
+			margin-bottom: calc(50vh - 28vh - 0.8px - 8px);
+
+			border: 1px solid var(--colour-border-edge);
+			border-radius: 16px;
+
+			padding: 16px;
+
+			background-color: var(--colour-selected);
+			color: var(--colour-colour);
+		}
+			body dialog div section {
+				position: absolute;
+				bottom: 0 !important;
+				left: 0;
+				top: auto;
+
+				height: 28px;
+				width: auto;
+
+				overflow: auto;
+				padding: 8px;
+			}
+				body dialog div section button {
+					width: calc(50% - 2px);
+					height: 100%;
+
+					border: 1px solid var(--colour-border-edge);
+					border-radius: 8px;
+
+					color: var(--colour-color);
+					cursor: pointer;
+				}
