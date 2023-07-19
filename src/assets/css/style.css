@@ -1,5 +1,5 @@
 :root {
-	--colour-colour: #dbe2e8;
+	--colour-colour: #e6ebef;
 	--colour-background: #0d1117;
 	--colour-header-background: #010409;
 
@@ -9,6 +9,8 @@
 
 	--colour-green: #20a239;
 	--colour-green-accent: #23bf41;
+	--colour-red: #953800;
+	--colour-red-accent: #cf222e;
 }
 
 

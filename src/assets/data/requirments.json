@@ -1,0 +1,194 @@
+{
+    "schulverwaltung": {
+        "branches": [
+            [["Erweiterungsflügel"], ["Lehrerzimmer", "Große-Halle"], ["Bibiliothek", "Atrium"], ["Rektorenturm", "Astronomieturm"]],
+            [["Lange-Galerie"], ["Gemeinschaftsraum", "Verlies"], ["Wohnturm", "Duellierzimmer", "Laboratorium"], ["Eulerei"], ["Chambre-Séparée"]],
+            [["Parkanlage"], ["Pavilion", "Wäldchen"], ["Kräutergarten", "Bootsanleger"], ["Steinkreis", "Gewächshaus"], ["Försterhütte"]],
+            [[], ["Besenhütte"], ["Quidditchfeld"], ["Quidditchtribünen"]]
+        ],
+
+        "buildings": {
+            "Erweiterungsflügel": {
+                "trivialname": "Erweiter-ungsflügel",
+                "parentNode": "none",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "*"
+            },
+
+            "Lange-Galerie": {
+                "trivialname": "Lange Galerie",
+                "parentNode": "none",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "*"
+            },
+
+            "Parkanlage": {
+                "trivialname": "Parkanlage",
+                "parentNode": "none",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "*"
+            },
+
+            "Lehrerzimmer": {
+                "trivialname": "Lehrer-zimmer",
+                "parentNode": "Erweiterungsflügel",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "+"
+            },
+
+            "Große-Halle": {
+                "trivialname": "Große Halle",
+                "parentNode": "Erweiterungsföügel",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "mehr"
+            },
+
+            "Gemeinschaftsraum": {
+                "trivialname": "Gemein-schaftsraum",
+                "parentNode": "Lange-Galerie",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "(alles)"
+            },
+
+            "Verlies": {
+                "trivialname": "Verlies",
+                "parentNode": "Lange-Galerie",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Zaubertränke, Verteidigung gegen die dunklen Künste"
+            },
+
+            "Pavilion": {
+                "trivialname": "Pavilion",
+                "parentNode": "Parkanlage",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Zauberkunst, Geschichte der Zauberei"
+            },
+
+            "Wäldchen": {
+                "trivialname": "Wäldchen",
+                "parentNode": "Parkanlage",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Pflege magischer Geschöpfe, Kräuterkunde"
+            },
+
+            "Besenhütte": {
+                "trivialname": "Besenhütte",
+                "parentNode": "none",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Besenfliegen"
+            },
+
+            "Bibiliothek": {
+                "trivialname": "Bibiliothek",
+                "parentNode": "Lehrerzimmer",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Geschichte der Zauberei, Zauberkunst"
+            },
+
+            "Atrium": {
+                "trivialname": "Atrium",
+                "parentNode": "Große-Halle",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Zauberkunst, Kräuterkunde"
+            },
+
+            "Wohnturm": {
+                "trivialname": "Wohnturm",
+                "parentNode": "Gemeinschaftsraum",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "(mehr Absolventen)"
+            },
+
+            "Duellierzimmer": {
+                "trivialname": "Duellier-zimmer",
+                "parentNode": "Lange-Galerie",
+                "requirments": ["100-Hymnen", "300-Holz"],
+                "yields": "Zauberkunst, Verteidigung gegen die dunklen Künste"
+            },
+
+            "Laboratorium": {
+                "trivialname": "Labora-torium",
+                "parentNode": "Verlies",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "(Zaubertränke Lehrerslot)"
+            },
+
+            "Kräutergarten": {
+                "trivialname": "Kräuter-garten",
+                "parentNode": "Parkanlage",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Kräuterkunde, Zaubertränke"
+            },
+
+            "Bootsanleger": {
+                "trivialname": "Bootsan-leger",
+                "parentNode": "Wäldchen",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Zaubertränke, Kräuterkunde"
+            },
+
+            "Quidditchfeld": {
+                "trivialname": "Quidditch-feld",
+                "parentNode": "Besenhütte",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "(Besenfliegen Lehrerslot)"
+            },
+
+            "Rektorenturm": {
+                "trivialname": "Rektoren-turm",
+                "parentNode": "Lehrerzimmer",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "+"
+            },
+
+            "Astronomieturm": {
+                "trivialname": "Astronomie-turm",
+                "parentNode": "Große-Halle",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Veerteidigung gegen die dunklen Künste, Geschichte der Zauberei"
+            },
+
+            "Eulerei": {
+                "trivialname": "Eulerei",
+                "parentNode": "Wohnturm",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Pflege magischer Geschöpfe"
+            },
+
+            "Steinkreis": {
+                "trivialname": "Steinkreis",
+                "parentNode": "Pavilion",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Geschichte der Zauberei"
+            },
+
+            "Gewächshaus": {
+                "trivialname": "Gewächs-haus",
+                "parentNode": "Kräutergarten",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Kräuterkunde Lehrerslot"
+            },
+
+            "Chambre-Séparée": {
+                "trivialname": "Chambre-Séparée",
+                "parentNode": "Duellierzimmer",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Verteidigung gegen die dunklen Künste Lehererslot"
+            },
+
+            "Försterhütte": {
+                "trivialname": "Förster-hütte",
+                "parentNode": "Bootsanleger",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Pflege magischer Geschöpfe Lehrerslot"
+            },
+
+            "Quidditchtribünen": {
+                "trivialname": "Quiddtich-tribüne",
+                "parentNode": "Quidditchfeld",
+                "requirements": ["100-Hymnen", "300-Holz"],
+                "yields": "Besenfliegen"
+            }
+        }
+    }
+}

@@ -11,15 +11,12 @@
     <script src="../../../../assets/js/interface.js" defer></script>
 
     <?php
-
+        // importing global and therefore important standart class and functions
         include "../../../scripts/global.php";
-
-        define('DATABASE', 'MINISTRY_SCHOOL_ADMIN', true);
-        define('MAX_VALUE_GRADUATES', 6, true);
-        define('MIN_VALUE_GRADUATES', 1, true);
-        define('MAX_VALUE_TEACHERS', 3, true);
-        define('MIN_VALUE_TEACHERS', 1, true);
-
+        include "../../../scripts/expansion.php";
+        // initilizing instances
+        $database = new Database;
+        $expansion_tree = new ExpensionTree();
     ?>
 </head>
 <body>
@@ -102,103 +99,26 @@
             </div>
         </article>
         <article>
-            <h2>Ausbau</h2>
+            <h2>Ausbau-bau-baum</h2>
             <article>
-                <!-- Parkanlage -->
-                <div>
-                    <div>
-                        <button>Parkanlage</button>
-                    </div>
-                    <div>
-                        <button>Kräutergarten</button>
-                        <button>Pavilion</button>
-                        <button>Wäldchen</button>
-                    </div>
-                    <div>
-                        <button>Bootsanleger</button>
-                        <button>Steinkreis</button>
-                    </div>
-                    <div>
-                        <button>Gewächshaus</button>
-                        <button>Försterhütte</button>
-                        <button>Drachenhöhle</button>
-                    </div>
-                </div>
-                <!-- Erweiterungsflügel -->
-                <div>
-                    <div>
-                        <button>Erweiterungs-flügel</button>
-                    </div>
-                    <div>
-                        <button>Leherzimmer</button>
-                        <button>Große Halle</button>
-                    </div>
-                    <div>
-                        <button>Rektorenturm</button>
-                        <button>Rektorenturm</button>
-                        <button>Wothturm</button>
-                        <button>Atrium</button>
-                    </div>
-                    <div>
-                        <button>Raum der Wünsche</button>
-                        <button>Eulerei</button>
-                        <button>Brunnen</button>
-                    </div>
-                </div>
-                <!-- Lange Galerie -->
-                <div>
-                    <div>
-                        <button>Lange Galerie</button>
-                    </div>
-                    <div>
-                        <button>Uhrentrum</button>
-                        <button>Gemein-schaftsraum</button>
-                        <button>Duellier-zimmer</button>
-                    </div>
-                    <div>
-                        <button>Verlies</button>
-                        <button>Astronomie-turm</button>
-                    </div>
-                    <div>
-                        <button>Laboratorium</button>
-                        <button>Chambre Séparée</button>
-                    </div>
-                </div>
-                <!-- Besenhütte -->
-                <div>
-                    <div>
-                        <button>Besenhütte</button>
-                    </div>
-                    <div></div>
-                    <div>
-                        <button>Quidditchfeld</button>
-                    </div>
-                    <div>
-                        <button>Quidditch-tribüne</button>
-                    </div>
-                </div>
+                <?php echo $expansion_tree->build(); ?>
+                <?php echo $expansion_tree->connect(); ?>
             </article>
         </article>
     </section>
 
-    <footer>
-
-    </footer>
-
     <dialog id="dialog">
         <div>
-            <article>
-                <!-- headers -->
-                <h1></h1>
-                <!-- main bodys -->
+            <!-- headers -->
+            <h1></h1>
+            <!-- main bodys -->
 
-            </article>
             <section>
                 <button onclick="close_dialog();" style="background-color: var(--colour-accent);">Schließen</button>
                 <button style="background-color: var(--colour-green);">Fertig</button>
+                <button style="background-color: var(--colour-red);">Entfernen</button>
             </section>
         </div>
     </dialog>
-
 </body>
 </html>

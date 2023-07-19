@@ -30,18 +30,31 @@ function highligth_team() {
 }
 
 function clicked_element(element, target) {
-    if(target == element) {
+    if(target != null) {
+        return clicked_element(element, target.parentElement);;
+    } else if(target == element) {
         return true;
-    } else if(target != null) {
-        return clicked_element(element, target.parentElement);
     } else {
         return false;
     }
 }
 
+function draw_arrows() {
+    let arrows = document.getElementsByName("arrow");
+
+    arrows.forEach(element => {
+        start_arrow = element.value.split(":")[0];
+        end_arrow = element.value.split(":")[1];
+
+        start_element = document.getElementById(start_arrow);
+        end_element = document.getElementById(end_arrow);
+    });
+}
+
 // methods around the dialog filed
-function open_dialog(/* args */) {
+function open_dialog(id) {
     // TODO: loading the content for the dialog
+    console.log(id)
     dialog.show();
 }
 
@@ -49,7 +62,13 @@ function close_dialog() {
     dialog.close();
 }
 
+// methods for expanding
+function open_building_dialog(building_name) {
+    dialog.show();
+}
+
 
 // === END ===
 // on window load ...
 highligth_team();
+draw_arrows();

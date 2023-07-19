@@ -17,27 +17,22 @@ In the following, we will take a look at the overall code and data structure in 
 Table arichtecture:
 
     MINISTRY_SCHOOL_ADMIN;
-    ├── group_id: INT PRIMARY KEY NOT NULL;    # identifes the group
+    ├── group_id: INT PRIMARY KEY AUTO_INCREMENT  NOT NULL;     # identifes the group
     ├── teacher_slots: INT NOT NULL;            # holds the number of teacher slots
-    ├── student_slots: INT NOT NULL;            # defines how many graduates / year
-    ├── graduates: INT NOT NULL;                # represents the schools graduates as an integer-string
     ├── teachers: INT NOT NULL;                 # represents the schools teachers as an integer-string (influences the quality of a student in a given subject)
+    ├── graduates_slots: INT NOT NULL;          # defines how many graduates / year
+    ├── graduates: INT NOT NULL;                # represents the schools graduates as an integer-string
     └── buildings: INT NOT NULL;                # represents the schools buildings as an integer-string (influences the quality of a student in a given subject)
 
-    CREATE TABLE MINISTRY_SCHOOL_ADMIN (
-        group_id INT PRIMIARY KEY NOT NULL,
-        teacher_slots INT NOT NULL,
-        student_slots INT NOT NULL,
-        graduates INT NOT NULL,
-        teachers INT NOT NULL,
-        buildings INT NOT NULL
-    );
+    CREATE TABLE MINISTRY_SCHOOL_ADMIN (group_id INT PRIMARY KEY AUTO_INCREMENT  NOT NULL, teacher_slots INT NOT NULL, teachers INT NOT NULL, graduates_slots INT NOT NULL, graduates INT NOT NULL, buildings INT NOT NULL);
+
+    INSERT INTO MINISTRY_SCHOOL_ADMIN (teacher_slots, graduates_slots, graduates, teachers, buildings) VALUES (3, 3, 0, 2, 5);
 
 `group_id`: Number from 1 to 12. 4 teams compose one order and therefore group_ids from ((n-1) * 4) + 1 -> n * 4 make a one team for n beeing [1, 2, 3].
 
 `teacher_slots`: Defines how many teachers can be employed
 
-`student_slots`: Defines how many students can be in the school and therefore influcences the yield of students per year.
+`graduates_slots`: Defines how many students can be in the school and therefore influcences the yield of students per year.
 
 `graduates`: Holds each not yet retrived graduate and its value in each subject. max value is 5
 

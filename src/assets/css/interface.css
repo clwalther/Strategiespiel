@@ -186,35 +186,62 @@ body section {
         body section article article {
             display: flex;
             justify-content: space-between;
+
+            padding-top: 8px;
             border: none;
+
+            overflow-y: visible;
             overflow-x: scroll;
+
             scrollbar-width: thin;
         }
             body section article article div {
+                min-width: fit-content;
                 width: auto;
                 height: auto;
-                overflow: hidden;
+
+                overflow: visible;
+
                 padding: 0;
+
                 display: grid;
                 justify-content: center;
-                min-width: fit-content;
             }
                 body section article article div div {
+                    height: calc(92px * 0.618 + 16px);
+
                     display: flex;
+
                     background-color: rgba(0, 0, 0, 0);
+
                     border: none;
                     border-radius: 0;
-                    height: calc(92px * 0.618 + 16px);
                     margin: 0;
                     margin-bottom: 32px;
                 }
                     body section article article div div button {
-                        background-color: var(--colour-selected);
+                        background-color: var(--colour-background);
+                        color: var(--colour-border-edge);
+
+                        margin: 8px;
                         border-radius: 8px;
                         border: 1px solid var(--colour-border-edge);
+
                         height: calc(92px * 0.618);
                         width: 92px;
-                        color: var(--colour-colour);
-                        margin: 8px;
+
                         cursor: pointer;
+
+                        font-weight: 900;
+                    }
+
+                    body section article article div div button:disabled,
+                    button[disabled] {
+                        cursor: no-drop;
+                    }
+
+                    body section article article div div .enabled {
+                        background-color: var(--colour-header-background);
+                        color: var(--colour-border);
+                        box-shadow:  0px 0px 16px 2px var(--colour-green);
                     }
