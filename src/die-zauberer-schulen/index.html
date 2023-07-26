@@ -6,6 +6,8 @@
     <title>Die Zauberer Schulen</title>
 
     <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <script src="../../assets/js/script.js" async></script>
 </head>
 <body>
     <nav>
@@ -16,6 +18,11 @@
         <a href="./ministerium-schulverwaltung">/Schulverwaltung</a>
         <br>
         <a href="./ministerium-arbeit">/Arbeit</a>
+        <article>
+            <button onclick="send('general_start', true)">Start</button>
+            <button onclick="send('general_pause', true)">Pause</button>
+            <button onclick="send('general_reset', true)">Reset</button>
+        </article>
     </section>
 </body>
 </html>

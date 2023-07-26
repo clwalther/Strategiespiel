@@ -5,6 +5,7 @@ The generall concept and architecture of this project is to be stackable and eas
 
 ## Table of Contents
 - 2023 - "Die Zauberer Schulen"
+    - General
     - Ministerium Schulverwaltung
     - Ministerium Arbeit
 
@@ -13,30 +14,93 @@ The main idea board is [here](https://miro.com/app/board/uXjVM9sY-J4=/).
 <br>
 In the following, we will take a look at the overall code and data structure in the code and the databases.
 
+### General
+Time logs:
+
+    TIME:
+    ├── id: INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+    ├── time: INT NOT NULL;
+    └── type: BOOL NOT NULL;
+
+    CREATE TABLE TIME (
+        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        time INT NOT NULL,
+        type BOOL NOT NULL
+        );
+
+Teams lookup table  (always 12 entries):
+
+    TEAM:
+    ├── gorup_id: INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+    └── teamname: VARCHAR(255) NOT NULL DEFAULT "TEAMNAME";
+
+    CREATE TABLE TEAM (
+        group_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        teamname VARCHAR(255) NOT NULL DEFAULT "TEAMNAME"
+        );
+
 ### Ministerium Schulverwaltung
-Table arichtecture:
+General school administration (always 12 entries):
 
-    MINISTRY_SCHOOL_ADMIN;
-    ├── group_id: INT PRIMARY KEY AUTO_INCREMENT  NOT NULL;     # identifes the group
-    ├── teacher_slots: INT NOT NULL;            # holds the number of teacher slots
-    ├── teachers: INT NOT NULL;                 # represents the schools teachers as an integer-string (influences the quality of a student in a given subject)
-    ├── graduates_slots: INT NOT NULL;          # defines how many graduates / year
-    ├── graduates: INT NOT NULL;                # represents the schools graduates as an integer-string
-    └── buildings: INT NOT NULL;                # represents the schools buildings as an integer-string (influences the quality of a student in a given subject)
+    SCHOOL_ADMIN:
+    ├── group_id: INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+    ├── Zaubertränke: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Zauberkunst: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Verteidigung: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Geschichte: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Geschöpfe: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Kräuterkunde: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Besenfliegen: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    └── buildings: BIGINT UNSIGNED NOT NULL DEFAULT 0;
 
-    CREATE TABLE MINISTRY_SCHOOL_ADMIN (group_id INT PRIMARY KEY AUTO_INCREMENT  NOT NULL, teacher_slots INT NOT NULL, teachers INT NOT NULL, graduates_slots INT NOT NULL, graduates INT NOT NULL, buildings INT NOT NULL);
+    CREATE TABLE SCHOOL_ADMIN (
+        group_id INT PRIMARY KEY AUTO_INCREMENT  NOT NULL,
+        Zaubertränke BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        Zauberkunst BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        Verteidigung BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        Geschichte BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        Geschöpfe BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        Kräuterkunde BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        Besenfliegen BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        buildings BIGINT UNSIGNED NOT NULL DEFAULT 0
+        );
 
-    INSERT INTO MINISTRY_SCHOOL_ADMIN (teacher_slots, graduates_slots, graduates, teachers, buildings) VALUES (3, 3, 0, 2, 5);
+Students:
 
-`group_id`: Number from 1 to 12. 4 teams compose one order and therefore group_ids from ((n-1) * 4) + 1 -> n * 4 make a one team for n beeing [1, 2, 3].
+    STUDENTS:
+    ├── id: INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+    ├── group_id: INT NOT NULL;
+    └── value: BIGINT UNSIGNED NOT NULL DEFAULT 0;
 
-`teacher_slots`: Defines how many teachers can be employed
+    CREATE TABLE STUDENTS (
+        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        group_id INT NOT NULL,
+        value BIGINT UNSIGNED NOT NULL DEFAULT 0
+    );
 
-`graduates_slots`: Defines how many students can be in the school and therefore influcences the yield of students per year.
 
-`graduates`: Holds each not yet retrived graduate and its value in each subject. max value is 5
+### Ministerium Arbeit
+Table arichtecture (always 12 entries):
 
-`teachers`: Level of teacher influeces the gausian (around which value its is concentrated) curve of the graduates performance. And in which subject.
+    LABOUR_TABLE:
+    ├── group_id: INT PRIMARY KEY AUTO_INCREMENT;
+    ├── prestige: INT NOT NULL DEFAULT 0;
+    ├── Medimagier: INT NOT NULL DEFAULT 0;
+    ├── Auror: INT NOT NULL DEFAULT 0;
+    ├── Ministeriumsbeamter: INT NOT NULL DEFAULT 0;
+    ├── Drachenwärter: INT NOT NULL DEFAULT 0;
+    ├── Magiezoologe: INT NOT NULL DEFAULT 0;
+    ├── Zauberstabschreinermeister: INT NOT NULL DEFAULT 0;
+    └── Quidditchprofi: INT NOT NULL DEFAULT 0;
 
-`buildings`: Ceils the maximum level a student can accomplish in a certain subject. Further dictating what teachers can be employed and therefore which subjects can be thaugth.
-
+    CREATE TABLE LABOUR_TABLE (
+        group_id INT PRIMARY KEY AUTO_INCREMENT,
+        prestige INT NOT NULL DEFAULT 0,
+        Medimagier INT NOT NULL DEFAULT 0,
+        Auror INT NOT NULL DEFAULT 0,
+        Ministeriumsbeamter INT NOT NULL DEFAULT 0,
+        Drachenwärter INT NOT NULL DEFAULT 0,
+        Magiezoologe INT NOT NULL DEFAULT 0,
+        Zauberstabschreinermeister INT NOT NULL DEFAULT 0,
+        Quidditchprofi INT NOT NULL DEFAULT 0
+        );

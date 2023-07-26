@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Teamauswahl</title>
+    <title>Ministerium für Arbeit - Interface</title>
 
     <link rel="stylesheet" href="../../assets/css/start-checkbox.css" />
 
@@ -157,6 +157,18 @@
       }
 
     </style>
+
+    <?php
+		include "../../../scripts/database.php";
+    include "../../../scripts/prestige.php";
+    include "../../../scripts/influence.php";
+    $database = new Database();
+    $prestigeDistributer = new PrestigeDistributer();
+		$prestigeDistributer->distributePrestigeOfAllJobs();
+    $influenceCalculator = new InfluenceCalculator();
+    $influenceCalculator->addGraduate(3, "Auror", [3, 4, 5, 6, 7, 8, 9]);
+
+    ?>
   </head>
   <body>
     <div style="display: flex;">
@@ -376,6 +388,19 @@
             row5.appendChild(td);
           });
           tableBody.appendChild(row5);
+        }
+
+        function updateTeamDetails() {
+
+        }
+
+        function updateGraduateButtons() {
+          var graduateButtons = document.querySelectorAll(
+            ".graduate-button"
+          );
+          graduateButtons.forEach(function (button) {
+            button.textContent = Math.floor(Math.random() * 10).toString();
+          });
         }
 
         var newLabourerTableBody = document.querySelector(

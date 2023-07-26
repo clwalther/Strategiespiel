@@ -46,7 +46,7 @@ class Database
     }
 
     public function select_where(string $table_name, array $columns, array $conditions): array {
-        // SELECT column1, column2, ... FROM table_name;
+        // SELECT column1, column2, ... FROM table_name WHERE condition;
         $sql_query = "SELECT %s FROM %s WHERE %s;";
 
         $str_columns = $this->format_one_dimensional($columns, false);
@@ -66,6 +66,16 @@ class Database
         $this->query(sprintf($sql_query, $table_name, $str_columns, $str_values));
     }
 
+    public function update(string $table_name, array $data, array $conditions) {
+        // UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;
+        $sql_query = "UPDATE %s SET %s WHERE %s;";
+
+        $str_data = $this->format_two_dimensional($data);
+        $str_conditions = $this->format_two_dimensional($conditions);
+
+        $this->query(sprintf($sql_query, $table_name, $str_data, $str_conditions));
+    }
+
     public function delete(string $table_name, array $conditions) {
         // DELETE FROM table_name WHERE condition;
         $sql_query = "DELETE FROM %s WHERE %s;";
@@ -73,6 +83,13 @@ class Database
         $str_conditions = $this->format_two_dimensional($conditions);
 
         $this->query(sprintf($sql_query, $table_name, $str_conditions));
+    }
+
+    public function delete_all(string $table_name) {
+        // DELETE FROM table_name;
+        $sql_query = "DELETE FROM %s;";
+
+        $this->query(sprintf($sql_query, $table_name));
     }
 
     // === FORMATING ===
@@ -120,18 +137,28 @@ class Database
 
     // === SECRUITY AND THREAT PREVENTION ===
     private function secure(string $string): string {
+        $string = htmlspecialchars($string);
+        $string = str_replace("&", "&amp", $string);
+        $string = str_replace(";", "&#59;", $string);
+
         $string = $this->prevent_corss_site_scripting($string);
         $string = $this->prevent_sql_injection($string);
         return $string;
     }
 
     private function prevent_corss_site_scripting(string $string): string {
-        // TODO: implement prevention for XSS
+        $string = str_replace("<", "&lt;", $string);
+        $string = str_replace(">", "&gt;", $string);
+        $string = str_replace("/", "&#47;", $string);
         return $string;
     }
 
     private function prevent_sql_injection(string $string): string {
-        // TODO: implement prevention for SQL_Injection
+        $string = str_replace('"', "&quot;", $string);
+        $string = str_replace("'", "&apos;", $string);
+        $string = str_replace("`", "&#96;", $string);
+        $string = str_replace("´", "&acute;", $string);
+        $string = str_replace("-", "&#45;", $string);
         return $string;
     }
 }
