@@ -168,59 +168,92 @@ body {
 					background-color: var(--colour-accent);
 					cursor: pointer;
 				}
-		body dialog #dialog-student ul {
+		body dialog #dialog-general-name input {
 			border: 1px solid var(--colour-border-edge);
-			border-radius: 32px;
+			border-radius: 8px;
+			width: calc(100% - 64px);
+			height: 14px;
+			background: var(--colour-background);
+			color: var(--colour-border-edge);
+			padding: 8px;
+			font-size: 15px;
+			margin-top: 64px;
+		}
+		body dialog #dialog-general-name input:focus-within {
+			outline: 1px solid var(--colour-green);
+			background-color: var(--colour-header-background);
+			color: var(--colour-colour);
+		}
+		body dialog div div {
+			display: flex;
+			position: relative;
+			height: calc(100% - 38.4px - 16px);
+			width: 100%;
+			margin: 0;
+			border: 0;
 			padding: 0;
-			margin-left: 6%;
-			margin-right: 6%;
-			margin-top: 3%;
-			cursor: pointer;
-			overflow: hidden;
-			padding-top: 3%;
-			padding-bottom: 3%;
+			overflow-x: scroll;
+			overflow-y: hidden;
 		}
-		body dialog #dialog-student ul:hover {
-			background: var(--colour-accent);
-		}
-		body dialog #dialog-student .clicked {
-		}
-			body dialog #dialog-student ul li {
-					display: flex;
-					justify-content: space-between;
-					list-style-type: none;
-					align-items: center;
-					padding-left: 48px;
-					padding-right: 48px;
-				}
-					body dialog #dialog-student ul li div {
-						display: inline-flex;
-						position: relative;
-						height: auto;
-						width: auto;
-						margin: 0;
-						border: 0;
-						padding: 0;
-						background-color: inherit;
+			body dialog div div ul {
+				border: 1px solid var(--colour-border-edge);
+				border-radius: 32px;
+				padding: 0;
+				margin-left: 6%;
+				margin-right: 6%;
+				margin-top: 3%;
+				cursor: pointer;
+				overflow: hidden;
+				padding-top: 3%;
+				padding-bottom: 3%;
+				display: inline-table;
+			}
+			body dialog div div ul:hover {
+				background: var(--colour-accent);
+			}
+			body dialog div div .clicked {
+				background-color: var(--colour-green) !important;
+			}
+			body dialog div div .clicked:hover {
+				background-color: var(--colour-green-accent) !important;
+			}
+				body dialog div div ul li {
+						display: flex;
+						justify-content: space-between;
+						list-style-type: none;
+						align-items: center;
+						padding-left: 48px;
+						padding-right: 48px;
 					}
-						body dialog #dialog-student ul li div input[type="checkbox"] {
-							height: 16px;
-							width: 16px;
+						body dialog div div ul li div {
+							display: inline-flex;
+							position: relative;
+							height: auto;
+							width: auto;
+							margin: 0;
 							border: 0;
-							margin: 10px;
-							background-color: var(--colour-background) !important;
+							padding: 0;
+							background-color: inherit;
+							overflow: hidden;
 						}
-						body dialog #dialog-student ul li div input[type="checkbox"]:disabled {
-							height: 16px;
-							width: 16px;
-							border: 0;
-							margin: 10px;
-							background-color: var(--colour-background) !important;
-						}
-						body dialog #dialog-student ul li div input[type="checkbox"]:checked {
-							height: 16px;
-							width: 16px;
-							border: 0;
-							margin: 10px;
-							background-color: var(--colour-background) !important;
-						}
+							body dialog div div ul li div input[type="checkbox"] {
+								height: 16px;
+								width: 16px;
+								border: 0;
+								margin: 10px;
+								background-color: var(--colour-background) !important;
+							}
+							body dialog div div ul li div input[type="checkbox"]:disabled {
+								height: 16px;
+								width: 16px;
+								border: 0;
+								margin: 10px;
+								background-color: var(--colour-background) !important;
+							}
+							body dialog div div ul li div input[type="checkbox"]:checked {
+								height: 16px;
+								width: 16px;
+								border: 0;
+								margin: 10px;
+								background-color: var(--colour-background) !important;
+							}

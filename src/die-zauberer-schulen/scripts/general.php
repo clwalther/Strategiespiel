@@ -49,6 +49,14 @@ class General
         // reads and returns the team array object
         return $this->database->select("TEAM", ["*"]);
     }
+
+    public function change_name($value): void {
+        // changes the name on a team
+        $id = explode(";", $value)[0];
+        $name = explode(";", $value)[1];
+
+        $this->database->update("TEAM", ["teamname" => $name], ["group_id" => $id]);
+    }
 }
 
 ?>

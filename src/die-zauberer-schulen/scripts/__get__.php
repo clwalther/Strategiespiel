@@ -1,14 +1,15 @@
 <?php
 
-
 include "../../scripts/global.php";
 include "./general.php";
 include "./buildings.php";
 include "./students.php";
+include "./teachers.php";
 
 $general = new General();
 $buildings = new Buildings();
 $students = new Students();
+$teachers = new Teachers();
 
 
 $array = [
@@ -21,7 +22,7 @@ $array = [
     ],
     "school_admin" => [
         "students" => $students->get_requirments(),
-        // "teachers" => "none",
+        "teachers" => $teachers->get_requirments(),
         "buildings" => $buildings->get_requirments()
     ]
 ];

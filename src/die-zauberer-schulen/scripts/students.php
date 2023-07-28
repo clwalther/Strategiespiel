@@ -39,10 +39,10 @@ class Students
 
     private function get_skill(int $individual_student_repr, int $skill_index): int {
         // caluclates the skill value in range 0 - MAX_STUDNET_POINTS for given student skill repr
-        return ($individual_student_repr / pow(MAX_STUDENT_POINTS, $skill_index)) % MAX_STUDENT_POINTS;
+        return floor($individual_student_repr / pow(MAX_STUDENT_POINTS, $skill_index)) % MAX_STUDENT_POINTS;
     }
 
-    public function check_out_student(int $id) {
+    public function check_out($id) {
         $this->database->delete("STUDENTS", ["id" => $id]);
     }
 }

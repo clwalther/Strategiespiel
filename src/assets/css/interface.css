@@ -63,7 +63,24 @@ body section {
     }
         body section h1 img {
             width: 32px;
+            height: 32px;
         }
+        body section h1 button {
+            border: 1px solid var(--colour-border-edge);
+            border-radius: 8px;
+            padding: 4px;
+
+            background-color: var(--colour-accent);
+
+            height: 32px;
+            width: 32px;
+
+            cursor: pointer;
+        }
+            body section h1 button img {
+                width: 24px;
+                height: 24px;
+            }
 
     body section article {
         position: relative;
@@ -243,7 +260,7 @@ body section {
                         cursor: no-drop;
                     }
 
-                    body section article article div div .enabled {
+                    body section article article div div .active_building {
                         background-color: var(--colour-header-background);
                         color: var(--colour-border);
                         box-shadow:  0px 0px 16px 1px var(--colour-green);
