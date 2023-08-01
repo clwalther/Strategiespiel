@@ -1,19 +1,278 @@
-body {
-    /* display: grid; */
-}
-    body section {
-        width: 100%;
-        height: 33.3%;
+/* STUDENTS */
+    body section #students p button {
+        height: 28px;
 
-        /* display: flex;
-        justify-content: space-around; */
+        margin-left: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
+        border-radius: 8px;
+        border: 0;
+
+        background-color: var(--colour-green);
+        color: var(--colour-colour);
+
+        cursor: pointer;
     }
-        body section button {
-            width: 20%;
-            height: 95%;
-            margin: 2.5%;
-            border: 0;
-            padding: 0;
+    body section #students p button:hover {
+        background-color: var(--colour-green-accent);
+    }
+    body dialog #dialog-student div {
+        display: flex;
+        align-items: center;
+    }
+    body dialog #dialog-student div div {
+        height: 100%;
+    }
+    body dialog #dialog-student div div ul {
+        display: grid;
 
-            border: none;
-        }
+        padding: 0;
+        margin: 0;
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 16px;
+
+        width: 75%;
+        height: 75%;
+
+        background-color: var(--colour-selected);
+        box-shadow: 0px 0px 32px 4px var(--colour-background);
+
+        cursor: pointer;
+
+        overflow: hidden;
+    }
+    body dialog .enabled-dialog div div ul {
+        visibility: collapse;
+    }
+    body dialog .enabled-dialog div div .loaded-student {
+        visibility: visible;
+    }
+    body dialog #dialog-student div .active-student {
+        box-shadow: 0px 0px 32px 4px var(--colour-green);
+    }
+    body dialog #dialog-student div div ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    body dialog #dialog-student div div ul li span {
+        margin-left: 16px;
+    }
+    body dialog #dialog-student div div ul li div {
+        width: auto;
+        visibility: inherit;
+    }
+    body dialog #dialog-student div div ul li div input:nth-child(5) {
+        margin-right: 32px;
+    }
+    body dialog #dialog-student div .student-navigation {
+        height: 46px;
+        width: 46px;
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 50%;
+        padding: 0;
+
+        background-color: var(--colour-selected);
+
+        cursor: pointer;
+    }
+    body dialog #dialog-student div button:hover {
+        background-color: var(--colour-accent);
+    }
+    body dialog #dialog-student div button img {
+        height: inherit;
+        width: inherit;
+    }
+
+
+/* TEACHERS */
+    body section #teachers div {
+        height: 96px;
+
+        overflow-x: scroll;
+        overflow-y: hidden;
+
+        padding-bottom: 16px;
+
+        scrollbar-width: thin;
+        display: -webkit-box;
+    }
+    body section #teachers div div {
+        width: calc(96px * 1.61803398875 - 8px);
+        height: calc(96px - 8px);
+
+        padding: 4px !important;
+
+        margin-right: 8px;
+    }
+    body section #teachers div div h4 {
+        margin: 0;
+        padding: 0;
+        padding-left: 4px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    body section #teachers div div h4 button {
+        height: 32px;
+        width: 32px;
+
+        border: 0;
+        border-radius: 8px;
+        padding: 0;
+
+        background-color: inherit;
+
+        cursor: pointer;
+    }
+    body section #teachers div div h4 button:hover {
+        background-color: var(--colour-accent);
+    }
+    body section #teachers div div h4 button img {
+        height: 22px;
+        width: 22px;
+
+        margin: 5px;
+    }
+    body section #teachers div div p {
+        display: flex;
+
+        margin: 5px;
+
+        font-size: 9px;
+    }
+    body section #teachers div div p span {
+        display: flex;
+        align-items: center;
+
+        border-radius: 8px;
+        padding: 2px;
+        padding-left: 6px;
+        padding-right: 6px;
+
+        font-size: 14px;
+
+        cursor: pointer;
+    }
+    body section #teachers div div p span:hover {
+        background-color: var(--colour-accent);
+    }
+    body section #teachers div div p span img {
+        height: 32px;
+        width: 32px;
+    }
+    body section #teachers div div p span span {
+        margin-left: 8px;
+    }
+    body dialog .dialog-teacher div {
+        display: flex;
+        align-items: center;
+    }
+    body dialog .dialog-teacher div ul {
+        display: grid;
+
+        padding: 0;
+        margin: 0;
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 16px;
+
+        width: 75%;
+        height: 75%;
+
+        background-color: var(--colour-selected);
+        box-shadow: 0px 0px 32px 4px var(--colour-background);
+
+        overflow: hidden;
+    }
+    body dialog .dialog-teacher div ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    body dialog .dialog-teacher div ul li span {
+        margin-left: 16px;
+    }
+    body dialog .dialog-teacher div ul li div {
+        width: auto;
+        height: 100%;
+        visibility: inherit;
+    }
+    body dialog .dialog-teacher div ul li div input:nth-child(5) {
+        margin-right: 32px;
+    }
+
+
+/* BUILDINGS */
+    body section #buildings div {
+        display: block ruby;
+        display: -webkit-box;
+
+        border: none;
+
+        overflow-y: visible;
+        overflow-x: scroll;
+
+        scrollbar-width: thin;
+
+        position: relative;
+    }
+    body section #buildings div div {
+        overflow: visible;
+
+        margin: 0;
+    }
+    body section #buildings div .building-tree-branch {
+        display: grid;
+        justify-items: center;
+        align-content: start;
+
+        margin: 0;
+    }
+    body section #buildings div button {
+        height: 54px;
+        width: calc(54px * 1.61803);
+
+        color: var(--colour-colour);
+        background-color: var(--colour-header-background);
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 8px;
+
+        margin: 16px;
+        margin-left: 8px;
+        margin-right: 8px;
+
+        font-family: Roboto-Regular;
+
+        cursor: pointer;
+    }
+    body section #buildings div button:disabled {
+        color: var(--colour-border-edge);
+
+        cursor: not-allowed;
+    }
+    body section #buildings div .active-building {
+        box-shadow: 0px 0px 16px var(--colour-green);
+    }
+    body section #buildings div .building-tree-knot {
+        display: flex;
+        justify-content: space-between;
+    }
+    body section #buildings div svg {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    body section #buildings div svg path {
+        stroke: var(--colour-border-edge);
+        stroke-width:2;
+        fill: none;
+    }
