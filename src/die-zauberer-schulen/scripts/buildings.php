@@ -1,147 +1,113 @@
 <?php
 
-
 class Buildings
 {
-    private $expansion_data;
+    private $data;
     private $database;
-    public $group_id;
+    private $group_id;
 
     function __construct() {
         // global import the database instance
         global $database;
-        // based on file: /var/www/html/The-Wizard-Schools/src/assets/data/requirments.json
-        $path_to_expansion_data = "/var/www/html/The-Wizard-Schools/src/assets/data/requirments.json";
 
-        // reading file and formating to php-array
-        $this->expansion_data = $this->get_json_data($path_to_expansion_data)["schulverwaltung"];
-        // setting up database
+        // reads from file
+        $path_data = "/var/www/html/The-Wizard-Schools/src/assets/data/buildings.json";
+
+        // initiates globals
         $this->database = $database;
-
         $this->group_id = $_GET["Team"];
+        $this->get_json_data($path_data);
     }
 
-    private function get_json_data(string $filename): array {
+    private function get_json_data(string $filename): void {
         // reads and formats a JSON-file
         $file = file_get_contents($filename);
-        return json_decode($file, true);
+        $this->buildings = json_decode($file, true);
     }
 
-    private function get_building_id(string $name): int {
-        // converts an name to the corresponding id of the building
-        $index = 0;
+    private function get_id(string $name): int {
+        // reads the building names and returns the index of the element
+        $counter = 0;
+        $this->search_for_name($name, $this->buildings, $counter);
+        return $counter;
+    }
 
-        // generally loops through all list until given entry is found
-        // looping through main branches
-        foreach($this->expansion_data["branches"] as $main_branches) {
-            // looping through level in main branch
-            foreach($main_branches as $levels) {
-                // looping through building name in level
-                foreach($levels as $building_name) {
-                    // checking for matching name
-                    if($building_name == $name) {
-                        // returning the correct id
-                        return $index;
-                    } else {
-                        $index++;
-                    }
-                }
+    private function search_for_name($name, $knot, &$counter) {
+        foreach($knot as $building_name => $building) {
+            if($name === $building_name) { return 1; }
+
+            $counter++;
+
+            if($this->search_for_name($name, $building["children"], $counter) == 1) {
+                return 1;
             }
         }
-
-        // returning -1 when there was no matching entry
-        return -1;
     }
 
-    private function get_building_status(int $id): bool {
-        // true => active; false => deactivated;
-        $table = "SCHOOL_ADMIN";
-        $columns = ["buildings"];
-        $condition = ["group_id" => $this->group_id];
-
+    private function get_status(int $id): bool {
+        // in the case that "none" is parent node it needs to return true
+        if($id < 0) { return false; }
         // reads the building_repr from the corresponding group
-        $building_statuses = $this->database->select_where($table, $columns, $condition);
+        $building_statuses = $this->database->select_where("SCHOOL_ADMIN", ["buildings"], ["group_id" => $this->group_id]);
 
-        if($id == -1) { return true; } // in the case that none is parent node it needs to return true
-
-        return (floatval($building_statuses[0]["buildings"]) & pow(2, $id)) == pow(2, $id);
+        // true => active; false => deactivated;
+        return ($building_statuses[0]["buildings"] & pow(2, $id)) == pow(2, $id);
     }
 
     public function get_requirments(): array {
-        $send_array = [];
+        foreach($this->buildings as $building_name => &$building) {
+            $this->manipulate_building($building_name, $building, true);
+        }
 
-        // looping through main branches
-        foreach($this->expansion_data["branches"] as $main_branch) {
-            $send_main_branch = [];
+        return $this->buildings;
+    }
 
-            // looping through levels in main branch
-            foreach($main_branch as $level) {
-                $send_level = [];
+    private function manipulate_building(string $building_name, array &$building, bool $parent_active): void {
+        $building_active = $this->get_status($this->get_id($building_name));
 
-                // looping through buildings in level
-                foreach($level as $building_name) {
-                    // get buildings object from requirments
-                    $building = $this->expansion_data["buildings"][$building_name];
-                    // get building id
-                    $building_id = $this->get_building_id($building_name);
-                    // team array object
-                    $send_building = [
-                        "id" => $building_id,
-                        "name" => $building["trivialname"],
-                        "parent" => $building["parent"],
-                        "active" => $this->get_building_status($building_id),
-                        "parent_active" => $this->get_building_status($this->get_building_id($building["parent"])),
+        $building["active"] = $building_active;
+        $building["parent_active"] = $parent_active;
 
-                        "requriments" => $building["requirements"],
-                        "yields" => $building["yields"]
-                    ];
 
-                    array_push($send_level, $send_building);
-                }
-                array_push($send_main_branch, $send_level);
+        if($building["children"] !== "none") {
+            foreach($building["children"] as $child_name => &$child) {
+                $this->manipulate_building($child_name, $child, $building_active);
             }
-            array_push($send_array, $send_main_branch);
         }
-
-        return $send_array;
     }
 
-    public function activate($id) {
-        $table_name = "SCHOOL_ADMIN";
-        $conditions = ["group_id" => $this->group_id];
-        $columns = ["buildings"];
-
+    // CHANGING THE DATABASE BUILDING VALUE
+    public function activate(string $building_name) {
+        // aquries the building id from the name
+        $building_id = $this->get_id($building_name);
         // aquires the building representation int
-        $building_statuses = $this->database->select_where($table_name, $columns, $conditions);
-        $building_repr = floatval($building_statuses[0]["buildings"]);
+        $building_statuses = $this->database->select_where("SCHOOL_ADMIN", ["buildings"], ["group_id" => $this->group_id]);
+        $building_repr = $building_statuses[0]["buildings"];
 
-        // checks for exitens of the building
-        if(($building_repr & pow(2, $id)) != pow(2, $id)) {
+        // checks for not exitens of the building
+        if(!$this->get_status($building_id)) {
             // adds the building
-            $building_repr += pow(2, $id);
+            $building_repr += pow(2, $building_id);
 
             // updates the database
-            $this->database->update($table_name, ["buildings" => $building_repr], $conditions);
+            $this->database->update("SCHOOL_ADMIN", ["buildings" => $building_repr], ["group_id" => $this->group_id]);
         }
     }
 
-    public function deactivate($id) {
-        $table_name = "SCHOOL_ADMIN";
-        $conditions = ["group_id" => $this->group_id];
-        $columns = ["buildings"];
-
+    public function deactivate(string $building_name) {
+        // aquries the building id from the name
+        $building_id = $this->get_id($building_name);
         // aquires the building representation int
-        $building_statuses = $this->database->select_where($table_name, $columns, $conditions);
+        $building_statuses = $this->database->select_where("SCHOOL_ADMIN", ["buildings"], ["group_id" => $this->group_id]);
+        $building_repr = $building_statuses[0]["buildings"];
 
         // checks for exitens of the building
-        $building_repr = floatval($building_statuses[0]["buildings"]);
-
-        if(($building_repr & pow(2, $id)) == pow(2, $id)) {
-            // removes the exitens of the building
-            $building_repr -= pow(2, $id);
+        if($this->get_status($building_id)) {
+            // removes the building
+            $building_repr -= pow(2, $building_id);
 
             // updates the database
-            $this->database->update($table_name, ["buildings" => $building_repr], $conditions);
+            $this->database->update("SCHOOL_ADMIN", ["buildings" => $building_repr], ["group_id" => $this->group_id]);
         }
     }
 }

@@ -29,4 +29,6 @@ $array = [
 
 echo json_encode($array);
 
+$database->close();
+
 ?>

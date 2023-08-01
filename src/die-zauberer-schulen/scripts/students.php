@@ -43,6 +43,7 @@ class Students
     }
 
     public function check_out($id) {
+        // removes the student from the database
         $this->database->delete("STUDENTS", ["id" => $id]);
     }
 }

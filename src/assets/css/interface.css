@@ -1,279 +1,278 @@
-body aside {
-    width: calc(270px - 32px);
-    height: calc(100% - 64px);
+/* STUDENTS */
+    body section #students p button {
+        height: 28px;
 
-    box-shadow: 0.5px 0.5px 1px var(--colour-border-edge);
-
-    display: grid;
-    align-content: start;
-
-    padding-left: 16px;
-    padding-right: 16px;
-}
-    body aside h3 {
-        font-size: 16px;
-        margin: 24px;
-    }
-    body aside button {
-        height: 32px;
-
+        margin-left: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
         border-radius: 8px;
         border: 0;
-        padding-left: 16px;
 
-        background-color: var(--colour-background);
-        color: var(--colour-text);
+        background-color: var(--colour-green);
+        color: var(--colour-colour);
 
+        cursor: pointer;
+    }
+    body section #students p button:hover {
+        background-color: var(--colour-green-accent);
+    }
+    body dialog #dialog-student div {
         display: flex;
         align-items: center;
+    }
+    body dialog #dialog-student div div {
+        height: 100%;
+    }
+    body dialog #dialog-student div div ul {
+        display: grid;
+
+        padding: 0;
+        margin: 0;
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 16px;
+
+        width: 75%;
+        height: 75%;
+
+        background-color: var(--colour-selected);
+        box-shadow: 0px 0px 32px 4px var(--colour-background);
+
+        cursor: pointer;
+
+        overflow: hidden;
+    }
+    body dialog .enabled-dialog div div ul {
+        visibility: collapse;
+    }
+    body dialog .enabled-dialog div div .loaded-student {
+        visibility: visible;
+    }
+    body dialog #dialog-student div .active-student {
+        box-shadow: 0px 0px 32px 4px var(--colour-green);
+    }
+    body dialog #dialog-student div div ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    body dialog #dialog-student div div ul li span {
+        margin-left: 16px;
+    }
+    body dialog #dialog-student div div ul li div {
+        width: auto;
+        visibility: inherit;
+    }
+    body dialog #dialog-student div div ul li div input:nth-child(5) {
+        margin-right: 32px;
+    }
+    body dialog #dialog-student div .student-navigation {
+        height: 46px;
+        width: 46px;
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 50%;
+        padding: 0;
+
+        background-color: var(--colour-selected);
+
+        cursor: pointer;
+    }
+    body dialog #dialog-student div button:hover {
+        background-color: var(--colour-accent);
+    }
+    body dialog #dialog-student div button img {
+        height: inherit;
+        width: inherit;
+    }
+
+
+/* TEACHERS */
+    body section #teachers div {
+        height: 96px;
+
+        overflow-x: scroll;
+        overflow-y: hidden;
+
+        padding-bottom: 16px;
+
+        scrollbar-width: thin;
+        display: -webkit-box;
+    }
+    body section #teachers div div {
+        width: calc(96px * 1.61803398875 - 8px);
+        height: calc(96px - 8px);
+
+        padding: 4px !important;
+
+        margin-right: 8px;
+    }
+    body section #teachers div div h4 {
+        margin: 0;
+        padding: 0;
+        padding-left: 4px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    body section #teachers div div h4 button {
+        height: 32px;
+        width: 32px;
+
+        border: 0;
+        border-radius: 8px;
+        padding: 0;
+
+        background-color: inherit;
+
+        cursor: pointer;
+    }
+    body section #teachers div div h4 button:hover {
+        background-color: var(--colour-accent);
+    }
+    body section #teachers div div h4 button img {
+        height: 22px;
+        width: 22px;
+
+        margin: 5px;
+    }
+    body section #teachers div div p {
+        display: flex;
+
+        margin: 5px;
+
+        font-size: 9px;
+    }
+    body section #teachers div div p span {
+        display: flex;
+        align-items: center;
+
+        border-radius: 8px;
+        padding: 2px;
+        padding-left: 6px;
+        padding-right: 6px;
 
         font-size: 14px;
 
         cursor: pointer;
     }
-    body aside button:hover {
+    body section #teachers div div p span:hover {
         background-color: var(--colour-accent);
     }
-    body aside .active_button {
-        background-color: var(--colour-selected);
+    body section #teachers div div p span img {
+        height: 32px;
+        width: 32px;
     }
-        body aside button img {
-            height: 24px;
-            width: 24px;
-        }
-
-body section {
-    position: absolute;
-    right: 0;
-    top: 64px;
-
-    padding: 16px;
-
-    height: calc(100% - 32px - 64px);
-    width: calc(100% - 270px - 32px - 16px);
-
-    scrollbar-width: thin;
-
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
-    body section h1 {
+    body section #teachers div div p span span {
+        margin-left: 8px;
+    }
+    body dialog .dialog-teacher div {
         display: flex;
         align-items: center;
     }
-        body section h1 img {
-            width: 32px;
-            height: 32px;
-        }
-        body section h1 button {
-            border: 1px solid var(--colour-border-edge);
-            border-radius: 8px;
-            padding: 4px;
-
-            background-color: var(--colour-accent);
-
-            height: 32px;
-            width: 32px;
-
-            cursor: pointer;
-        }
-            body section h1 button img {
-                width: 24px;
-                height: 24px;
-            }
-
-    body section article {
-        position: relative;
-        top: 0;
-
-        height: auto;
-        width: 100%;
+    body dialog .dialog-teacher div ul {
+        display: grid;
 
         padding: 0;
-        padding-bottom: 16px;
-        border-bottom: 1px solid var(--colour-border-edge);
+        margin: 0;
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 16px;
+
+        width: 75%;
+        height: 75%;
+
+        background-color: var(--colour-selected);
+        box-shadow: 0px 0px 32px 4px var(--colour-background);
 
         overflow: hidden;
     }
-        body section article h2 {
-            font-size: 20px;
-        }
-        body section article p {
-            font-size: 14px;
-        }
-            body section article p button {
-                height: 28px;
-
-                margin-left: 16px;
-                border: 0;
-                border-radius: 8px;
-                padding-left: 8px;
-                padding-right: 8px;
-
-                background-color: var(--colour-green);
-                color: var(--colour-colour);
-
-                cursor: pointer;
-            }
-            body section article p button:hover {
-                background-color: var(--colour-green-accent);
-            }
-        body section article div {
-            width: 100%;
-            height: 96px;
-
-            overflow-x: scroll;
-            overflow-y: hidden;
-            padding-bottom: 16px;
-
-            scrollbar-width: thin;
-            display: -webkit-box;
-        }
-            body section article div div {
-                    width: calc(96px * 1.61803398875);
-                    height: 96px;
-
-                    overflow: hidden;
-                    padding: 0;
-
-                    background-color: var(--colour-header-background);
-                    border-radius: 8px;
-                    border: 1px solid var(--colour-border-edge);
-                    margin-right: 8px;
-
-                    display: block;
-            }
-                body section article div div h4 {
-                    margin: 8px;
-                    align-items: center;
-
-                    display: flex;
-                    justify-content: space-between;
+    body dialog .dialog-teacher div ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    body dialog .dialog-teacher div ul li span {
+        margin-left: 16px;
+    }
+    body dialog .dialog-teacher div ul li div {
+        width: auto;
+        height: 100%;
+        visibility: inherit;
+    }
+    body dialog .dialog-teacher div ul li div input:nth-child(5) {
+        margin-right: 32px;
+    }
 
 
-                    width: calc(96px * 1.61803398875 - 16px);
-                    height: 24px;
-                }
-                    body section article div div h4 button {
-                        padding: 0;
-                        border: 0;
-                        border-radius: 8px;
-                        height: 28px;
-                        width: 28px;
-                        cursor: pointer;
-                        background-color: rgba(255, 255, 255, 0);
-                    }
-                    body section article div div h4 button:hover {
-                        background-color: rgba(255, 255, 255, .1);
-                    }
-                        body section article div div h4 button img {
-                            height: 22px;
-                            width: 22px;
-                        }
-                body section article div div p {
-                    font-size: 8px;
+/* BUILDINGS */
+    body section #buildings div {
+        display: block ruby;
+        display: -webkit-box;
 
-                    margin-left: 8px;
-                    margin-right: 8px;
+        border: none;
 
-                    display: flex;
-                }
-                    body section article div div p span {
-                        font-size: 14px;
+        overflow-y: visible;
+        overflow-x: scroll;
 
-                        display: flex;
-                        align-items: center;
+        scrollbar-width: thin;
 
-                        padding: 6px;
-                        padding-top: 2px;
-                        padding-bottom: 2px;
-                        border-radius: 8px;
+        position: relative;
+    }
+    body section #buildings div div {
+        overflow: visible;
 
-                        cursor: pointer;
-                    }
-                    body section article div div p span:hover {
-                        background-color: rgba(255, 255, 255, .1);
-                    }
-                        body section article div div p span img {
-                            height: 28px;
-                            width: 28px;
+        margin: 0;
+    }
+    body section #buildings div .building-tree-branch {
+        display: grid;
+        justify-items: center;
+        align-content: start;
 
-                            margin-right: 8px;
-                        }
-        body section article article {
-            display: flex;
-            justify-content: space-between;
+        margin: 0;
+    }
+    body section #buildings div button {
+        height: 54px;
+        width: calc(54px * 1.61803);
 
-            padding-top: 8px;
-            border: none;
+        color: var(--colour-colour);
+        background-color: var(--colour-header-background);
 
-            overflow-y: visible;
-            overflow-x: scroll;
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 8px;
 
-            scrollbar-width: thin;
-        }
-            body section article article div {
-                min-width: fit-content;
-                width: auto;
-                height: auto;
+        margin: 16px;
+        margin-left: 8px;
+        margin-right: 8px;
 
-                overflow: visible;
+        font-family: Roboto-Regular;
 
-                padding: 0;
+        cursor: pointer;
+    }
+    body section #buildings div button:disabled {
+        color: var(--colour-border-edge);
 
-                display: grid;
-                justify-content: center;
-            }
-                body section article article div div {
-                    height: calc(92px * 0.618 + 16px);
-
-                    display: flex;
-
-                    background-color: rgba(0, 0, 0, 0);
-
-                    border: none;
-                    border-radius: 0;
-                    margin: 0;
-                    margin-bottom: 32px;
-                    padding: 0;
-                    padding-left: 4px;
-                    padding-right: 4px;
-                }
-                    body section article article div div button {
-                        background-color: var(--colour-background);
-                        color: var(--colour-border-edge);
-
-                        margin: 8px;
-                        border-radius: 8px;
-                        border: 1px solid var(--colour-border-edge);
-
-                        height: calc(92px * 0.618);
-                        width: 92px;
-
-                        cursor: pointer;
-
-                        font-weight: 900;
-                    }
-
-                    body section article article div div button:disabled,
-                    button[disabled] {
-                        cursor: no-drop;
-                    }
-
-                    body section article article div div .active_building {
-                        background-color: var(--colour-header-background);
-                        color: var(--colour-border);
-                        box-shadow:  0px 0px 16px 1px var(--colour-green);
-                    }
-            body section article article svg {
-                position: absolute;
-                height: calc(100% - 8px);
-                width: 100%;
-                overflow: visible;
-                margin-top: -8px;
-                z-index: -1;
-            }
-                body section article article svg line {
-                    stroke:var(--colour-selected);
-                    stroke-width:2
-                }
+        cursor: not-allowed;
+    }
+    body section #buildings div .active-building {
+        box-shadow: 0px 0px 16px var(--colour-green);
+    }
+    body section #buildings div .building-tree-knot {
+        display: flex;
+        justify-content: space-between;
+    }
+    body section #buildings div svg {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    body section #buildings div svg path {
+        stroke: var(--colour-border-edge);
+        stroke-width:2;
+        fill: none;
+    }

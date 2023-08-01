@@ -8,7 +8,6 @@ let dialog;
 // onload event
 document.addEventListener("readystatechange", (event) => {
     get_team();
-    route_to_team();
 
     // global
     body = document.getElementById("body");
@@ -44,27 +43,6 @@ function get_team() {
     });
 }
 
-// generates the query string for sending data to the backend
-function get_message_string(key, value) {
-    let queries = [];
-
-    // pushes all wanted queries into array
-    for(var i = 0; i < Math.min(key.length, value.length); i++) {
-        queries.push(encodeURI(key[i]) + "=" + encodeURI(value[i]));
-    }
-    // joins all entries with query seperators: "?"
-    return queries.join("?");
-}
-
-// routing to the correct Team location
-function route_to_team() {
-    // checks whether the team is defined
-    if(team_id === undefined) {
-        // reroutes to know location
-        window.open('./index.php?Team=1', '_self');
-    }
-}
-
 // util to find the generally clicked element
 function clicked_element(element, target) {
     if(target != null) {
@@ -72,6 +50,31 @@ function clicked_element(element, target) {
     } else {
         return target == element;
     }
+}
+
+function get_message_string(keys, values) {
+    parameters = [];
+    value_list = [];
+    queries = [];
+
+    for(let i = 0; i < Math.min(keys.length, values.length); i++) {
+        keys[i] = encodeURI(keys[i]);
+        values[i] = encodeURI(values[i]);
+
+        if(parameters.includes(keys[i])) {
+            query_index = parameters.indexOf(keys[i]);
+            value_list[query_index].push(values[i]);
+        } else {
+            parameters.push(keys[i]);
+            value_list.push([values[i]]);
+        }
+    }
+
+    for(let j = 0; j < parameters.length; j++) {
+        queries.push(`${parameters[j]}=${value_list[j].join(",")}`)
+    }
+
+    return queries.join("&");
 }
 
 // === DIALOG ===
@@ -91,15 +94,14 @@ function close_dialog() {
 }
 
 // === BACKEND COMMUNICATION ===
-async function __send(key, value) {
+async function __send(keys, values) {
     // create the XMLHttpRequest (post)
-    let xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open("POST", `/die-zauberer-schulen/scripts/__send__.php?Team=${team_id}`, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    console.log(get_message_string(key, value));
-    xhr.send(get_message_string(key, value));
-    // reload the current location
-    xhr.onloadend = function (event) { location.reload(); }
+    xhr.send(get_message_string(keys, values));
+
+    xhr.onloadend = function(event) { location.reload(); }
 }
 
 async function __get() {

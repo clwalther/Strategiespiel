@@ -1,0 +1,133 @@
+/* BUILDING BLOCKS */
+body dialog {
+	position: inherit;
+	top: inherit;
+	left: inherit;
+
+	height: inherit;
+	width: inherit;
+
+	margin: inherit;
+	border: inherit;
+	padding: inherit;
+
+	background-color: rgba(0, 0, 0, 0.5);
+}
+body dialog div {
+	position: inherit;
+
+	height: calc(56vh - 16px);
+	width: calc(90vh - 16px);
+
+	margin-left:   calc(50vw - 45vh - 0.8px - 16px);
+	margin-right:  calc(50vw - 45vh - 0.8px - 16px);
+	margin-top:    calc(50vh - 28vh - 0.8px - 16px);
+	margin-bottom: calc(50vh - 28vh - 0.8px - 16px);
+
+	border: 1px solid var(--colour-border-edge);
+	border-radius: 16px;
+
+	padding: 32px;
+
+	background-color: var(--colour-selected);
+	color: var(--colour-colour);
+
+	overflow: hidden;
+
+	visibility: hidden;
+}
+body dialog .enabled-dialog {
+	visibility: visible;
+}
+
+/* DEFAULT INTERNALS */
+body dialog div h1 {
+    font-size: 28px;
+
+    margin: 0px;
+}
+body dialog div p {
+    margin: 0;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    line-height: 1.5;
+}
+body dialog div div {
+    position: relative;
+
+    width: 100%;
+    height: calc(100% - 45.6px);
+
+    margin: 0;
+    border: 0;
+    padding: 0;
+
+    overflow: hidden;
+}
+body dialog .enabled-dialog div {
+    visibility: visible;
+}
+
+body dialog div input[type="text"] {
+    width: calc(100% - 64px);
+    height: 14px;
+
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--colour-border-edge);
+    border-radius: 8px;
+    padding: 8px;
+
+    background: var(--colour-background);
+    color: var(--colour-border-edge);
+
+    font-size: 15px;
+}
+body dialog div input[type="text"]:focus-within {
+    outline: 1px solid var(--colour-green);
+
+    background-color: var(--colour-header-background);
+    color: var(--colour-colour);
+}
+body dialog div input[type="checkbox"] {
+    height: 16px;
+    width: 16px;
+    border: 0;
+    margin: 10px;
+
+    cursor: pointer;
+
+    filter: brightness(85%) saturate(100%) contrast(50000%);
+}
+/* BOTTOM BUTTON CONTAINER */
+body dialog div .button-container {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	height: 28px;
+	width: calc(100% - 16px);
+
+	padding: 8px;
+
+    display: flex;
+    justify-content: space-between;
+
+    overflow: hidden;
+}
+body dialog div .button-container button {
+	width: calc(50% - 2px);
+	height: 100%;
+
+	border: 1px solid var(--colour-border-edge);
+	border-radius: 8px;
+
+	color: var(--colour-colour);
+	background-color: var(--colour-accent);
+
+	cursor: pointer;
+}
+body dialog .enabled-dialog .button-container {
+    visibility: visible;
+}

@@ -1,0 +1,84 @@
+body section {
+    position: absolute;
+    right: 0;
+    top: 64px;
+
+    padding: 32px;
+
+    height: calc(100% - var(--nav-height)  - 64px);
+    width:  calc(100% - var(--aside-width) - 64px);
+
+    scrollbar-width: thin;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/* HEADER */
+body section header {
+    display: flex;
+    align-items: center;
+}
+body section header img {
+    width: 32px;
+    height: 32px;
+}
+body section header h1 {
+    white-space: nowrap;
+
+    margin: 0;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+body section header button {
+    border: 1px solid var(--colour-border-edge);
+    border-radius: 8px;
+    padding: 0;
+
+    background-color: var(--colour-accent);
+
+    height: 32px;
+    width: 32px;
+
+    cursor: pointer;
+}
+body section header button img {
+    width:  calc(32px - 8px);
+    height: calc(32px - 8px);
+
+    margin: 4px;
+}
+
+/* ARTICLE */
+body section article {
+    width: 100%;
+
+    margin: 0;
+    margin-top: 8px;
+    padding: 0;
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid var(--colour-border-edge);
+
+    overflow: hidden;
+}
+body section article h2 {
+    font-size: 20px;
+}
+body section article p {
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+body section article .panel {
+    margin: 0;
+    border: 1px solid var(--colour-border-edge) !important;
+    border-radius: 8px !important;
+    padding: 0 !important;
+
+    background-color: var(--colour-header-background) !important;
+
+    display: block !important;
+
+    overflow: hidden !important;
+}

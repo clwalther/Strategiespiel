@@ -12,11 +12,7 @@ class General
         $this->database->delete_all("TIME"); // resets time: by delete every entry
         $this->database->update("TEAM", ["teamname" => "TEAMNAME"], ["*"]); // reset team: by defaulting every entry
         $this->database->update("MINISTRY_SCHOOL_ADMIN", [
-            "teacher_slots"   => 0,
-            "teachers"        => 0,
-            "graduates_slots" => 0,
-            "graduates"       => 0,
-            "buildings"       => 0
+            "buildings" => 0
         ], ["*"]); // reset ministry of school administration: by defaulting every entry
     }
 
