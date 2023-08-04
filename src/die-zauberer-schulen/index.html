@@ -7,25 +7,39 @@
 
     <link rel="shortcut icon" href="../assets/imgs/favicon-32x32.png" type="image/x-icon">
 
-    <script src="../assets/js/script.js"></script>
+    <!-- main script (import last) -->
+    <script src="../assets/js/script.js" async></script>
 
-    <link rel="stylesheet" href="../../assets/css/style.css">
-
-    <script src="../../assets/js/script.js" async></script>
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- stylistic specific style elements -->
+    <link rel="stylesheet" href="../assets/css/section.css">
+    <link rel="stylesheet" href="../assets/css/aside.css">
+    <link rel="stylesheet" href="../assets/css/dialog.css">
 </head>
 <body id="body">
     <nav>
-        <a href="/">Strategiespiel</a><i>&nbsp;&nbsp;/&nbsp;&nbsp;</i>
-        <a href="/die-zauberer-schulen">Die-Zauberer-Schulen</a><i>&nbsp;&nbsp;/&nbsp;&nbsp;</i>
+        <a href="/">Strategiespiel</a><i>/</i>
+        <a href="/die-zauberer-schulen">Die-Zauberer-Schulen</a><i>/</i>
     </nav>
+    <aside id="aside">
+        <h3>Directions</h3>
+        <div id="team-drawer">
+            <button onclick="window.open('./ministerium-arbeit', '_self')">
+                <img src="../assets/imgs/open_in_new.svg">
+                <span>/Arbeit</span>
+            </button>
+            <button onclick="window.open('./ministerium-schulverwaltung', '_self')">
+                <img src="../assets/imgs/open_in_new.svg">
+                <span>/Schulverwaltung</span>
+            </button>
+        </div>
+    </aside>
     <section>
-        <a href="./ministerium-schulverwaltung">/Schulverwaltung</a>
-        <br>
-        <a href="./ministerium-arbeit">/Arbeit</a>
         <article>
-            <button onclick="send('general_start', true)">Start</button>
-            <button onclick="send('general_pause', true)">Pause</button>
-            <button onclick="send('general_reset', true)">Reset</button>
+            <button onclick="__send(['general_start'], ['true'])">Start</button>
+            <button onclick="__send(['general_pause'], ['true'])">Pause</button>
+            <button onclick="__send(['general_reset'], ['true'])">Reset</button>
         </article>
     </section>
 </body>

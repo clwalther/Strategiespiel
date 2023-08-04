@@ -9,6 +9,7 @@ body section {
     width:  calc(100% - var(--aside-width) - 64px);
 
     scrollbar-width: thin;
+    scrollbar-color: var(--colour-border-edge) transparent;
 
     overflow-x: hidden;
     overflow-y: scroll;
@@ -42,6 +43,9 @@ body section header button {
 
     cursor: pointer;
 }
+body section header button:hover {
+    background-color: var(--colour-accent);
+}
 body section header button img {
     width:  calc(32px - 8px);
     height: calc(32px - 8px);
@@ -69,16 +73,4 @@ body section article p {
     font-size: 14px;
 
     white-space: nowrap;
-}
-body section article .panel {
-    margin: 0;
-    border: 1px solid var(--colour-border-edge) !important;
-    border-radius: 8px !important;
-    padding: 0 !important;
-
-    background-color: var(--colour-header-background) !important;
-
-    display: block !important;
-
-    overflow: hidden !important;
 }

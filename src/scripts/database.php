@@ -50,7 +50,7 @@ class Database
         $sql_query = "SELECT %s FROM %s WHERE %s;";
 
         $str_columns = $this->format_one_dimensional($columns, false);
-        $str_conditions = $this->format_two_dimensional($conditions);
+        $str_conditions = $this->format_two_dimensional($conditions, " AND ");
 
         $query_response = $this->query(sprintf($sql_query, $str_columns, $table_name, $str_conditions));
         return $this->format_query_response($query_response);
@@ -71,7 +71,7 @@ class Database
         $sql_query = "UPDATE %s SET %s WHERE %s;";
 
         $str_data = $this->format_two_dimensional($data);
-        $str_conditions = $this->format_two_dimensional($conditions);
+        $str_conditions = $this->format_two_dimensional($conditions, " AND ");
 
         $this->query(sprintf($sql_query, $table_name, $str_data, $str_conditions));
     }
@@ -80,7 +80,7 @@ class Database
         // DELETE FROM table_name WHERE condition;
         $sql_query = "DELETE FROM %s WHERE %s;";
 
-        $str_conditions = $this->format_two_dimensional($conditions);
+        $str_conditions = $this->format_two_dimensional($conditions, " AND ");
 
         $this->query(sprintf($sql_query, $table_name, $str_conditions));
     }
@@ -110,7 +110,7 @@ class Database
         return implode(", ", $new_array);
     }
 
-    private function format_two_dimensional(array $array): string {
+    private function format_two_dimensional(array $array, string $seperator = ", "): string {
         $new_array = [];
         foreach($array as $key => $value) {
             if(is_string($value)) {
@@ -120,7 +120,7 @@ class Database
                 array_push($new_array, $key."=".$value);
             }
         }
-        return implode(", ", $new_array);
+        return implode($seperator, $new_array);
     }
 
     private function format_query_response(object $query_response): array {

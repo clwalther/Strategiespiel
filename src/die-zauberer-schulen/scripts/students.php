@@ -21,13 +21,13 @@ class Students
             $students_struct = [
                 "id" => $student["id"],
                 "skills" => [
-                    ["name" => "Zaubertränke", "value" => $this->get_skill($student["value"], 0)],
-                    ["name" => "Zauberkunst",  "value" => $this->get_skill($student["value"], 1)],
-                    ["name" => "Verteidigung", "value" => $this->get_skill($student["value"], 2)],
-                    ["name" => "Geschichte",   "value" => $this->get_skill($student["value"], 3)],
-                    ["name" => "Geschöpfe",    "value" => $this->get_skill($student["value"], 4)],
-                    ["name" => "Kräuterkunde", "value" => $this->get_skill($student["value"], 5)],
-                    ["name" => "Besenfliegen", "value" => $this->get_skill($student["value"], 6)]
+                    ["name" => "Zaubertränke", "base" => $this->get_skill($student["value"], 0)],
+                    ["name" => "Zauberkunst",  "base" => $this->get_skill($student["value"], 1)],
+                    ["name" => "Verteidigung", "base" => $this->get_skill($student["value"], 2)],
+                    ["name" => "Geschichte",   "base" => $this->get_skill($student["value"], 3)],
+                    ["name" => "Geschöpfe",    "base" => $this->get_skill($student["value"], 4)],
+                    ["name" => "Kräuterkunde", "base" => $this->get_skill($student["value"], 5)],
+                    ["name" => "Besenfliegen", "base" => $this->get_skill($student["value"], 6)]
                 ]
             ];
 

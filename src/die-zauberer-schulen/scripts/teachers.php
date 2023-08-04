@@ -87,7 +87,6 @@ class Teachers
         $skill   = intval($bundle[1]);
         $value   = intval($bundle[2]);
 
-        echo $subject;
         $response = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
         $old_value = $this->get_skill(intval($response[0][$subject]) - 1, $skill, MAX_BASE_POINTS);
 

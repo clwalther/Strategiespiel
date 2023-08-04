@@ -12,7 +12,14 @@ class General
         $this->database->delete_all("TIME"); // resets time: by delete every entry
         $this->database->update("TEAM", ["teamname" => "TEAMNAME"], ["*"]); // reset team: by defaulting every entry
         $this->database->update("MINISTRY_SCHOOL_ADMIN", [
-            "buildings" => 0
+            "Zaubertränke" => 0,
+            "Zauberkunst"  => 0,
+            "Verteidigung" => 0,
+            "Geschichte"   => 0,
+            "Geschöpfe"    => 0,
+            "Kräuterkunde" => 0,
+            "Besenfliegen" => 0,
+            "buildings"    => 0
         ], ["*"]); // reset ministry of school administration: by defaulting every entry
     }
 
@@ -33,7 +40,7 @@ class General
         // 1.: gets the last type from database to determine wheter halted or not
         // 2.: writes all of the time logs into time logs send object
         $send_times = [
-            "is_halted" => end($time_logs)["type"],
+            "is_running" => end($time_logs)["type"],
             "times" => $time_logs
         ];
 

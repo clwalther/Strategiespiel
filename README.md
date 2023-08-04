@@ -82,25 +82,39 @@ Students:
 ### Ministerium Arbeit
 Table arichtecture (always 12 entries):
 
-    LABOUR_TABLE:
+    LABOUR:
     ├── group_id: INT PRIMARY KEY AUTO_INCREMENT;
     ├── prestige: INT NOT NULL DEFAULT 0;
-    ├── Medimagier: INT NOT NULL DEFAULT 0;
-    ├── Auror: INT NOT NULL DEFAULT 0;
-    ├── Ministeriumsbeamter: INT NOT NULL DEFAULT 0;
-    ├── Drachenwärter: INT NOT NULL DEFAULT 0;
-    ├── Magiezoologe: INT NOT NULL DEFAULT 0;
-    ├── Zauberstabschreinermeister: INT NOT NULL DEFAULT 0;
-    └── Quidditchprofi: INT NOT NULL DEFAULT 0;
+    ├── Medimagier: FLOAT NOT NULL DEFAULT 0;
+    ├── Auror: FLOAT NOT NULL DEFAULT 0;
+    ├── Ministeriumsbeamter: FLOAT NOT NULL DEFAULT 0;
+    ├── Drachenwärter: FLOAT NOT NULL DEFAULT 0;
+    ├── Magiezoologe: FLOAT NOT NULL DEFAULT 0;
+    ├── Zauberstabschreinermeister: FLOAT NOT NULL DEFAULT 0;
+    └── Quidditchprofi: FLOAT NOT NULL DEFAULT 0;
 
-    CREATE TABLE LABOUR_TABLE (
+    CREATE TABLE LABOUR (
         group_id INT PRIMARY KEY AUTO_INCREMENT,
         prestige INT NOT NULL DEFAULT 0,
-        Medimagier INT NOT NULL DEFAULT 0,
-        Auror INT NOT NULL DEFAULT 0,
-        Ministeriumsbeamter INT NOT NULL DEFAULT 0,
-        Drachenwärter INT NOT NULL DEFAULT 0,
-        Magiezoologe INT NOT NULL DEFAULT 0,
-        Zauberstabschreinermeister INT NOT NULL DEFAULT 0,
-        Quidditchprofi INT NOT NULL DEFAULT 0
+        Medimagier FLOAT NOT NULL DEFAULT 0,
+        Auror FLOAT NOT NULL DEFAULT 0,
+        Ministeriumsbeamter FLOAT NOT NULL DEFAULT 0,
+        Drachenwärter FLOAT NOT NULL DEFAULT 0,
+        Magiezoologe FLOAT NOT NULL DEFAULT 0,
+        Zauberstabschreinermeister FLOAT NOT NULL DEFAULT 0,
+        Quidditchprofi FLOAT NOT NULL DEFAULT 0
         );
+
+
+    WORKERS:
+    ├── id: INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+    ├── group_id: INT NOT NULL;
+    ├── job_name: VARCHAR(255) NOT NULL;
+    └── value: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+
+    CREATE TABLE WORKERS (
+        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        group_id INT NOT NULL,
+        job_name VARCHAR(255) NOT NULL,
+        value BIGINT UNSIGNED NOT NULL DEFAULT 0
+    );

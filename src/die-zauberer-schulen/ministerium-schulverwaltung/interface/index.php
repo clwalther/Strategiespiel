@@ -8,7 +8,11 @@
     <link rel="shortcut icon" href="../../../../assets/imgs/favicon-32x32.png" type="image/x-icon">
 
     <!-- file specific script -->
-    <script src="../../../../assets/js/interface.js"></script>
+    <script src="../../../../assets/js/general.js"></script>
+    <script src="../../../../assets/js/dialog.js"></script>
+	<script src="../../../../assets/js/skill.js"></script>
+	<script src="../../../../assets/js/panel.js"></script>
+    <script src="../../../../assets/js/school_admin.js"></script>
     <!-- main script (import last) -->
     <script src="../../../../assets/js/script.js" async></script>
 
@@ -54,7 +58,7 @@
             <h2>Schüler</h2>
             <p>
                 Unabgeholte Schüler: <code id="students-not-fetched"></code>
-                <button onclick="students.open_dialog();">
+                <button onclick="open_dialog('dialog-students-0');">
                     Auszahlen
                 </button>
             </p>
