@@ -198,77 +198,6 @@
     }
     body dialog .jobs div {
         overflow-y: scroll;
-
-        scrollbar-width: thin;
-        scrollbar-color: var(--colour-border-edge) transparent;
-    }
-    body dialog .jobs div .list {
-        padding: 0;
-
-        margin: 0;
-        margin-top: 18px;
-        margin-right: 18px;
-    }
-    body dialog .jobs div .list li {
-        height: 32px;
-
-        border: 1px solid var(--colour-border-edge);
-        border-radius: 8px;
-
-        padding: 0;
-        padding-left: 16px;
-        padding-right: 1.7px;
-
-        margin: 0;
-        margin-bottom: 6px;
-
-        background-color: var(--colour-header-selected);
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        font-size: 14px;
-
-        cursor: pointer;
-    }
-    body dialog .jobs div .list li:hover {
-        background-color: var(--colour-background);
-    }
-    body dialog .jobs div .list li button {
-        width: 28px;
-
-        background-color: inherit;
-
-        padding: 0;
-        border: 0;
-    }
-    body dialog .jobs div .list li button:hover {
-        background-color: var(--colour-accent);
-    }
-    body dialog .jobs div .list li img {
-        margin: 2px;
-
-        height: 24px;
-        width: 24px;
-    }
-    body dialog .jobs div .list li span span {
-        display: inline-block;
-
-        height: 24px;
-
-        padding-left: 4px;
-        padding-right: 4px;
-
-        border-radius: 4px;
-
-        margin-left: 4px;
-        margin-right: 4px;
-
-        line-height: 1.75;
-    }
-    body dialog .jobs div .list li span span:hover {
-        background-color: var(--colour-accent);
     }
     body dialog .worker-editing div .skill-card {
         display: none;
@@ -277,6 +206,10 @@
         display: grid;
     }
 
+/* LOAD BACKUP */
+    body dialog .load-backup div {
+        overflow-y: scroll;
+    }
 
 /* PANELS */
     body section article div .panel {
@@ -389,4 +322,77 @@
     }
     body dialog .enabled-dialog div .skill-card li div input:nth-child(5) {
         margin-right: 32px;
+    }
+
+/* LIST */
+    body dialog div div .list {
+        padding: 0;
+
+        margin: 0;
+        margin-top: 18px;
+        margin-right: 18px;
+    }
+    body dialog div div .list li {
+        height: 32px;
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 8px;
+
+        padding: 0;
+        padding-left: 16px;
+        padding-right: 1.7px;
+
+        margin: 0;
+        margin-bottom: 6px;
+
+        background-color: var(--colour-header-selected);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        font-size: 14px;
+
+        cursor: pointer;
+    }
+    body dialog div div .list li:hover {
+        background-color: var(--colour-background);
+    }
+    body dialog div div .list li button {
+        width: 28px;
+
+        background-color: inherit;
+
+        padding: 0;
+        border: 0;
+    }
+    body dialog div div .list li button:hover {
+        background-color: var(--colour-accent);
+    }
+    body dialog div div .list li img {
+        margin: 2px;
+
+        height: 24px;
+        width: 24px;
+    }
+    body dialog div div .list li span span {
+        display: inline-block;
+
+        height: 24px;
+
+        padding-left: 4px;
+        padding-right: 4px;
+
+        border-radius: 4px;
+
+        margin-left: 4px;
+        margin-right: 4px;
+
+        line-height: 1.75;
+    }
+    body dialog div div .list li span span:hover {
+        background-color: var(--colour-accent);
+    }
+    body dialog div div .list .enabled-list-element {
+        background-color: var(--colour-header-background);
     }

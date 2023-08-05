@@ -3,6 +3,27 @@ let teamname;
 let prestige_accumulated;
 let job_slot;
 
+// === ROUTEES TEAM ===
+function route_team() {
+    // routing to the correct Team location
+    let team_id;
+    // looping through all passed queries
+    window.location.search.split("?").forEach(query => {
+        // checks for query key: "Team"
+        if(query.split("=")[0] === "Team") {
+            // sets the int team identifer
+            team_id = parseInt(query.split("=")[1]);
+        }
+    });
+    // checks whether the team is defined
+    if(team_id === undefined) {
+        // reroutes to know location
+        window.open('./index.php?Team=1', '_self');
+    }
+};
+
+route_team();
+
 class Prestige
 {
     constructor(data, team_id) {
@@ -104,6 +125,7 @@ class Labour
     generate_worker_list(job) {
         let worker_list = document.createElement("ul");
         worker_list.classList.add("list");
+        worker_list.classList.add("noselect");
 
         for(let worker_index = job.workers.length - 1; worker_index >= 0; worker_index--) {
             let worker = job.workers[worker_index];
@@ -152,7 +174,7 @@ class Labour
     generate_adding_dialog_cards() {
         this.data.labour.jobs.forEach(job => {
             let dialog_card = new DialogCard("worker-adding", job.name);
-            let worker_card = new SkillCard(this.data.labour.standart_skills);
+            let worker_card = new SkillCard(this.data.general.skills);
 
             dialog.appendChild(dialog_card.generate());
             dialog_card.container.appendChild(worker_card.generate(false, false));
@@ -270,7 +292,11 @@ function initialize(data, team_id) {
     // jobs
     job_slot = document.getElementById("job-slot");
 
-    new General(data, team_id);
+    let general = new General(data, team_id);
     new Prestige(data, team_id);
     new Labour(data, team_id);
+
+    general.generate_team_drawer();
+    general.generate_teamname();
+    general.generate_time_interval();
 }

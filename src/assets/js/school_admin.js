@@ -8,6 +8,27 @@ let teacher_slot;
 
 let students;
 
+// === ROUTEES TEAM ===
+function route_team() {
+    // routing to the correct Team location
+    let team_id;
+    // looping through all passed queries
+    window.location.search.split("?").forEach(query => {
+        // checks for query key: "Team"
+        if(query.split("=")[0] === "Team") {
+            // sets the int team identifer
+            team_id = parseInt(query.split("=")[1]);
+        }
+    });
+    // checks whether the team is defined
+    if(team_id === undefined) {
+        // reroutes to know location
+        window.open('./index.php?Team=1', '_self');
+    }
+};
+
+route_team();
+
 // === CLAESS ===
 class Students
 {
@@ -327,8 +348,13 @@ function initialize(data, team_id) {
     // teachers
     teacher_slot = document.getElementById("teacher-slot");
 
-    new General(data, team_id);
-    students = new Students(data, team_id);
+    let general = new General(data, team_id);
+    new Students(data, team_id);
     new Teachers(data, team_id);
     new Buildings(data, team_id);
+
+    general.generate_team_drawer();
+    general.generate_teamname();
+    general.generate_dialog_card();
+    general.generate_time_interval();
 }

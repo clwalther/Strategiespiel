@@ -56,18 +56,6 @@ class Labour
         return $send_jobs;
     }
 
-    public function get_standart_skills(): array {
-        return [
-            ["name" => "Zaubertränke", "base" => 0, "advanced" => 0],
-            ["name" => "Zauberkunst",  "base" => 0, "advanced" => 0],
-            ["name" => "Verteidigung", "base" => 0, "advanced" => 0],
-            ["name" => "Geschichte",   "base" => 0, "advanced" => 0],
-            ["name" => "Geschöpfe",    "base" => 0, "advanced" => 0],
-            ["name" => "Kräuterkunde", "base" => 0, "advanced" => 0],
-            ["name" => "Besenfliegen", "base" => 0, "advanced" => 0]
-        ];
-    }
-
     private function get_skill(int $teacher_repr, int $skill_index, int $max_points): int {
         // caluclates the skill value in range 0 - $max_points for given student skill repr
         return floor($teacher_repr / pow($max_points, $skill_index)) % $max_points;

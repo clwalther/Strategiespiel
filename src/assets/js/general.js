@@ -1,34 +1,9 @@
-// routing to the correct Team location
-function route_team() {
-    let team_id;
-    // looping through all passed queries
-    window.location.search.split("?").forEach(query => {
-        // checks for query key: "Team"
-        if(query.split("=")[0] === "Team") {
-            // sets the int team identifer
-            team_id = parseInt(query.split("=")[1]);
-        }
-    });
-    // checks whether the team is defined
-    if(team_id === undefined) {
-        // reroutes to know location
-        window.open('./index.php?Team=1', '_self');
-    }
-};
-
-route_team();
-
 class General
 {
     constructor(data, team_id) {
         this.data = data;
         this.team_id = team_id;
         this.teamname = this.data.general.teams[this.team_id - 1].teamname;
-
-        this.generate_team_drawer();
-        this.generate_teamname();
-        this.generate_dialog_card();
-        this.generate_time_interval();
     }
 
     generate_team_drawer() {

@@ -1,6 +1,7 @@
 <?php
 
 include "../../scripts/global.php";
+
 include "./general.php";
 include "./buildings.php";
 include "./students.php";
@@ -8,12 +9,12 @@ include "./teachers.php";
 include "./labour.php";
 include "./prestige.php";
 
-$general = new General();
+$general   = new General();
 $buildings = new Buildings();
-$students = new Students();
-$teachers = new Teachers();
-$labour = new Labour();
-$prestige = new Prestige();
+$students  = new Students();
+$teachers  = new Teachers();
+$labour    = new Labour();
+$prestige  = new Prestige();
 
 foreach($_POST as $key => $values) {
     // converts previously converted key back
@@ -27,6 +28,15 @@ foreach($_POST as $key => $values) {
         switch($key)
         {
             // general
+            // backup
+            case "general_backup":
+                $general->backup("RQSTD");
+                break;
+
+            case "general_load_backup":
+                $general->load_backup(BACKUP_FILE_PATH.$value);
+                break;
+
             // launch/halt/reset/backup
             case "general_reset":
                 $general->reset();

@@ -9,27 +9,27 @@ include "./teachers.php";
 include "./labour.php";
 include "./prestige.php";
 
-$general = new General();
+$general   = new General();
 $buildings = new Buildings();
-$students = new Students();
-$teachers = new Teachers();
-$labour = new Labour();
-$prestige = new Prestige();
-
+$students  = new Students();
+$teachers  = new Teachers();
+$labour    = new Labour();
+$prestige  = new Prestige();
 
 $data = [
     "general" => [
-        "teams" => $general->get_teams(),
-        "times" => $general->get_times()
+        "teams"     => $general->get_teams(),
+        "times"     => $general->get_times(),
+        "skills"    => $general->get_skills(),
+        "backups"   => $general->get_backups()
     ],
     "labour" => [
-        "jobs" => $labour->get_requirments(),
-        "prestige" => $prestige->get_requirments(),
-        "standart_skills" => $labour->get_standart_skills()
+        "jobs"      => $labour->get_requirments(),
+        "prestige"  => $prestige->get_requirments(),
     ],
     "school_admin" => [
-        "students" => $students->get_requirments(),
-        "teachers" => $teachers->get_requirments(),
+        "students"  => $students->get_requirments(),
+        "teachers"  => $teachers->get_requirments(),
         "buildings" => $buildings->get_requirments()
     ]
 ];

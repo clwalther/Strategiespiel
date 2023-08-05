@@ -56,7 +56,7 @@ class Database
         return $this->format_query_response($query_response);
     }
 
-    public function insert(string $table_name, array $data) {
+    public function insert(string $table_name, array $data): void {
         // INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
         $sql_query = "INSERT INTO %s (%s) VALUES (%s);";
 
@@ -66,7 +66,7 @@ class Database
         $this->query(sprintf($sql_query, $table_name, $str_columns, $str_values));
     }
 
-    public function update(string $table_name, array $data, array $conditions) {
+    public function update(string $table_name, array $data, array $conditions): void {
         // UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;
         $sql_query = "UPDATE %s SET %s WHERE %s;";
 
@@ -76,7 +76,7 @@ class Database
         $this->query(sprintf($sql_query, $table_name, $str_data, $str_conditions));
     }
 
-    public function delete(string $table_name, array $conditions) {
+    public function delete(string $table_name, array $conditions): void {
         // DELETE FROM table_name WHERE condition;
         $sql_query = "DELETE FROM %s WHERE %s;";
 
@@ -85,11 +85,57 @@ class Database
         $this->query(sprintf($sql_query, $table_name, $str_conditions));
     }
 
-    public function delete_all(string $table_name) {
+    public function delete_all(string $table_name): void {
         // DELETE FROM table_name;
         $sql_query = "DELETE FROM %s;";
 
         $this->query(sprintf($sql_query, $table_name));
+    }
+
+    // === BACKUPS ===
+    public function backup_table(string $table_name, string $file_path): void {
+        // aquire table entries
+        $table_entries = $this->select($table_name, ["*"]);
+        // create file pointer
+        $file_stream = fopen($file_path, "w");
+
+        // puts the sql entries into the csv file
+        foreach ($table_entries as $row_index => $fields) {
+            // puts in the column headers
+            if ($row_index == 0) {
+                fputcsv($file_stream, array_keys($fields));
+            }
+            fputcsv($file_stream, array_values($fields));
+        }
+
+        // closes the file pointer
+        fclose($file_stream);
+    }
+
+    public function load_table_backup(string $table_name, string $file_path): void {
+        // accessing the file
+        $file_stream = fopen($file_path, "r");
+
+        // getting the csv and database headers
+        $csv_header = fgetcsv($file_stream, filesize($file_path));
+
+        if($csv_header != false) {
+            // deleting table content
+            $this->delete_all($table_name);
+
+            while ($csv_data = fgetcsv($file_stream, filesize($file_path))) {
+                $insert_data = array();
+                // build the data which will be inserted
+                for ($column_index = 0; $column_index < count($csv_data); $column_index++) {
+                    $insert_data[$csv_header[$column_index]] = $csv_data[$column_index];
+                }
+
+                // inserting data into table
+                $this->insert($table_name, $insert_data);
+            }
+        }
+
+        fclose($file_stream);
     }
 
     // === FORMATING ===
