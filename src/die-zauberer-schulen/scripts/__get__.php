@@ -24,13 +24,13 @@ $data = [
         "backups"   => $general->get_backups()
     ],
     "labour" => [
-        "jobs"      => $labour->get_requirments(),
-        "prestige"  => $prestige->get_requirments(),
+        "jobs"      => $labour->get_requirements(),
+        "prestige"  => $prestige->get_requirements(),
     ],
     "school_admin" => [
-        "students"  => $students->get_requirments(),
-        "teachers"  => $teachers->get_requirments(),
-        "buildings" => $buildings->get_requirments()
+        "students"  => $students->get_requirements(),
+        "teachers"  => $teachers->get_requirements(),
+        "buildings" => $buildings->get_requirements()
     ]
 ];
 

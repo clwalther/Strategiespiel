@@ -1,10 +1,5 @@
 <?php
 
-define('MAX_BASE_POINTS', 5, true);
-define('MAX_ADVANCED_POINTS', 2, true);
-define('N_SKILLS', 7, true);
-
-
 class Teachers
 {
     function __construct() {
@@ -14,86 +9,134 @@ class Teachers
         $this->group_id = $_GET["Team"];
     }
 
-    public function get_requirments(): array {
-        $send_teachers = [];
+    // === METHODS ===
+    private function get_base_repr(int $skill_repre, int $n_skills): int {
+        // calculates the base repre from skill repre
+        return $skill_repre % pow(MAX_BASE_POINTS, $n_skills);
+    }
 
-        $database_response = $this->database->select_where(
-            "SCHOOL_ADMIN",
-            [
-                "Zaubertränke",
-                "Zauberkunst",
-                "Verteidigung",
-                "Geschichte",
-                "Geschöpfe",
-                "Kräuterkunde",
-                "Besenfliegen"
-            ],
-            ["group_id" => $this->group_id]
-        );
+    private function get_advanced_repr(int $skill_repre, int $n_skills): int {
+        // calculates the advanced repre from skill repre
+        return floor($skill_repre / pow(MAX_BASE_POINTS, $n_skills));
+    }
 
+    private function get_skill(int $teacher_repr, int $skill_index, int $max_points): int {
+        // caluclates the skill value in range 0 - $max_points for given teacher skill repr
+        return floor($teacher_repr / pow($max_points, $skill_index)) % $max_points;
+    }
 
-        foreach($database_response[0] as $subject => $value) {
-            $value = intval($value);
+    // === NECESSITIES ===
+    public function get_requirements(): array {
+        // returns the necessities for the frontend
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+        // return array carrying necessities
+        $send_teachers = array();
 
-            if($value > 0) {
-                $base_skill = $value - 1;
-                $advanced_skill = floor(($value - 1) / pow(MAX_BASE_POINTS, N_SKILLS));
+        // aquires correct group from group id with all teachers
+        $group = $this->database->select_where("SCHOOL_ADMIN", $file["general"]["subjects"], ["group_id" => $this->group_id]);
 
-                $teacher_struct = [
-                    "name" => $subject,
-                    "skills" =>  [
-                        ["name" => "Zaubertränke", "base" => $this->get_skill($base_skill, 0, MAX_BASE_POINTS), "advanced" => $this->get_skill($advanced_skill, 0, MAX_ADVANCED_POINTS)],
-                        ["name" => "Zauberkunst",  "base" => $this->get_skill($base_skill, 1, MAX_BASE_POINTS), "advanced" => $this->get_skill($advanced_skill, 1, MAX_ADVANCED_POINTS)],
-                        ["name" => "Verteidigung", "base" => $this->get_skill($base_skill, 2, MAX_BASE_POINTS), "advanced" => $this->get_skill($advanced_skill, 2, MAX_ADVANCED_POINTS)],
-                        ["name" => "Geschichte",   "base" => $this->get_skill($base_skill, 3, MAX_BASE_POINTS), "advanced" => $this->get_skill($advanced_skill, 3, MAX_ADVANCED_POINTS)],
-                        ["name" => "Geschöpfe",    "base" => $this->get_skill($base_skill, 4, MAX_BASE_POINTS), "advanced" => $this->get_skill($advanced_skill, 4, MAX_ADVANCED_POINTS)],
-                        ["name" => "Kräuterkunde", "base" => $this->get_skill($base_skill, 5, MAX_BASE_POINTS), "advanced" => $this->get_skill($advanced_skill, 5, MAX_ADVANCED_POINTS)],
-                        ["name" => "Besenfliegen", "base" => $this->get_skill($base_skill, 6, MAX_BASE_POINTS), "advanced" => $this->get_skill($advanced_skill, 6, MAX_ADVANCED_POINTS)]
-                    ],
-                ];
+        // loops through all teachers
+        foreach($group[0] as $teacher => $skill_repre) {
+            // converts the skill to integer and subtracts one to check for enabled
+            $skill_repre = intval($skill_repre) - 1;
 
+            // if the skill_repre is greater than negative one -> teacher slot enabled
+            if($skill_repre > -1) {
+                $n_skills = count($file["general"]["subjects"]);
+                // aquires the base and advanced values
+                $base_repre = $this->get_base_repr($skill_repre, $n_skills);
+                $advanced_repre = $this->get_advanced_repr($skill_repre, $n_skills);
+                // teacher structure
+                $teacher_struct = ["name" => $teacher, "skills" => array()];
+
+                for ($skill_index = 0; $skill_index < $n_skills; $skill_index++) {
+                    // aquires all the skill attributes
+                    $skill_name = $file["general"]["subjects"][$skill_index];
+                    $base_value = $this->get_skill($base_repre, $skill_index, MAX_BASE_POINTS);
+                    $advanced_value = $this->get_skill($advanced_repre, $skill_index, MAX_ADVANCED_POINTS);
+
+                    // assembles attributes in structre
+                    $skill_struct = [
+                        "name" => $skill_name,
+                        "base" => $base_value,
+                        "advanced" => $advanced_value
+                    ];
+
+                    // pushes skill into teacher structure -> skills object
+                    array_push($teacher_struct["skills"], $skill_struct);
+                }
+
+                // pushes the teacher structe into return array
                 array_push($send_teachers, $teacher_struct);
             }
 
         }
+
+        // returns the teachers
         return $send_teachers;
     }
 
-    private function get_skill(int $teacher_repr, int $skill_index, int $max_points): int {
-        // caluclates the skill value in range 0 - $max_points for given student skill repr
-        return floor($teacher_repr / pow($max_points, $skill_index)) % $max_points;
-    }
-
+    // === ACTIONS ===
     public function set_advanced(string $bundle): void {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
         $bundle = explode(";", $bundle);
-        // bundel => subject;int(skill);int(value)
+        // bundel => subject;int(skill);int(advanced)
         $subject = $bundle[0];
-        $skill   = intval($bundle[1]);
-        $value   = intval($bundle[2]);
+        $skill_index = intval($bundle[1]);
+        $advanced_value = intval($bundle[2]);
 
-        $response = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
-        $old_value = $this->get_skill(floor(intval(($response[0][$subject]) - 1) / pow(MAX_BASE_POINTS, N_SKILLS)), $skill, MAX_ADVANCED_POINTS);
+        $n_skills = count($file["general"]["subjects"]);
 
-        $update_value = ($value - $old_value) * pow(MAX_ADVANCED_POINTS, $skill);
-        $database_update = $response[0][$subject] + $update_value * pow(MAX_BASE_POINTS, N_SKILLS);
+        // aquires correct group from group id with specific teacher
+        $teacher = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
+        // aquires all the skill attributes
+        $advanced_repre = $this->get_advanced_repr(intval($teacher[0][$subject]) - 1, $n_skills);
 
-        $this->database->update("SCHOOL_ADMIN", [$subject => $database_update], ["group_id" => $this->group_id]);
+        // gets the old skill value
+        $old_value = $this->get_skill($advanced_repre, $skill_index, MAX_ADVANCED_POINTS);
+
+        // calculates the delta and formats it
+        // further adding it to the repre
+        $advanced_repre_delta = ($advanced_value - $old_value) * pow(MAX_ADVANCED_POINTS, $skill_index);
+        $new_teacher_repr = $teacher[0][$subject] + $advanced_repre_delta * pow(MAX_BASE_POINTS, $n_skills);
+
+        // updating the database
+        $this->database->update("SCHOOL_ADMIN", [$subject => $new_teacher_repr], ["group_id" => $this->group_id]);
     }
 
     public function set_base(string $bundle): void {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
         $bundle = explode(";", $bundle);
-        // bundel => subject;int(skill);int(value)
+        // bundel => subject;int(skill);int(base)
         $subject = $bundle[0];
-        $skill   = intval($bundle[1]);
-        $value   = intval($bundle[2]);
+        $skill_index = intval($bundle[1]);
+        $base_value = intval($bundle[2]);
 
-        $response = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
-        $old_value = $this->get_skill(intval($response[0][$subject]) - 1, $skill, MAX_BASE_POINTS);
+        $n_skills = count($file["general"]["subjects"]);
 
-        $update_value = ($value - $old_value) * pow(MAX_BASE_POINTS, $skill);
-        $database_update = $response[0][$subject] + $update_value;
+        // aquires correct group from group id with specific teacher
+        $teacher = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
+        // aquires all the skill attributes
+        $base_repre = $this->get_base_repr(intval($teacher[0][$subject]) - 1, $n_skills);
 
-        $this->database->update("SCHOOL_ADMIN", [$subject => $database_update], ["group_id" => $this->group_id]);
+        // gets the old skill value
+        $old_value = $this->get_skill($base_repre, $skill_index, MAX_BASE_POINTS);
+
+        // calculates the delta and formats it
+        // further adding it to the repre
+        $base_repre_delta = ($base_value - $old_value) * pow(MAX_BASE_POINTS, $skill_index);
+        $new_teacher_repr = $teacher[0][$subject] + $base_repre_delta;
+
+        // updating the database
+        $this->database->update("SCHOOL_ADMIN", [$subject => $new_teacher_repr], ["group_id" => $this->group_id]);
     }
 }
 ?>

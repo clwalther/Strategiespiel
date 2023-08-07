@@ -1,7 +1,12 @@
 <?php
 
-define('BACKUP_FILE_PATH', "/var/www/html/The-Wizard-Schools/conf.d/backups/die-zauberer-schulen/", true);
+define('BACKUP_FILE_PATH', "/var/www/html/Strategiespiel/conf.d/backups/die-zauberer-schulen/", true);
+define('DATA_FILE_PATH', '/var/www/html/Strategiespiel/src/assets/data/die-zauberer-schulen.json', true);
 
+define('BASE_SKILL_STATES', 7, true);
+define('ADVANCED_SKILL_STATES', 3, true);
+
+define('BUILDING_STATES', 2, true);
 
 class General
 {
@@ -49,13 +54,11 @@ class General
     }
 
     public function get_backups(): array {
-        $folder_path = "/var/www/html/The-Wizard-Schools/conf.d/backups/die-zauberer-schulen/";
-
         // returning the all folder enties in backup folder without the two standart dot-folders
-        return array_values(array_diff(scandir($folder_path), array('..', '.')));
+        return array_values(array_diff(scandir(BACKUP_FILE_PATH), array('..', '.')));
     }
 
-    public function reset(): void { // [TODO]
+    public function reset(): void {
         // creates a safety backup
         $this->backup("BFR-RST");
     }
@@ -106,17 +109,17 @@ class General
         $this->database->update("TEAM", ["teamname" => $name], ["group_id" => $id]);
     }
 
-    // SKILLS [TODO]
+    // SKILLS
     public function get_skills(): array {
-        return [
-            ["name" => "Zaubertränke", "base" => 0, "advanced" => 0],
-            ["name" => "Zauberkunst",  "base" => 0, "advanced" => 0],
-            ["name" => "Verteidigung", "base" => 0, "advanced" => 0],
-            ["name" => "Geschichte",   "base" => 0, "advanced" => 0],
-            ["name" => "Geschöpfe",    "base" => 0, "advanced" => 0],
-            ["name" => "Kräuterkunde", "base" => 0, "advanced" => 0],
-            ["name" => "Besenfliegen", "base" => 0, "advanced" => 0]
-        ];
+        $skills_set = array();
+
+        foreach($this->data["general"]["subjects"] as $subject_names) {
+            $skill_struct = ["name" => $subject_names, "base" => 0, "advanced" => 0];
+
+            array_push($skills_set, $skill);
+        }
+
+        return $skills_set;
     }
 }
 

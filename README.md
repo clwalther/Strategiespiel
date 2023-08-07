@@ -63,7 +63,7 @@ General school administration (always 12 entries):
         Kräuterkunde BIGINT UNSIGNED NOT NULL DEFAULT 0,
         Besenfliegen BIGINT UNSIGNED NOT NULL DEFAULT 0,
         buildings BIGINT UNSIGNED NOT NULL DEFAULT 0
-        );
+    );
 
 Students:
 
@@ -103,7 +103,7 @@ Table arichtecture (always 12 entries):
         Magiezoologe FLOAT NOT NULL DEFAULT 0,
         Zauberstabschreinermeister FLOAT NOT NULL DEFAULT 0,
         Quidditchprofi FLOAT NOT NULL DEFAULT 0
-        );
+    );
 
 
     WORKERS:

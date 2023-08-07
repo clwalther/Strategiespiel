@@ -1,0 +1,321 @@
+{
+    "general": {
+        "subjects": [
+            "Zaubertränke",
+            "Zauberkunst",
+            "Verteidigung",
+            "Geschichte",
+            "Geschöpfe",
+            "Kräuterkunde",
+            "Besenfliegen"
+        ],
+
+        "teams": {
+            "1": "TEAMNAME",
+            "2": "TEAMNAME",
+            "3": "TEAMNAME",
+            "4": "TEAMNAME",
+            "5": "TEAMNAME",
+            "6": "TEAMNAME",
+            "7": "TEAMNAME",
+            "8": "TEAMNAME",
+            "9": "TEAMNAME",
+            "10": "TEAMNAME",
+            "11": "TEAMNAME",
+            "12": "TEAMNAME"
+        }
+    },
+
+    "buildings": {
+        "Erweiterungsflügel": {
+            "trivialname": "Erweiter-ungsflügel",
+            "requirements": [""],
+            "yields": [""],
+
+            "level": 1,
+
+            "children": {
+                "Lehrerzimmer": {
+                    "trivialname": "Lehrer-zimmer",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 2,
+
+                    "children": {
+                        "Rektorenturm": {
+                            "trivialname": "Rektoren-turm",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 4,
+
+                            "children": "none"
+                        },
+
+                        "Bibiliothek": {
+                            "trivialname": "Bibiliothek",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 3,
+
+                            "children": "none"
+                        }
+                    }
+                },
+
+                "Große-Halle": {
+                    "trivialname": "Große Halle",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 2,
+
+                    "children": {
+                        "Atrium": {
+                            "trivialname": "Atrium",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 3,
+
+                            "children": "none"
+                        },
+
+                        "Astronomieturm": {
+                            "trivialname": "Astronomie-turm",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 4,
+
+                            "children": "none"
+                        }
+                    }
+                }
+            }
+        },
+
+        "Lange-Galerie": {
+            "trivialname": "Lange Galerie",
+            "requirements": [""],
+            "yields": [""],
+
+            "level": 1,
+
+            "children": {
+                "Gemeinschaftsraum": {
+                    "trivialname": "Gemein-schaftsraum",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 2,
+
+                    "children": {
+                        "Wohnturm": {
+                            "trivialname": "Wohnturm",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 3,
+
+                            "children": {
+                                "Eulerei": {
+                                    "trivialname": "Eulerei",
+                                    "requirements": [""],
+                                    "yields": [""],
+
+                                    "level": 4,
+
+                                    "children": "none"
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "Duellierzimmer": {
+                    "trivialname": "Duellier-zimmer",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 3,
+
+                    "children":  {
+                        "Chambre-Séparée": {
+                            "trivialname": "Chambre-Séparée",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 5,
+
+                            "children": "none"
+                        }
+                    }
+                },
+
+                "Verlies": {
+                    "trivialname": "Verlies",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 2,
+
+                    "children": {
+                        "Laboratorium": {
+                            "trivialname": "Labora-torium",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 3,
+
+                            "children": "none"
+                        }
+                    }
+                }
+            }
+        },
+
+        "Parkanlage": {
+            "trivialname": "Parkanlage",
+            "requirements": [""],
+            "yields": [""],
+
+            "level": 1,
+
+            "children": {
+                "Pavilion": {
+                    "trivialname": "Pavilion",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 2,
+
+                    "children": {
+                        "Steinkreis": {
+                            "trivialname": "Steinkreis",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 5,
+
+                            "children": "none"
+                        }
+                    }
+                },
+
+                "Kräutergarten": {
+                    "trivialname": "Kräuter-garten",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 3,
+
+                    "children": {
+                        "Gewächshaus": {
+                            "trivialname": "Gewächs-haus",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 4,
+
+                            "children": "none"
+                        }
+                    }
+                },
+
+                "Wäldchen": {
+                    "trivialname": "Wäldchen",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 2,
+
+                    "children": {
+                        "Bootsanleger": {
+                            "trivialname": "Bootsan-leger",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 3,
+
+                            "children": {
+                                "Försterhütte": {
+                                    "trivialname": "Försterhütte",
+                                    "requirements": [""],
+                                    "yields": [""],
+
+                                    "level": 5,
+
+                                    "children": "none"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "Besenhütte": {
+            "trivialname": "Besenhütte",
+            "requirements": [""],
+            "yields": [""],
+
+            "level": 2,
+
+            "children": {
+                "Quidditchfeld": {
+                    "trivialname": "Quidditch-feld",
+                    "requirements": [""],
+                    "yields": [""],
+
+                    "level": 3,
+
+                    "children": {
+                        "Quidditchtribünen": {
+                            "trivialname": "Quiddtich-tribüne",
+                            "requirements": [""],
+                            "yields": [""],
+
+                            "level": 5,
+
+                            "children": "none"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "jobs": [
+        {
+            "name": "Medimagier",
+            "requirements": [0, 5, 1]
+        },
+        {
+            "name": "Auroren",
+            "requirements": [2, 0, 6]
+        },
+        {
+            "name": "Ministeriumsbeamter",
+            "requirements": [3, 1, 5]
+        },
+        {
+            "name": "Drachenwärter",
+            "requirements": [4, 1, 6]
+        },
+        {
+            "name": "Magizoologe",
+            "requirements": [4, 5, 6]
+        },
+        {
+            "name": "Zauberstabschreinermeister",
+            "requirements": [5, 3, 1]
+        },
+        {
+            "name": "Quidditchprofi",
+            "requirements": [6, 0, 3]
+        }
+    ]
+}

@@ -238,7 +238,11 @@ class Buildings
         building.active ? panel.classList.add("active-building") : false;
 
         panel.innerText = building.trivialname;
-        panel.disabled = !prev_acitve;
+
+        // === DON'T TOUCH ===
+        /* REASON: we want to have more interacivity */
+        // panel.disabled = !prev_acitve;
+        // === * * ===
 
         if(building.children != "none") {
             Object.keys(building.children).forEach(child_name => {

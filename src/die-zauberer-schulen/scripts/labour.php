@@ -12,7 +12,7 @@ class Labour
         $this->group_id = $_GET["Team"];
     }
 
-    public function get_requirments(): array {
+    public function get_requirements(): array {
         $send_jobs = [];
 
         $database_response = $this->database->select_where(
