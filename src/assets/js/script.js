@@ -46,10 +46,13 @@ function get_team() {
 // util to find the generally clicked element
 function clicked_element(element, target) {
     if(target != null) {
-        return clicked_element(element, target.parentElement);
-    } else {
-        return target == element;
+        if(target == element) {
+            return true;
+        } else {
+            return clicked_element(element, target.parentElement);
+        }
     }
+    return false;
 }
 
 function get_message_string(keys, values) {

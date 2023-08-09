@@ -46,7 +46,7 @@ body dialog div h1 {
 
     margin: 0px;
 }
-body dialog div p {
+body dialog div div p {
     margin: 0;
     margin-top: 24px;
     margin-bottom: 24px;
@@ -64,17 +64,21 @@ body dialog div div {
     padding: 0;
 
     overflow: hidden;
+
+    border-radius: 0;
 }
 body dialog .enabled-dialog div {
     visibility: visible;
 }
 
-body dialog div input[type="text"] {
+body dialog div div input[type="text"], body dialog div div input[type="number"] {
     width: calc(100% - 64px);
     height: 14px;
 
     margin-top: 16px;
     margin-bottom: 16px;
+    margin-right:  16px;
+    margin-left: 16px;
     border: 1px solid var(--colour-border-edge);
     border-radius: 8px;
     padding: 8px;
@@ -84,13 +88,13 @@ body dialog div input[type="text"] {
 
     font-size: 15px;
 }
-body dialog div input[type="text"]:focus-within {
+body dialog div div input[type="text"]:focus-within, body dialog div div input[type="number"]:focus-within {
     outline: 1px solid var(--colour-green);
 
     background-color: var(--colour-header-background);
     color: var(--colour-colour);
 }
-body dialog div input[type="checkbox"] {
+body dialog div div input[type="checkbox"] {
     height: 16px;
     width: 16px;
     border: 0;
@@ -114,7 +118,7 @@ body dialog div .button-container {
     display: flex;
     justify-content: space-between;
 
-    overflow: hidden;
+    overflow: hidden !important;
 }
 body dialog div .button-container button {
 	width: calc(50% - 2px);

@@ -1,48 +1,63 @@
 <?php
 
-define('MAX_STUDENT_POINTS', 5, true);
-define('N_SKILLS', 7, true);
-
 class Students
 {
     function __construct() {
         global $database;
+        global $general;
 
         $this->database = $database;
+        $this->general = $general;
         $this->group_id = $_GET["Team"];
     }
 
-    public function get_requirments(): array {
-        $send_students = [];
+    // === NECESSITIES ===
+    public function get_requirements(): array {
+        // returns the necessities for the frontend
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+        // return array carrying necessities
+        $send_students = array();
 
-        $database_response = $this->database->select_where("STUDENTS", ["id", "value"], ["group_id" => $this->group_id]);
+        // reads all the students from the database with correct group id
+        $students = $this->database->select_where("STUDENTS", ["id", "value"], ["group_id" => $this->group_id]);
 
-        foreach($database_response as $student) {
-            $students_struct = [
-                "id" => $student["id"],
-                "skills" => [
-                    ["name" => "Zaubertränke", "value" => $this->get_skill($student["value"], 0)],
-                    ["name" => "Zauberkunst",  "value" => $this->get_skill($student["value"], 1)],
-                    ["name" => "Verteidigung", "value" => $this->get_skill($student["value"], 2)],
-                    ["name" => "Geschichte",   "value" => $this->get_skill($student["value"], 3)],
-                    ["name" => "Geschöpfe",    "value" => $this->get_skill($student["value"], 4)],
-                    ["name" => "Kräuterkunde", "value" => $this->get_skill($student["value"], 5)],
-                    ["name" => "Besenfliegen", "value" => $this->get_skill($student["value"], 6)]
-                ]
-            ];
+        // looping through all the students as student<id;value>
+        foreach($students as $student) {
+            $n_skills = count($file["general"]["subjects"]);
+            // converts the skill to integer
+            $skill_repre = floatval($student["value"]);
 
-            array_push($send_students, $students_struct);
+            // student structure
+            $student_struct = ["id" => $student["id"], "skills" => array()];
+            for ($skill_index = 0; $skill_index < $n_skills; $skill_index++) {
+                // aquires all the skill attributes
+                $skill_name = $file["general"]["subjects"][$skill_index];
+                $base_value = $this->general->get_base($skill_repre, $skill_index);
+                $advanced_value = $this->general->get_advanced($skill_repre, $skill_index);
+
+                // assembles attributes in structre
+                $skill_struct = [
+                    "name" => $skill_name,
+                    "base" => $base_value,
+                    "advanced" => $advanced_value
+                ];
+
+                // pushes skill into student structure -> skills object
+                array_push($student_struct["skills"], $skill_struct);
+            }
+
+            // pushes the student structe into return array
+            array_push($send_students, $student_struct);
         }
 
+        // returns the students
         return $send_students;
     }
 
-    private function get_skill(int $individual_student_repr, int $skill_index): int {
-        // caluclates the skill value in range 0 - MAX_STUDNET_POINTS for given student skill repr
-        return floor($individual_student_repr / pow(MAX_STUDENT_POINTS, $skill_index)) % MAX_STUDENT_POINTS;
-    }
-
-    public function check_out($id) {
+    // === ACTIONS ===
+    public function check_out(string $id) {
         // removes the student from the database
         $this->database->delete("STUDENTS", ["id" => $id]);
     }
