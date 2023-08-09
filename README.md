@@ -51,14 +51,7 @@ General school administration (always 12 entries):
     ├── Geschöpfe: BIGINT UNSIGNED NOT NULL DEFAULT 0;
     ├── Kräuterkunde: BIGINT UNSIGNED NOT NULL DEFAULT 0;
     ├── Besenfliegen: BIGINT UNSIGNED NOT NULL DEFAULT 0;
-    ├── buildings: BIGINT UNSIGNED NOT NULL DEFAULT 0;
-    ├── Zaubertränke_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
-    ├── Zauberkunst_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
-    ├── Verteidigung_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
-    ├── Geschichte_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
-    ├── Geschöpfe_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
-    ├── Kräuterkunde_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
-    └── Besenfliegen_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
+    └── buildings: BIGINT UNSIGNED NOT NULL DEFAULT 0;
 
     CREATE TABLE SCHOOL_ADMIN (
         group_id INT PRIMARY KEY AUTO_INCREMENT  NOT NULL,
@@ -69,15 +62,8 @@ General school administration (always 12 entries):
         Geschöpfe BIGINT UNSIGNED NOT NULL DEFAULT 0,
         Kräuterkunde BIGINT UNSIGNED NOT NULL DEFAULT 0,
         Besenfliegen BIGINT UNSIGNED NOT NULL DEFAULT 0,
-        buildings BIGINT UNSIGNED NOT NULL DEFAULT 0,
-        Zaubertränke_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
-        Zauberkunst_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
-        Verteidigung_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
-        Geschichte_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
-        Geschöpfe_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
-        Kräuterkunde_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
-        Besenfliegen_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0
-    );
+        buildings BIGINT UNSIGNED NOT NULL DEFAULT 0
+        );
 
 Students:
 
@@ -96,39 +82,25 @@ Students:
 ### Ministerium Arbeit
 Table arichtecture (always 12 entries):
 
-    LABOUR:
+    LABOUR_TABLE:
     ├── group_id: INT PRIMARY KEY AUTO_INCREMENT;
     ├── prestige: INT NOT NULL DEFAULT 0;
-    ├── Medimagier: FLOAT NOT NULL DEFAULT 0;
-    ├── Auror: FLOAT NOT NULL DEFAULT 0;
-    ├── Ministeriumsbeamter: FLOAT NOT NULL DEFAULT 0;
-    ├── Drachenwärter: FLOAT NOT NULL DEFAULT 0;
-    ├── Magiezoologe: FLOAT NOT NULL DEFAULT 0;
-    ├── Zauberstabschreinermeister: FLOAT NOT NULL DEFAULT 0;
-    └── Quidditchprofi: FLOAT NOT NULL DEFAULT 0;
+    ├── Medimagier: INT NOT NULL DEFAULT 0;
+    ├── Auror: INT NOT NULL DEFAULT 0;
+    ├── Ministeriumsbeamter: INT NOT NULL DEFAULT 0;
+    ├── Drachenwärter: INT NOT NULL DEFAULT 0;
+    ├── Magiezoologe: INT NOT NULL DEFAULT 0;
+    ├── Zauberstabschreinermeister: INT NOT NULL DEFAULT 0;
+    └── Quidditchprofi: INT NOT NULL DEFAULT 0;
 
-    CREATE TABLE LABOUR (
+    CREATE TABLE LABOUR_TABLE (
         group_id INT PRIMARY KEY AUTO_INCREMENT,
         prestige INT NOT NULL DEFAULT 0,
-        Medimagier FLOAT NOT NULL DEFAULT 0,
-        Auror FLOAT NOT NULL DEFAULT 0,
-        Ministeriumsbeamter FLOAT NOT NULL DEFAULT 0,
-        Drachenwärter FLOAT NOT NULL DEFAULT 0,
-        Magiezoologe FLOAT NOT NULL DEFAULT 0,
-        Zauberstabschreinermeister FLOAT NOT NULL DEFAULT 0,
-        Quidditchprofi FLOAT NOT NULL DEFAULT 0
-    );
-
-
-    WORKERS:
-    ├── id: INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
-    ├── group_id: INT NOT NULL;
-    ├── job_name: VARCHAR(255) NOT NULL;
-    └── value: BIGINT UNSIGNED NOT NULL DEFAULT 0;
-
-    CREATE TABLE WORKERS (
-        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        group_id INT NOT NULL,
-        job_name VARCHAR(255) NOT NULL,
-        value BIGINT UNSIGNED NOT NULL DEFAULT 0
-    );
+        Medimagier INT NOT NULL DEFAULT 0,
+        Auror INT NOT NULL DEFAULT 0,
+        Ministeriumsbeamter INT NOT NULL DEFAULT 0,
+        Drachenwärter INT NOT NULL DEFAULT 0,
+        Magiezoologe INT NOT NULL DEFAULT 0,
+        Zauberstabschreinermeister INT NOT NULL DEFAULT 0,
+        Quidditchprofi INT NOT NULL DEFAULT 0
+        );

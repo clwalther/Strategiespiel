@@ -2,20 +2,14 @@
 
 include "../../scripts/global.php";
 include "./general.php";
-
-$general   = new General();
-
 include "./buildings.php";
 include "./students.php";
 include "./teachers.php";
-include "./labour.php";
-include "./prestige.php";
 
+$general = new General();
 $buildings = new Buildings();
-$students  = new Students();
-$teachers  = new Teachers();
-$labour    = new Labour();
-$prestige  = new Prestige();
+$students = new Students();
+$teachers = new Teachers();
 
 foreach($_POST as $key => $values) {
     // converts previously converted key back
@@ -29,16 +23,6 @@ foreach($_POST as $key => $values) {
         switch($key)
         {
             // general
-            // backup
-            case "general_backup":
-                $general->backup("RQSTD");
-                break;
-
-            case "general_load_backup":
-                $general->load_backup(BACKUP_FILE_PATH.$value);
-                break;
-
-            // launch/halt/reset/backup
             case "general_reset":
                 $general->reset();
                 break;
@@ -51,69 +35,33 @@ foreach($_POST as $key => $values) {
                 $general->pause();
                 break;
 
-            // team
             case "general_change_name":
-                $general->change_name($value);
+                $general->change_name($value); // value: int(id);string(name)
                 break;
-
-
             // ministry of labour
-            // prestige / influence
-            case "prestige_add":
-                $prestige->add_value($value);
-                break;
-
-            case "influence_add":
-                $labour->add_influence($value);
-                break;
-            // labour
-            case "labour_set_base":
-                $labour->set_base($value);
-                break;
-
-            case "labour_set_advanced":
-                $labour->set_advanced($value);
-                break;
-
-            case "labour_add_worker":
-                $labour->add_worker($value); // adds a new worker of given type
-                break;
-
-            case "labour_add_base":
-                $labour->add_base($value); // set the base value for the last worker of given type
-                break;
-
-            case "labour_add_advanced":
-                $labour->add_advanced($value); // set the advanced value for the last worker of given type
-                break;
-
-            case "labour_delete_worker":
-                $labour->delete_worker($value);
-                break;
-
 
             // ministry of school administration
             // buildings
-            case "building_activate":
+            case "acitvate_building":
                 $buildings->activate($value);
                 break;
 
-            case "building_deactivate":
+            case "deacitvate_building":
                 $buildings->deactivate($value);
                 break;
 
             // students
-            case "students_check_out":
+            case "check_out_student":
                 $students->check_out($value);
                 break;
 
             // teachers
-            case "teachers_set_base":
-                $teachers->set_base($value);
+            case "set_teacher_advanced":
+                $teachers->set_advanced($value);
                 break;
 
-            case "teachers_set_advanced":
-                $teachers->set_advanced($value);
+            case "set_teacher_base":
+                $teachers->set_base($value); // value: subject(string);skill([1-7]);value(int)
                 break;
         }
     }

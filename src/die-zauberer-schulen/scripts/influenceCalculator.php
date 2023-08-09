@@ -11,6 +11,7 @@ class InfluenceCalculator {
         global $database;
 
         $this->database = $database;
+        $this->database->connect();
 
         $this->$jobSkillsIdArray = array(
             "Medimagier" => [1,6,2],
@@ -54,6 +55,8 @@ class InfluenceCalculator {
         $newInfluence = $currentInfluence + $influenceToAdd;
         $database->update(LABOUR_TABLE, [$job => $newInfluence], $groupIdContition);
     }
+
+
 }
 
 ?>

@@ -2,41 +2,32 @@
 
 include "../../scripts/global.php";
 include "./general.php";
-
-$general   = new General();
-
 include "./buildings.php";
 include "./students.php";
 include "./teachers.php";
-include "./labour.php";
-include "./prestige.php";
 
+$general = new General();
 $buildings = new Buildings();
-$students  = new Students();
-$teachers  = new Teachers();
-$labour    = new Labour();
-$prestige  = new Prestige();
+$students = new Students();
+$teachers = new Teachers();
 
-$data = [
+
+$array = [
     "general" => [
-        "teams"     => $general->get_teams(),
-        "times"     => $general->get_times(),
-        "skills"    => $general->get_skills(),
-        "backups"   => $general->get_backups()
+        "teams" => $general->get_teams(),
+        "times" => $general->get_times()
     ],
     "labour" => [
-        "jobs"      => $labour->get_requirements(),
-        "prestige"  => $prestige->get_requirements(),
+
     ],
     "school_admin" => [
-        "students"  => $students->get_requirements(),
-        "teachers"  => $teachers->get_requirements(),
-        "buildings" => $buildings->get_requirements()
+        "students" => $students->get_requirments(),
+        "teachers" => $teachers->get_requirments(),
+        "buildings" => $buildings->get_requirments()
     ]
 ];
 
-// returns the json version of the array
-echo json_encode($data);
+echo json_encode($array);
 
 $database->close();
 

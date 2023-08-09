@@ -1,26 +1,74 @@
 /* STUDENTS */
     body section #students p button {
+        height: 28px;
+
         margin-left: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
+        border-radius: 8px;
+        border: 0;
+
+        background-color: var(--colour-green);
+        color: var(--colour-colour);
+
+        cursor: pointer;
     }
-    body dialog .students div div {
+    body section #students p button:hover {
+        background-color: var(--colour-green-accent);
+    }
+    body dialog #dialog-student div {
+        display: flex;
+        align-items: center;
+    }
+    body dialog #dialog-student div div {
         height: 100%;
     }
-    body dialog .students div div ul {
+    body dialog #dialog-student div div ul {
+        display: grid;
+
+        padding: 0;
+        margin: 0;
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+
+        border: 1px solid var(--colour-border-edge);
+        border-radius: 16px;
+
+        width: 75%;
+        height: 75%;
+
+        background-color: var(--colour-selected);
+        box-shadow: 0px 0px 32px 4px var(--colour-background);
+
         cursor: pointer;
 
-        display: none !important;
+        overflow: hidden;
     }
-    body dialog .students div div .enabled-student {
-        display: grid !important;
+    body dialog .enabled-dialog div div ul {
+        visibility: collapse;
     }
-    body dialog .students div div .active-student {
+    body dialog .enabled-dialog div div .loaded-student {
+        visibility: visible;
+    }
+    body dialog #dialog-student div .active-student {
         box-shadow: 0px 0px 32px 4px var(--colour-green);
     }
-    body dialog .students div .student-navigation {
-        position: absolute;
-        top: calc(50% - 23px);
-        z-index: 1;
-
+    body dialog #dialog-student div div ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    body dialog #dialog-student div div ul li span {
+        margin-left: 16px;
+    }
+    body dialog #dialog-student div div ul li div {
+        width: auto;
+        visibility: inherit;
+    }
+    body dialog #dialog-student div div ul li div input:nth-child(5) {
+        margin-right: 32px;
+    }
+    body dialog #dialog-student div .student-navigation {
         height: 46px;
         width: 46px;
 
@@ -32,37 +80,94 @@
 
         cursor: pointer;
     }
-    body dialog .students div .student-navigation:nth-child(1) {
-        left: 0px;
-    }
-    body dialog .students div .student-navigation:nth-child(2) {
-        right: 0px;
-    }
-    body dialog .students div .student-navigation:hover {
+    body dialog #dialog-student div button:hover {
         background-color: var(--colour-accent);
     }
-    body dialog .students div .student-navigation img {
+    body dialog #dialog-student div button img {
         height: inherit;
         width: inherit;
     }
 
 
 /* TEACHERS */
-    body section #teachers #teacher-slot {
+    body section #teachers div {
         height: 96px;
 
         overflow-x: scroll;
         overflow-y: hidden;
 
+        padding-bottom: 16px;
+
         scrollbar-width: thin;
-        scrollbar-color: var(--colour-border-edge) transparent;
-
-        padding: 0;
-        padding-bottom: 32px;
-
-        margin: 0;
-
         display: -webkit-box;
+    }
+    body section #teachers div div {
+        width: calc(96px * 1.61803398875 - 8px);
+        height: calc(96px - 8px);
+
+        padding: 4px !important;
+
+        margin-right: 8px;
+    }
+    body section #teachers div div h4 {
+        margin: 0;
+        padding: 0;
+        padding-left: 4px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    body section #teachers div div h4 button {
+        height: 32px;
+        width: 32px;
+
+        border: 0;
+        border-radius: 8px;
+        padding: 0;
+
+        background-color: inherit;
+
+        cursor: pointer;
+    }
+    body section #teachers div div h4 button:hover {
+        background-color: var(--colour-accent);
+    }
+    body section #teachers div div h4 button img {
+        height: 22px;
+        width: 22px;
+
+        margin: 5px;
+    }
+    body section #teachers div div p {
+        display: flex;
+
+        margin: 5px;
+
+        font-size: 9px;
+    }
+    body section #teachers div div p span {
+        display: flex;
+        align-items: center;
+
+        border-radius: 8px;
+        padding: 2px;
+        padding-left: 6px;
+        padding-right: 6px;
+
+        font-size: 14px;
+
+        cursor: pointer;
+    }
+    body section #teachers div div p span:hover {
+        background-color: var(--colour-accent);
+    }
+    body section #teachers div div p span img {
+        height: 32px;
+        width: 32px;
+    }
+    body section #teachers div div p span span {
+        margin-left: 8px;
     }
     body dialog .dialog-teacher div {
         display: flex;
@@ -116,7 +221,6 @@
         overflow-x: scroll;
 
         scrollbar-width: thin;
-        scrollbar-color: var(--colour-border-edge) transparent;
 
         position: relative;
     }
@@ -131,10 +235,6 @@
         align-content: start;
 
         margin: 0;
-    }
-    body section #buildings div .building-tree-knot {
-        display: flex;
-        justify-content: space-between;
     }
     body section #buildings div button {
         height: 54px;
@@ -162,6 +262,10 @@
     body section #buildings div .active-building {
         box-shadow: 0px 0px 16px var(--colour-green);
     }
+    body section #buildings div .building-tree-knot {
+        display: flex;
+        justify-content: space-between;
+    }
     body section #buildings div svg {
         position: absolute;
         height: 100%;
@@ -171,228 +275,4 @@
         stroke: var(--colour-border-edge);
         stroke-width:2;
         fill: none;
-    }
-
-
-/* PRESTIGE */
-    body section #prestige p button {
-        margin-left: 16px;
-    }
-
-
-/* WORKERS */
-    body section #jobs #job-slot {
-        height: 96px;
-
-        overflow-x: scroll;
-        overflow-y: hidden;
-        scrollbar-width: thin;
-        scrollbar-color: var(--colour-border-edge) transparent;
-
-        padding: 0;
-        padding-bottom: 32px;
-
-        margin: 0;
-
-        display: -webkit-box;
-    }
-    body dialog .jobs div {
-        overflow-y: scroll;
-    }
-    body dialog .worker-editing div .skill-card {
-        display: none;
-    }
-    body dialog .worker-editing div .enabled-worker {
-        display: grid;
-    }
-
-/* LOAD BACKUP */
-    body dialog .load-backup div {
-        overflow-y: scroll;
-    }
-
-/* PANELS */
-    body section article div .panel {
-        width: calc(96px * 1.61803398875 - 8px);
-        height: calc(96px - 8px);
-
-        padding: 4px !important;
-
-        margin-right: 8px;
-
-        background-color: var(--colour-header-background) !important;
-
-        border: 1px solid var(--colour-border-edge) !important;
-        border-radius: 8px !important;
-    }
-    body section article div .panel h4 {
-        margin: 0;
-        padding: 0;
-        padding-left: 4px;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    body section article div .panel h4 button {
-        height: 32px;
-        width: 32px;
-
-        border: 0;
-        border-radius: 8px;
-        padding: 0;
-
-        background-color: inherit;
-
-        cursor: pointer;
-    }
-    body section article div .panel h4 button:hover {
-        background-color: var(--colour-accent);
-    }
-    body section article div .panel h4 button img {
-        height: 22px;
-        width: 22px;
-
-        margin: 5px;
-    }
-    body section article div .panel p {
-        display: flex;
-
-        margin: 5px;
-
-        font-size: 9px;
-    }
-    body section article div .panel p span {
-        display: flex;
-        align-items: center;
-
-        border-radius: 8px;
-        padding: 2px;
-        padding-left: 6px;
-        padding-right: 6px;
-
-        font-size: 14px;
-
-        cursor: pointer;
-    }
-    body section article div .panel p span:hover {
-        background-color: var(--colour-accent);
-    }
-    body section article div .panel p span img {
-        height: 28px;
-        width: 28px;
-    }
-    body section article div .panel p span span {
-        margin-left: 8px;
-    }
-
-/* SKILL CARD */
-    body dialog .enabled-dialog div .skill-card {
-        display: grid;
-
-        padding: 0;
-        margin-top: 6.25%;
-        margin-bottom: 6.25%;
-        margin-left: 12.5%;
-        margin-right: 12.5%;
-
-        border: 1px solid var(--colour-border-edge);
-        border-radius: 16px;
-
-        width: 75%;
-        height: 75%;
-
-        background-color: var(--colour-selected);
-        box-shadow: 0px 0px 32px 4px var(--colour-background);
-
-        overflow: hidden;
-    }
-    body dialog .enabled-dialog div .skill-card li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    body dialog .enabled-dialog div .skill-card li span {
-        margin-left: 16px;
-    }
-    body dialog .enabled-dialog div .skill-card li div {
-        width: auto;
-        height: 100%;
-        visibility: inherit;
-    }
-    body dialog .enabled-dialog div .skill-card li div input:nth-child(7) {
-        margin-right: 32px;
-    }
-
-/* LIST */
-    body dialog div div .list {
-        padding: 0;
-
-        margin: 0;
-        margin-top: 18px;
-        margin-right: 18px;
-    }
-    body dialog div div .list li {
-        height: 32px;
-
-        border: 1px solid var(--colour-border-edge);
-        border-radius: 8px;
-
-        padding: 0;
-        padding-left: 16px;
-        padding-right: 1.7px;
-
-        margin: 0;
-        margin-bottom: 6px;
-
-        background-color: var(--colour-header-selected);
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        font-size: 14px;
-
-        cursor: pointer;
-    }
-    body dialog div div .list li:hover {
-        background-color: var(--colour-background);
-    }
-    body dialog div div .list li button {
-        width: 28px;
-
-        background-color: inherit;
-
-        padding: 0;
-        border: 0;
-    }
-    body dialog div div .list li button:hover {
-        background-color: var(--colour-accent);
-    }
-    body dialog div div .list li img {
-        margin: 2px;
-
-        height: 24px;
-        width: 24px;
-    }
-    body dialog div div .list li span span {
-        display: inline-block;
-
-        height: 24px;
-
-        padding-left: 4px;
-        padding-right: 4px;
-
-        border-radius: 4px;
-
-        margin-left: 4px;
-        margin-right: 4px;
-
-        line-height: 1.75;
-    }
-    body dialog div div .list li span span:hover {
-        background-color: var(--colour-accent);
-    }
-    body dialog div div .list .enabled-list-element {
-        background-color: var(--colour-header-background);
     }
