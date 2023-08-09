@@ -1,15 +1,16 @@
 <?php
 
 include "../../scripts/global.php";
-
 include "./general.php";
+
+$general   = new General();
+
 include "./buildings.php";
 include "./students.php";
 include "./teachers.php";
 include "./labour.php";
 include "./prestige.php";
 
-$general   = new General();
 $buildings = new Buildings();
 $students  = new Students();
 $teachers  = new Teachers();
@@ -57,11 +58,14 @@ foreach($_POST as $key => $values) {
 
 
             // ministry of labour
-            // prestige
+            // prestige / influence
             case "prestige_add":
                 $prestige->add_value($value);
                 break;
 
+            case "influence_add":
+                $labour->add_influence($value);
+                break;
             // labour
             case "labour_set_base":
                 $labour->set_base($value);

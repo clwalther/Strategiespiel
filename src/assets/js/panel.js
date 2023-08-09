@@ -44,5 +44,7 @@ class PanelCard
 
         image.src = image_source;
         value.innerText = value_text;
+
+        return span_display;
     }
 }

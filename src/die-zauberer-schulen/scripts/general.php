@@ -3,8 +3,8 @@
 define('BACKUP_FILE_PATH', "/var/www/html/Strategiespiel/conf.d/backups/die-zauberer-schulen/", true);
 define('DATA_FILE_PATH', '/var/www/html/Strategiespiel/src/assets/data/die-zauberer-schulen.json', true);
 
-define('BASE_SKILL_STATES', 7, true);
-define('ADVANCED_SKILL_STATES', 3, true);
+define('BASE_SKILL_STATES', 8, true);
+define('ADVANCED_SKILL_STATES', 4, true);
 
 define('BUILDING_STATES', 2, true);
 
@@ -61,6 +61,39 @@ class General
     public function reset(): void {
         // creates a safety backup
         $this->backup("BFR-RST");
+
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        // list of all the tables
+        $table_names = ["TIME", "TEAM", "SCHOOL_ADMIN", "STUDENTS", "LABOUR", "WORKERS"];
+
+        // deletes all entries from all tables
+        foreach($table_names as $table_name) {
+            $this->database->delete_alL($table_name);
+        }
+
+        foreach(array_keys($file["general"]["teams"]) as $group_id) {
+            // SCHOOL ADMINISTRATION
+            $this->database->insert("SCHOOL_ADMIN",
+            [
+                "group_id" => $group_id
+            ]);
+
+            // LABOUR
+            $this->database->insert("LABOUR",
+            [
+                "group_id" => $group_id
+            ]);
+
+            // TEAM
+            $this->database->insert("TEAM",
+            [
+                "group_id" => $group_id,
+                "teamname" => $file["general"]["teams"][$group_id]
+            ]);
+        }
     }
 
     // TIME SPECIFIC
@@ -68,14 +101,18 @@ class General
         // creates a safety backup
         $this->backup("BFR_STRT");
         // writes a start time log into time-database
-        $this->database->insert("TIME", ["time" => time(), "type" => true]);
+        $this->database->insert("TIME", ["time" => time(), "type" => 1]);
+        // creates a safety backup
+        $this->backup("PST_STRT");
     }
 
     public function pause(): void {
         // creates a safety backup
         $this->backup("BFR-PAUS");
         // writes a halt/stop time log into time-database
-        $this->database->insert("TIME", ["time" => time(), "type" => false]);
+        $this->database->insert("TIME", ["time" => time(), "type" => 0]);
+        // creates a safety backup
+        $this->backup("PST_PAUS");
     }
 
     public function get_times(): array {
@@ -111,15 +148,107 @@ class General
 
     // SKILLS
     public function get_skills(): array {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+        // returning array
         $skills_set = array();
 
-        foreach($this->data["general"]["subjects"] as $subject_names) {
+        // loops through all subjects
+        foreach($file["general"]["subjects"] as $subject_names) {
             $skill_struct = ["name" => $subject_names, "base" => 0, "advanced" => 0];
 
-            array_push($skills_set, $skill);
+            array_push($skills_set, $skill_struct);
         }
 
         return $skills_set;
+    }
+
+    // EXTRACT SKILLS
+    public function get_base(float $repre, int $skill_index): int {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+        $n_skills = count($file["general"]["subjects"]);
+
+        // get base representation
+        $base_repre = fmod($repre, pow(BASE_SKILL_STATES, $n_skills));
+
+        // returns the skill as int
+        return intval(fmod(floor($base_repre / pow(BASE_SKILL_STATES, $skill_index)), BASE_SKILL_STATES));
+    }
+
+    public function get_advanced(float $repre, int $skill_index): int {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+        $n_skills = count($file["general"]["subjects"]);
+
+        // get advanced representation
+        $advanced_repre = floor(floatval($repre) / pow(BASE_SKILL_STATES, $n_skills));
+
+        // returns the skill as int
+        return intval(fmod(floor($advanced_repre / pow(ADVANCED_SKILL_STATES, $skill_index)), ADVANCED_SKILL_STATES));
+    }
+
+    public function add_base(float $repre, int $skill_index, int $delta): float {
+        return $repre + $delta * pow(BASE_SKILL_STATES, $skill_index);
+    }
+
+    public function add_advanced(float $repre, int $skill_index, int $delta): float {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+        $n_skills = count($file["general"]["subjects"]);
+
+        return $repre + $delta * pow(ADVANCED_SKILL_STATES, $skill_index) * pow(BASE_SKILL_STATES, $n_skills);
+    }
+
+    // BUILDINGS
+    public function get_building_id(string $name): ?int {
+        // returns the id of a building
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        $root = $file["buildings"];
+
+        // loops through all branches and returns the id if found
+        $counter = 0;
+        $this->search_knot_for_name($name, $root, $counter);
+        return $counter;
+    }
+
+    private function search_knot_for_name(string $name, array $knot, int &$counter) {
+        // loops through all buildings in a knot
+        foreach($knot as $building_name => $building) {
+            // if correct element found return counter
+            if($name === $building_name) { return $counter; }
+
+            // aquire the f(x+1) generation
+            $filial_knot = $building["children"];
+
+            $counter++;
+            // checks if knot is authentic
+            if($filial_knot != "none") {
+                // searches the next branch forming from the knot
+                $queries = $this->search_knot_for_name($name, $filial_knot, $counter);
+
+                // if the result is not null return the counter
+                if($queries != NULL) { return $queries; }
+            }
+        }
+    }
+
+    public function get_building_status(int $id, $group_id): bool {
+        // aquiers the status of certain building id
+        // in the case that "none" is parent node it needs to return true
+        if($id < 0) { return false; }
+        // reads the building_repr from the corresponding group
+        $building_statuses = $this->database->select_where("SCHOOL_ADMIN", ["buildings"], ["group_id" => $group_id]);
+
+        // true => active; false => deactivated;
+        return ($building_statuses[0]["buildings"] & pow(BUILDING_STATES, $id)) == pow(BUILDING_STATES, $id);
     }
 }
 

@@ -4,25 +4,48 @@ class Teachers
 {
     function __construct() {
         global $database;
+        global $general;
 
         $this->database = $database;
+        $this->general = $general;
         $this->group_id = $_GET["Team"];
     }
 
     // === METHODS ===
-    private function get_base_repr(int $skill_repre, int $n_skills): int {
-        // calculates the base repre from skill repre
-        return $skill_repre % pow(MAX_BASE_POINTS, $n_skills);
+    private function is_loaded(string $teacher): bool {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        $root = $file["buildings"];
+
+        if(in_array($teacher, $file["general"]["default_teachers"])) {
+            return true;
+        }
+        // loops through all branches and returns the id if found
+        $is_included = false;
+        $this->search_knot_for_teacher($teacher, $root, $is_included);
+        return $is_included;
     }
 
-    private function get_advanced_repr(int $skill_repre, int $n_skills): int {
-        // calculates the advanced repre from skill repre
-        return floor($skill_repre / pow(MAX_BASE_POINTS, $n_skills));
-    }
+    private function search_knot_for_teacher(string $teacher, array $knot, int &$is_included) {
+        // loops through all buildings in a knot
+        foreach($knot as $building_name => $building) {
+            // if correct element found return counter
+            if($teacher == $building["teacher"]) {
+                $building_id = $this->general->get_building_id($building_name);
+                $is_included = $this->general->get_building_status($building_id, $this->group_id);
+            }
 
-    private function get_skill(int $teacher_repr, int $skill_index, int $max_points): int {
-        // caluclates the skill value in range 0 - $max_points for given teacher skill repr
-        return floor($teacher_repr / pow($max_points, $skill_index)) % $max_points;
+            // aquire the f(x+1) generation
+            $filial_knot = $building["children"];
+
+            // checks if knot is authentic
+            if($filial_knot != "none") {
+                // searches the next branch forming from the knot
+                $this->search_knot_for_teacher($teacher, $filial_knot, $is_included);
+            }
+        }
     }
 
     // === NECESSITIES ===
@@ -39,23 +62,20 @@ class Teachers
 
         // loops through all teachers
         foreach($group[0] as $teacher => $skill_repre) {
-            // converts the skill to integer and subtracts one to check for enabled
-            $skill_repre = intval($skill_repre) - 1;
+            // converts the skill to float and subtracts one to check for enabled
+            $skill_repre = floatval($skill_repre);
 
             // if the skill_repre is greater than negative one -> teacher slot enabled
-            if($skill_repre > -1) {
+            if($this->is_loaded($teacher)) {
                 $n_skills = count($file["general"]["subjects"]);
-                // aquires the base and advanced values
-                $base_repre = $this->get_base_repr($skill_repre, $n_skills);
-                $advanced_repre = $this->get_advanced_repr($skill_repre, $n_skills);
                 // teacher structure
                 $teacher_struct = ["name" => $teacher, "skills" => array()];
 
                 for ($skill_index = 0; $skill_index < $n_skills; $skill_index++) {
                     // aquires all the skill attributes
                     $skill_name = $file["general"]["subjects"][$skill_index];
-                    $base_value = $this->get_skill($base_repre, $skill_index, MAX_BASE_POINTS);
-                    $advanced_value = $this->get_skill($advanced_repre, $skill_index, MAX_ADVANCED_POINTS);
+                    $base_value = $this->general->get_base($skill_repre, $skill_index);
+                    $advanced_value = $this->general->get_advanced($skill_repre, $skill_index);
 
                     // assembles attributes in structre
                     $skill_struct = [
@@ -79,64 +99,44 @@ class Teachers
     }
 
     // === ACTIONS ===
-    public function set_advanced(string $bundle): void {
-        // aquires the file contents
-        $file = file_get_contents(DATA_FILE_PATH);
-        $file = json_decode($file, true);
-
-        $bundle = explode(";", $bundle);
-        // bundel => subject;int(skill);int(advanced)
-        $subject = $bundle[0];
-        $skill_index = intval($bundle[1]);
-        $advanced_value = intval($bundle[2]);
-
-        $n_skills = count($file["general"]["subjects"]);
-
-        // aquires correct group from group id with specific teacher
-        $teacher = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
-        // aquires all the skill attributes
-        $advanced_repre = $this->get_advanced_repr(intval($teacher[0][$subject]) - 1, $n_skills);
-
-        // gets the old skill value
-        $old_value = $this->get_skill($advanced_repre, $skill_index, MAX_ADVANCED_POINTS);
-
-        // calculates the delta and formats it
-        // further adding it to the repre
-        $advanced_repre_delta = ($advanced_value - $old_value) * pow(MAX_ADVANCED_POINTS, $skill_index);
-        $new_teacher_repr = $teacher[0][$subject] + $advanced_repre_delta * pow(MAX_BASE_POINTS, $n_skills);
-
-        // updating the database
-        $this->database->update("SCHOOL_ADMIN", [$subject => $new_teacher_repr], ["group_id" => $this->group_id]);
-    }
-
     public function set_base(string $bundle): void {
-        // aquires the file contents
-        $file = file_get_contents(DATA_FILE_PATH);
-        $file = json_decode($file, true);
-
         $bundle = explode(";", $bundle);
         // bundel => subject;int(skill);int(base)
         $subject = $bundle[0];
         $skill_index = intval($bundle[1]);
-        $base_value = intval($bundle[2]);
+        $new_base_value = intval($bundle[2]);
 
-        $n_skills = count($file["general"]["subjects"]);
 
         // aquires correct group from group id with specific teacher
         $teacher = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
         // aquires all the skill attributes
-        $base_repre = $this->get_base_repr(intval($teacher[0][$subject]) - 1, $n_skills);
+        $old_base_value = $this->general->get_base(floatval($teacher[0][$subject]), $skill_index);
+        $base_delta = ($new_base_value - $old_base_value);
+        echo $base_delta;
 
-        // gets the old skill value
-        $old_value = $this->get_skill($base_repre, $skill_index, MAX_BASE_POINTS);
-
-        // calculates the delta and formats it
-        // further adding it to the repre
-        $base_repre_delta = ($base_value - $old_value) * pow(MAX_BASE_POINTS, $skill_index);
-        $new_teacher_repr = $teacher[0][$subject] + $base_repre_delta;
+        $base = $this->general->add_base(floatval($teacher[0][$subject]), $skill_index, $base_delta);
 
         // updating the database
-        $this->database->update("SCHOOL_ADMIN", [$subject => $new_teacher_repr], ["group_id" => $this->group_id]);
+        $this->database->update("SCHOOL_ADMIN", [$subject => $base], ["group_id" => $this->group_id]);
+    }
+
+    public function set_advanced(string $bundle): void {
+        $bundle = explode(";", $bundle);
+        // bundel => subject;int(skill);int(advanced)
+        $subject = $bundle[0];
+        $skill_index = intval($bundle[1]);
+        $new_advanced_value = intval($bundle[2]);
+
+        // aquires correct group from group id with specific teacher
+        $teacher = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
+        // aquires all the skill attributes
+        $old_advanced_value = $this->general->get_advanced(floatval($teacher[0][$subject]), $skill_index);
+        $advanced_delta = ($new_advanced_value - $old_advanced_value);
+
+        $advanced = $this->general->add_advanced(floatval($teacher[0][$subject]), $skill_index, $advanced_delta);
+
+        // updating the database
+        $this->database->update("SCHOOL_ADMIN", [$subject => $advanced], ["group_id" => $this->group_id]);
     }
 }
 ?>

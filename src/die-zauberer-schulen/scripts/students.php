@@ -4,25 +4,11 @@ class Students
 {
     function __construct() {
         global $database;
+        global $general;
 
         $this->database = $database;
+        $this->general = $general;
         $this->group_id = $_GET["Team"];
-    }
-
-    // === METHODS ===
-    private function get_base_repr(int $skill_repre, int $n_skills): int {
-        // calculates the base repre from skill repre
-        return $skill_repre % pow(MAX_BASE_POINTS, $n_skills);
-    }
-
-    private function get_advanced_repr(int $skill_repre, int $n_skills): int {
-        // calculates the advanced repre from skill repre
-        return floor($skill_repre / pow(MAX_BASE_POINTS, $n_skills));
-    }
-
-    private function get_skill(int $individual_student_repr, int $skill_index): int {
-        // caluclates the skill value in range 0 - MAX_BASE_POINTS for given student skill repr
-        return floor($individual_student_repr / pow(MAX_BASE_POINTS, $skill_index)) % MAX_BASE_POINTS;
     }
 
     // === NECESSITIES ===
@@ -41,17 +27,15 @@ class Students
         foreach($students as $student) {
             $n_skills = count($file["general"]["subjects"]);
             // converts the skill to integer
-            $skill_repre = intval($student["value"]);
-            // aquires the base and advanced values
-            $base_repre = $this->get_base_repr($skill_repre, $n_skills);
-            $advanced_repre = $this->get_advanced_repr($skill_repre, $n_skills);
+            $skill_repre = floatval($student["value"]);
+
             // student structure
             $student_struct = ["id" => $student["id"], "skills" => array()];
             for ($skill_index = 0; $skill_index < $n_skills; $skill_index++) {
                 // aquires all the skill attributes
                 $skill_name = $file["general"]["subjects"][$skill_index];
-                $base_value = $this->get_skill($base_repre, $skill_index);
-                $advanced_value = $this->get_skill($advanced_repre, $skill_index);
+                $base_value = $this->general->get_base($skill_repre, $skill_index);
+                $advanced_value = $this->general->get_advanced($skill_repre, $skill_index);
 
                 // assembles attributes in structre
                 $skill_struct = [
@@ -73,7 +57,7 @@ class Students
     }
 
     // === ACTIONS ===
-    public function check_out($id) {
+    public function check_out(string $id) {
         // removes the student from the database
         $this->database->delete("STUDENTS", ["id" => $id]);
     }

@@ -10,6 +10,13 @@
             "Besenfliegen"
         ],
 
+        "initial_skillperks" : {
+            "Zaubertränke": 0.15,
+            "Zauberkunst": 0.15,
+            "Geschichte": 0.1,
+            "Besenfliegen": 0.1
+        },
+
         "teams": {
             "1": "TEAMNAME",
             "2": "TEAMNAME",
@@ -23,31 +30,52 @@
             "10": "TEAMNAME",
             "11": "TEAMNAME",
             "12": "TEAMNAME"
-        }
+        },
+
+        "jobs": [
+            "Medimagier",
+            "Auror",
+            "Ministeriumsbeamter",
+            "Drachenwärter",
+            "Magiezoologe",
+            "Zauberstabschreinermeister",
+            "Quidditchprofi"
+        ],
+
+        "default_teachers": [
+            "Zauberkunst",
+            "Geschichte"
+        ]
     },
 
     "buildings": {
         "Erweiterungsflügel": {
             "trivialname": "Erweiter-ungsflügel",
             "requirements": [""],
-            "yields": [""],
 
+
+            "teacher": "",
+            "perks": {"Zaubertränke": 0.04, "Zauberkunst": 0.04, "Geschichte": 0.04},
             "level": 1,
 
             "children": {
                 "Lehrerzimmer": {
                     "trivialname": "Lehrer-zimmer",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "",
+                    "perks": {},
                     "level": 2,
 
                     "children": {
                         "Rektorenturm": {
                             "trivialname": "Rektoren-turm",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "",
+                            "perks": {},
                             "level": 4,
 
                             "children": "none"
@@ -56,8 +84,10 @@
                         "Bibiliothek": {
                             "trivialname": "Bibiliothek",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "",
+                            "perks": {"Zauberkunst": 0.14, "Geschichte": 0.25},
                             "level": 3,
 
                             "children": "none"
@@ -68,16 +98,20 @@
                 "Große-Halle": {
                     "trivialname": "Große Halle",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "",
+                    "perks": {},
                     "level": 2,
 
                     "children": {
                         "Atrium": {
                             "trivialname": "Atrium",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "",
+                            "perks": {"Zaubertränke": 0.08, "Zauberkunst": 0.19, "Besenfliegen": 0.13},
                             "level": 3,
 
                             "children": "none"
@@ -86,8 +120,10 @@
                         "Astronomieturm": {
                             "trivialname": "Astronomie-turm",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "",
+                            "perks": {"Verteidigung": 0.35, "Geschichte": 0.2},
                             "level": 4,
 
                             "children": "none"
@@ -100,32 +136,41 @@
         "Lange-Galerie": {
             "trivialname": "Lange Galerie",
             "requirements": [""],
-            "yields": [""],
 
+
+            "teacher": "",
+            "perks": {"Geschöpfe": 0.04, "Kräuterkunde": 0.04},
             "level": 1,
 
             "children": {
                 "Gemeinschaftsraum": {
                     "trivialname": "Gemein-schaftsraum",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "",
+                    "perks": {"Zaubertränke": 0.06, "Zauberkunst": 0.06, "Verteidigung": 0.06,
+                        "Geschichte": 0.06, "Geschöpfe": 0.06, "Kräuterkunde": 0.06, "Besenfliegen": 0.06},
                     "level": 2,
 
                     "children": {
                         "Wohnturm": {
                             "trivialname": "Wohnturm",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "",
+                            "perks": {},
                             "level": 3,
 
                             "children": {
                                 "Eulerei": {
                                     "trivialname": "Eulerei",
                                     "requirements": [""],
-                                    "yields": [""],
 
+
+                                    "teacher": "",
+                                    "perks": {"Geschöpfe": 0.35, "Kräuterkunde": 0.2},
                                     "level": 4,
 
                                     "children": "none"
@@ -138,16 +183,20 @@
                 "Duellierzimmer": {
                     "trivialname": "Duellier-zimmer",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "",
+                    "perks": {"Zauberkunst": 0.2, "Verteidigung": 0.2},
                     "level": 3,
 
                     "children":  {
                         "Chambre-Séparée": {
                             "trivialname": "Chambre-Séparée",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "Verteidigung",
+                            "perks": {"Verteidigung": 0.15},
                             "level": 5,
 
                             "children": "none"
@@ -158,16 +207,20 @@
                 "Verlies": {
                     "trivialname": "Verlies",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "",
+                    "perks": {"Zaubertränke": 0.2, "Verteidigung": 0.1},
                     "level": 2,
 
                     "children": {
                         "Laboratorium": {
                             "trivialname": "Labora-torium",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "Zaubertränke",
+                            "perks": {},
                             "level": 3,
 
                             "children": "none"
@@ -180,24 +233,30 @@
         "Parkanlage": {
             "trivialname": "Parkanlage",
             "requirements": [""],
-            "yields": [""],
 
+
+            "teacher": "",
+            "perks": {"Geschöpfe": 0.04, "Kräuterkunde": 0.04, "Besenfliegen": 0.04},
             "level": 1,
 
             "children": {
                 "Pavilion": {
                     "trivialname": "Pavilion",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "",
+                    "perks": {"Zauberkunst": 0.2, "Geschichte": 0.1},
                     "level": 2,
 
                     "children": {
                         "Steinkreis": {
                             "trivialname": "Steinkreis",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "",
+                            "perks": {"Verteidigung": 0.1, "Geschichte": 0.35, "Geschöpfe": 0.1},
                             "level": 5,
 
                             "children": "none"
@@ -208,16 +267,20 @@
                 "Kräutergarten": {
                     "trivialname": "Kräuter-garten",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "",
+                    "perks": {"Zaubertränke": 0.14, "Kräuterkunde": 0.26},
                     "level": 3,
 
                     "children": {
                         "Gewächshaus": {
                             "trivialname": "Gewächs-haus",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "Kräuterkunde",
+                            "perks": {"Kräuterkunde": 0.1},
                             "level": 4,
 
                             "children": "none"
@@ -228,24 +291,30 @@
                 "Wäldchen": {
                     "trivialname": "Wäldchen",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "",
+                    "perks": {"Zaubertränke": 0.05, "Geschöpfe": 0.2, "Kräuterkunde": 0.05},
                     "level": 2,
 
                     "children": {
                         "Bootsanleger": {
                             "trivialname": "Bootsan-leger",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "",
+                            "perks": {"Zaubertränke": 0.2, "Geschöpfe": 0.06, "Kräuterkunde": 0.14},
                             "level": 3,
 
                             "children": {
                                 "Försterhütte": {
                                     "trivialname": "Försterhütte",
                                     "requirements": [""],
-                                    "yields": [""],
 
+
+                                    "teacher": "Geschöpfe",
+                                    "perks": {"Geschöpfe": 0.07, "Kräuterkunde": 0.07},
                                     "level": 5,
 
                                     "children": "none"
@@ -260,24 +329,30 @@
         "Besenhütte": {
             "trivialname": "Besenhütte",
             "requirements": [""],
-            "yields": [""],
 
+
+            "teacher": "",
+            "perks": {"Besenfliegen": 0.22, "Verteidigung": 0.08},
             "level": 2,
 
             "children": {
                 "Quidditchfeld": {
                     "trivialname": "Quidditch-feld",
                     "requirements": [""],
-                    "yields": [""],
 
+
+                    "teacher": "Besenfliegen",
+                    "perks": {},
                     "level": 3,
 
                     "children": {
                         "Quidditchtribünen": {
                             "trivialname": "Quiddtich-tribüne",
                             "requirements": [""],
-                            "yields": [""],
 
+
+                            "teacher": "",
+                            "perks": {"Besenfliegen": 0.42, "Geschöpfe": 0.12},
                             "level": 5,
 
                             "children": "none"
@@ -286,36 +361,5 @@
                 }
             }
         }
-    },
-
-    "jobs": [
-        {
-            "name": "Medimagier",
-            "requirements": [0, 5, 1]
-        },
-        {
-            "name": "Auroren",
-            "requirements": [2, 0, 6]
-        },
-        {
-            "name": "Ministeriumsbeamter",
-            "requirements": [3, 1, 5]
-        },
-        {
-            "name": "Drachenwärter",
-            "requirements": [4, 1, 6]
-        },
-        {
-            "name": "Magizoologe",
-            "requirements": [4, 5, 6]
-        },
-        {
-            "name": "Zauberstabschreinermeister",
-            "requirements": [5, 3, 1]
-        },
-        {
-            "name": "Quidditchprofi",
-            "requirements": [6, 0, 3]
-        }
-    ]
+    }
 }

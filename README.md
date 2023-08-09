@@ -51,7 +51,14 @@ General school administration (always 12 entries):
     ├── Geschöpfe: BIGINT UNSIGNED NOT NULL DEFAULT 0;
     ├── Kräuterkunde: BIGINT UNSIGNED NOT NULL DEFAULT 0;
     ├── Besenfliegen: BIGINT UNSIGNED NOT NULL DEFAULT 0;
-    └── buildings: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    ├── buildings: BIGINT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Zaubertränke_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Zauberkunst_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Verteidigung_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Geschichte_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Geschöpfe_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
+    ├── Kräuterkunde_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
+    └── Besenfliegen_displacement: FLOAT UNSIGNED NOT NULL DEFAULT 0;
 
     CREATE TABLE SCHOOL_ADMIN (
         group_id INT PRIMARY KEY AUTO_INCREMENT  NOT NULL,
@@ -62,7 +69,14 @@ General school administration (always 12 entries):
         Geschöpfe BIGINT UNSIGNED NOT NULL DEFAULT 0,
         Kräuterkunde BIGINT UNSIGNED NOT NULL DEFAULT 0,
         Besenfliegen BIGINT UNSIGNED NOT NULL DEFAULT 0,
-        buildings BIGINT UNSIGNED NOT NULL DEFAULT 0
+        buildings BIGINT UNSIGNED NOT NULL DEFAULT 0,
+        Zaubertränke_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
+        Zauberkunst_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
+        Verteidigung_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
+        Geschichte_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
+        Geschöpfe_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
+        Kräuterkunde_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0,
+        Besenfliegen_displacement FLOAT UNSIGNED NOT NULL DEFAULT 0
     );
 
 Students:

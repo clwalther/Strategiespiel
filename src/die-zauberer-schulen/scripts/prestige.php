@@ -17,7 +17,7 @@ class Prestige
     }
 
     // === ACTIONS ===
-    public function add_value(string $value) {
+    public function add_value(string $value): void {
         // aqurie the old prestige value
         $prestige = $this->database->select_where("LABOUR", ["prestige"], ["group_id" => $this->group_id]);
 

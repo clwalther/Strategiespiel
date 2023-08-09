@@ -320,7 +320,7 @@
         height: 100%;
         visibility: inherit;
     }
-    body dialog .enabled-dialog div .skill-card li div input:nth-child(5) {
+    body dialog .enabled-dialog div .skill-card li div input:nth-child(7) {
         margin-right: 32px;
     }
 

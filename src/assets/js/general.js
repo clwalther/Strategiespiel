@@ -75,14 +75,28 @@ class General
     }
 
     generate_time_interval() {
-        if(this.data.general.times.is_running == 1) {
-            setInterval(function () {
+        if(this.data.general.times.is_running != null) {
+            setInterval(function(times) {
+                // compute ellapsed time
+                let time_ellapsed = 0;
+
+                for(let time_index = 0; time_index < times.length - 1; time_index++) {
+                    if(times[time_index].type == 1) {
+                        time_ellapsed += (times[time_index + 1].time - times[time_index].time) * 1000;
+                    }
+                }
+
+                if(times[times.length - 1].type == 1) {
+                    time_ellapsed += Date.now() - times[times.length - 1].time * 1000;
+                }
+
+                // display
                 let elements = document.getElementsByTagName("time");
 
                 for(let index = 0; index < elements.length; index++) {
-                    elements[index].innerText = "TODO: time";
+                    elements[index].innerText = new Date(time_ellapsed).toISOString().slice(11, -5);
                 }
-            }, 999);
+            }, 999, this.data.general.times.times);
         }
     }
 }

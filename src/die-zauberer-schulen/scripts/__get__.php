@@ -1,15 +1,16 @@
 <?php
 
 include "../../scripts/global.php";
-
 include "./general.php";
+
+$general   = new General();
+
 include "./buildings.php";
 include "./students.php";
 include "./teachers.php";
 include "./labour.php";
 include "./prestige.php";
 
-$general   = new General();
 $buildings = new Buildings();
 $students  = new Students();
 $teachers  = new Teachers();

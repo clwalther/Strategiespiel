@@ -153,8 +153,8 @@ class Teachers
             teacher.skills.forEach(skill => {
                 if(skill.name === teacher.name) {
                     teacher_slot.appendChild(teacher_card.generate());
-                    teacher_card.add_display(skill.advanced + 1, "../../../../assets/imgs/education.svg");
-                    teacher_card.add_display(skill.base + 1, "../../../../assets/imgs/star.svg");
+                    teacher_card.add_display(skill.advanced, "../../../../assets/imgs/education.svg");
+                    teacher_card.add_display(skill.base, "../../../../assets/imgs/star.svg");
 
                     teacher_card.action_button.addEventListener("click", (event) => {
                         open_dialog(`dialog-teacher-${teacher.name}`);
@@ -297,18 +297,18 @@ class Buildings
             let dialog_card = new DialogCard("buildings", building_name);
             let requirements_header = document.createElement("h4");
             let requirements = document.createElement("ul");
-            let yields_header = document.createElement("h4");
-            let yields = document.createElement("ul");
+            let perks_header = document.createElement("h4");
+            let perks = document.createElement("ul");
 
             dialog.appendChild(dialog_card.generate());
             dialog_card.container.appendChild(requirements_header);
             dialog_card.container.appendChild(requirements);
-            dialog_card.container.appendChild(yields_header);
-            dialog_card.container.appendChild(yields);
+            dialog_card.container.appendChild(perks_header);
+            dialog_card.container.appendChild(perks);
 
             dialog_card.header.innerText = `${building.trivialname.replace("-", "")}`;
             requirements_header.innerText = "Benötigt:";
-            yields_header.innerText = "Erträge:";
+            perks_header.innerText = "Erträge:";
             dialog_card.cancel.innerText = "Schließen";
             dialog_card.submit.innerText = building.active ? "Deaktivieren" : "Aktivieren";
             dialog_card.submit.style.backgroundColor = building.active ? "var(--colour-red)" : "var(--colour-green)";
@@ -319,10 +319,11 @@ class Buildings
                 list_element.innerText = requirement_value;
             });
 
-            building.yields.forEach(yield_value => {
+            Object.keys(building.perks).forEach(perk_name => {
+                let perk_value = building.perks[perk_name];
                 let list_element = document.createElement("li");
-                yields.appendChild(list_element);
-                list_element.innerText = yield_value;
+                perks.appendChild(list_element);
+                list_element.innerText = `${perk_name}: ${perk_value}`;
             });
 
             dialog_card.cancel.addEventListener("click", (event) => {

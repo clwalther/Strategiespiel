@@ -7,8 +7,8 @@ class SkillCard
         this.base_cached_changes = Array();
         this.advanced_cached_changes = Array();
 
-        this.max_base_skill = 5;
-        this.max_advanced_skill = 7;
+        this.max_base_skill = 8;
+        this.max_advanced_skill = 4;
     }
 
     generate(base_disabled = false, advanced_disabled = false) {
@@ -30,18 +30,26 @@ class SkillCard
             this.card.classList.add("skill-card");
             skill_name.innerText = skill.name;
 
-            // generate base-value checkboxes to: 5
-            for(let checkbox_index = 0; checkbox_index < this.max_base_skill; checkbox_index++) {
+            // generate base-value checkboxes to: 7
+            for(let checkbox_index = 1; checkbox_index < this.max_base_skill; checkbox_index++) {
                 let checkbox = document.createElement("input");
 
                 checkbox_container.appendChild(checkbox);
 
                 checkbox.type = "checkbox";
-                checkbox.checked = checkbox_index == skill.base;
+                checkbox.checked = checkbox_index <= skill.base;
                 checkbox.disabled = base_disabled;
 
                 checkbox.addEventListener("click", (event) => {
                     // updates the cache
+                    let actual_change;
+
+                    if(this.base_cached_changes.includes(`${skill_index};${checkbox_index}`)) {
+                        actual_change = 0;
+                    } else {
+                        actual_change = checkbox_index;
+                    }
+
                     for(let cache_index = 0; cache_index < this.base_cached_changes.length; cache_index++) {
                         let cached_skill_key = this.base_cached_changes[cache_index].split(";")[0];
 
@@ -52,29 +60,35 @@ class SkillCard
                         }
                     }
                     // caches the recent changes
-                    this.base_cached_changes.push(`${skill_index};${checkbox_index}`);
+                    this.base_cached_changes.push(`${skill_index};${actual_change}`);
 
                     // updates the html object
                     // remove the check from each element
-                    for(let index = 0; index < this.max_base_skill; index++) {
-                        checkbox.parentElement.children[index].checked = false;
+                    for(let index = 1; index < this.max_base_skill; index++) {
+                        checkbox.parentElement.children[index - 1].checked = index <= actual_change;
                     }
-                    // add the check onto the current checkbox
-                    checkbox.checked = true;
                 });
             }
-            // generates advanced-value checkboxes from: 6 to 7
-            for(let checkbox_index = this.max_base_skill; checkbox_index < this.max_advanced_skill; checkbox_index++) {
+            // generates advanced-value checkboxes from: 8 to 10
+            for(let checkbox_index = 1; checkbox_index < this.max_advanced_skill; checkbox_index++) {
                 let checkbox = document.createElement("input");
 
                 checkbox_container.appendChild(checkbox);
 
                 checkbox.type = "checkbox";
-                checkbox.checked = (checkbox_index - this.max_base_skill) == skill.advanced;
+                checkbox.checked = checkbox_index <= skill.advanced;
                 checkbox.disabled = advanced_disabled;
 
                 checkbox.addEventListener("click", (event) => {
                     // updates the cache
+                    let actual_change;
+
+                    if(this.advanced_cached_changes.includes(`${skill_index};${checkbox_index}`)) {
+                        actual_change = 0;
+                    } else {
+                        actual_change = checkbox_index;
+                    }
+
                     for(let cache_index = 0; cache_index < this.advanced_cached_changes.length; cache_index++) {
                         let cached_skill_key = this.advanced_cached_changes[cache_index].split(";")[0];
 
@@ -85,15 +99,13 @@ class SkillCard
                         }
                     }
                     // caches the recent changes
-                    this.advanced_cached_changes.push(`${skill_index};${checkbox_index - this.max_base_skill}`);
+                    this.advanced_cached_changes.push(`${skill_index};${actual_change}`);
 
                     // updates the html object
                     // remove the check from each element
-                    for(let index = this.max_base_skill; index < this.max_advanced_skill; index++) {
-                        checkbox.parentElement.children[index].checked = false;
+                    for(let index = 0; index < this.max_advanced_skill - 1; index++) {
+                        checkbox.parentElement.children[index + this.max_base_skill - 1].checked = index + 1 <= actual_change;
                     }
-                    // add the check onto the current checkbox
-                    checkbox.checked = true;
                 });
             }
 
@@ -119,19 +131,13 @@ class SkillCard
             let checkbox_container = skill_container.children[1];
 
             // goes through all checkboxes base
-            for(let checkbox_index = 0; checkbox_index < this.max_base_skill; checkbox_index++) {
-                let checkbox = checkbox_container.children[checkbox_index];
-
-                // resets the value
-                checkbox.checked = checkbox_index == skill.base;
+            for(let index = 1; index < this.max_base_skill; index++) {
+                checkbox_container.children[index - 1].checked = index <= skill.base;
             }
 
             // goes through all checkboxes advanced
-            for(let checkbox_index = this.max_base_skill; checkbox_index < this.max_advanced_skill; checkbox_index++) {
-                let checkbox = checkbox_container.children[checkbox_index];
-
-                // resets the value. note: checkbox_index has to be subtracted
-                checkbox.checked = (checkbox_index - this.max_base_skill) == skill.advanced;
+            for(let index = 0; index < this.max_advanced_skill - 1; index++) {
+                checkbox_container.children[index + this.max_base_skill - 1].checked = index + 1 <= skill.advanced;
             }
         }
     }

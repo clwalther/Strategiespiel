@@ -82,6 +82,7 @@ class Labour
         this.generate_adding_dialog_cards();
         this.generate_editing_dialog_cards();
         this.generate_deleting_dialog_cards();
+        this.generate_influence_dialog_cards();
     }
 
     generate_panels() {
@@ -92,10 +93,14 @@ class Labour
             let image_source = "../../../../assets/imgs/percent.svg";
             let value = job.influence.substring(0, 7);
 
-            job_panel.add_display(value, image_source);
+            let influence_display = job_panel.add_display(value, image_source);
 
             job_panel.action_button.addEventListener("click", (event) => {
                 open_dialog(`dialog-jobs-${job.name}`);
+            });
+
+            influence_display.addEventListener("click", (event) => {
+                open_dialog(`dialog-influence-${job.name}`);
             });
         });
     }
@@ -145,7 +150,7 @@ class Labour
             worker_list_id.innerText = `#${worker_index + 1}`;
             worker_delete_image.src = "../../../../assets/imgs/delete.svg";
 
-            worker.forEach(skill => {
+            worker.skills.forEach(skill => {
                 let skill_container = document.createElement("span");
                 let skill_name = skill.name.replace(/[aeiouäöü]/gi, '').substring(0, 5);
                 let skill_base = skill.base;
@@ -177,7 +182,7 @@ class Labour
             let worker_card = new SkillCard(this.data.general.skills);
 
             dialog.appendChild(dialog_card.generate());
-            dialog_card.container.appendChild(worker_card.generate(false, false));
+            dialog_card.container.appendChild(worker_card.generate(false, true));
 
             dialog_card.header.innerText = `Arbeiter für ${job.name} hinzufügen`;
             dialog_card.cancel.innerText = "Abbrechen";
@@ -196,12 +201,12 @@ class Labour
 
                 worker_card.base_cached_changes.forEach(struct => {
                     keys.push("labour_add_base");
-                    values.push(`${job.name};${struct}`);
+                    values.push(struct);
                 });
 
                 worker_card.advanced_cached_changes.forEach(struct => {
                     keys.push("labour_add_advanced");
-                    values.push(`${job.name};${struct}`);
+                    values.push(struct);
                 });
 
                 __send(keys, values);
@@ -215,7 +220,7 @@ class Labour
                 let worker = job.workers[worker_index];
 
                 let dialog_card = new DialogCard("worker-editing", `${job.name}-${worker_index}`);
-                let worker_card = new SkillCard(worker);
+                let worker_card = new SkillCard(worker.skills);
 
                 dialog.appendChild(dialog_card.generate());
                 dialog_card.container.appendChild(worker_card.generate(false, true));
@@ -237,12 +242,12 @@ class Labour
 
                     worker_card.base_cached_changes.forEach(struct => {
                         keys.push("labour_set_base");
-                        values.push(`${job.name};${worker_index};${struct}`);
+                        values.push(`${worker.id};${struct}`);
                     });
 
                     worker_card.advanced_cached_changes.forEach(struct => {
                         keys.push("labour_set_advanced");
-                        values.push(`${job.name};${worker_index};${struct}`);
+                        values.push(`${worker.id};${struct}`);
                     });
 
                     __send(keys, values);
@@ -257,7 +262,7 @@ class Labour
                 let worker = job.workers[worker_index];
 
                 let dialog_card = new DialogCard("worker-deleting", `${job.name}-${worker_index}`);
-                let worker_card = new SkillCard(worker);
+                let worker_card = new SkillCard(worker.skills);
 
                 dialog.appendChild(dialog_card.generate());
                 dialog_card.container.appendChild(worker_card.generate(true, true));
@@ -276,9 +281,40 @@ class Labour
                 });
                 dialog_card.submit.addEventListener("click", (event) => {
                     // send deleting information
-                    __send(["labour_delete_worker"], [`${job.name};${worker_index}`]);
+                    __send(["labour_delete_worker"], [worker.id]);
                 });
             }
+        });
+    }
+
+    generate_influence_dialog_cards() {
+        this.data.labour.jobs.forEach(job => {
+            let dialog_card = new DialogCard("influence", job.name);
+            let paragraph = document.createElement("p");
+            let text_input = document.createElement("input");
+
+            dialog.appendChild(dialog_card.generate());
+
+            dialog_card.container.appendChild(paragraph);
+            dialog_card.container.appendChild(text_input);
+
+            paragraph.innerText = `Ändern des Einflusses eines Teams hat zur auswirkung, dass die fehlenden Einfluss Punkte für den angepeilten Prozentualen Einfluss zum Team-Job-Einfluss Wert hinzugefügt wird.
+                Andere Teams werden daher Prozentual verlieren`;
+
+            text_input.type = "number";
+            text_input.placeholder = `${job.influence * 100}%`;
+            text_input.value = `${job.influence * 100}`;
+
+            dialog_card.header.innerText = `Ändere Einfluss in Job ${job.name}`;
+            dialog_card.cancel.innerText = "Abbrechen";
+            dialog_card.submit.innerText = "Ändern";
+
+            dialog_card.cancel.addEventListener("click", (event) => {
+                close_dialog();
+            });
+            dialog_card.submit.addEventListener("click", (event) => {
+                __send(["labour_change_influence"], [`${job.name};${influence}`]);
+            });
         });
     }
 }
