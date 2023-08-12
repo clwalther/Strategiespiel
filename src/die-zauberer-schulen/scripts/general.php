@@ -8,6 +8,10 @@ define('ADVANCED_SKILL_STATES', 4, true);
 
 define('BUILDING_STATES', 2, true);
 
+define('WORKER_PARA_ALPHA', 3, true);
+define('WORKER_PARA_BETA', 2, true);
+define('WORKER_PARA_GAMMA', 1, true);
+
 class General
 {
     function __construct() {
@@ -249,6 +253,66 @@ class General
 
         // true => active; false => deactivated;
         return ($building_statuses[0]["buildings"] & pow(BUILDING_STATES, $id)) == pow(BUILDING_STATES, $id);
+    }
+
+    // INFLUENCE
+    public function get_influence(string $job_name) {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        $combined_points = 0;
+        $group_specific_points = array();
+        $group_specific_influence = array();
+
+        foreach($file["general"]["teams"] as $group_id => $group_name) {
+            $group_points = $this->get_points_workers(intval($group_id), $job_name);
+            $group_points += $this->get_points_extra(intval($group_id), $job_name);
+
+            $combined_points += $group_points;
+
+            $group_specific_points[$group_id] = $group_points;
+        }
+
+        foreach($group_specific_points as $group_id => $group_points) {
+            if($combined_points != 0) {
+                $group_influence = $group_points / $combined_points;
+            } else {
+                $group_influence = $group_points;
+            }
+
+            $group_specific_influence[$group_id] = $group_influence;
+        }
+
+        return $group_specific_influence;
+    }
+
+    public function get_points_workers(int $group_id, string $job_name): float {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        $points_workers = 0;
+        $workers = $this->database->select_where("WORKERS", ["value"], ["job_name" => $job_name, "group_id" => $group_id]);
+
+        foreach($workers as $worker) {
+            $job_requirements = $file["general"]["job_requirements"][$job_name];
+
+            $value_alpha = $this->get_base(floatval($worker["value"]), $job_requirements[0]);
+            $value_beta = $this->get_base(floatval($worker["value"]), $job_requirements[1]);
+            $value_gamma = $this->get_base(floatval($worker["value"]), $job_requirements[2]);
+
+            $points_workers = WORKER_PARA_ALPHA * $value_alpha
+                            + WORKER_PARA_BETA * $value_beta
+                            + WORKER_PARA_GAMMA * $value_gamma;
+        }
+
+        return $points_workers;
+    }
+
+    public function get_points_extra(int $group_id, string $job_name) {
+        $points = $this->database->select_where("LABOUR", [$job_name], ["group_id" => $group_id]);
+        return $points[0][$job_name];
     }
 }
 

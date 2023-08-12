@@ -10,8 +10,6 @@ The generall concept and architecture of this project is to be stackable and eas
     - Ministerium Arbeit
 
 ## 2023 - "Die Zauberer Schulen"
-The main idea board is [here](https://miro.com/app/board/uXjVM9sY-J4=/).
-<br>
 In the following, we will take a look at the overall code and data structure in the code and the databases.
 
 ### General

@@ -22,12 +22,10 @@ class Labour
         // return array carrying necessities
         $send_jobs = array();
 
-        // reads all the jobs from the database with correct group id
-        $group = $this->database->select_where("LABOUR", $file["general"]["jobs"], ["group_id" => $this->group_id]);
-
         // looping through all the workers as worker <job_name;influence>
-        foreach($group[0] as $job_name => $influence) {
+        foreach($file["general"]["jobs"] as $job_name) {
             // reads all the workers with matching group id and job name
+            $influence = $this->general->get_influence($job_name)[$this->group_id];
             $workers = $this->database->select_where("WORKERS", ["value", "id"], ["job_name" => $job_name, "group_id" => $this->group_id]);
 
             // job structre
@@ -72,7 +70,29 @@ class Labour
     // === ACTIONS ===
     // TODO: change influence
     public function change_influence(string $value): void {
+        $bundel = explode(";", $value);
 
+        $job_name = $bundel[0];
+        $influence = floatval($bundel[1]);
+
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        $combined_points = 0;
+        $group_specific_points = array();
+
+        foreach($file["general"]["teams"] as $group_id => $group_name) {
+            $group_points = $this->general->get_points_workers(intval($group_id), $job_name);
+            $group_points += $this->general->get_points_extra(intval($group_id), $job_name);
+
+            $combined_points += $group_points;
+            $group_specific_points[$group_id] = $group_points;
+        }
+
+        $add_points = $influence * ($combined_points - $group_specific_points[$this->group_id]) / (1 - $influence);
+
+        $this->database->update("LABOUR", [$job_name => $add_points - $this->general->get_points_workers(intval($this->group_id), $job_name)], ["group_id" => $this->group_id]);
     }
 
     public function delete_worker(string $id): void {
@@ -140,8 +160,8 @@ class Labour
         $new_worker_value = intval($bundel[2]);
 
         // auires the last worker from workers
-        $workers = $this->database->select("WORKERS", ["value"], ["group_id" => $this->group_id]);
-        $worker = end($workers);
+        $workers = $this->database->select_where("WORKERS", ["value"], ["group_id" => $this->group_id, "id" => $worker_id]);
+        $worker = $workers[0];
 
         $worker_repre = floatval($worker["value"]);
         $old_worker_value = $this->general->get_base($worker_repre, $skill_index);
@@ -162,8 +182,8 @@ class Labour
         $new_worker_value = intval($bundel[2]);
 
         // auires the last worker from workers
-        $workers = $this->database->select("WORKERS", ["value"], ["group_id" => $this->group_id]);
-        $worker = end($workers);
+        $workers = $this->database->select_where("WORKERS", ["value"], ["group_id" => $this->group_id, "id" => $worker_id]);
+        $worker = $workers[0];
 
         $worker_repre = floatval($worker["value"]);
         $old_worker_value = $this->general->get_advanced($worker_repre, $skill_index);

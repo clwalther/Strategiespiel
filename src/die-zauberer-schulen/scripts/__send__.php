@@ -91,6 +91,9 @@ foreach($_POST as $key => $values) {
                 $labour->delete_worker($value);
                 break;
 
+            case "labour_change_influence":
+                $labour->change_influence($value);
+                break;
 
             // ministry of school administration
             // buildings

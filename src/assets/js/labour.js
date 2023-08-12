@@ -91,7 +91,7 @@ class Labour
             job_slot.appendChild(job_panel.generate());
 
             let image_source = "../../../../assets/imgs/percent.svg";
-            let value = job.influence.substring(0, 7);
+            let value = `${String(job.influence * 100).substring(0, 7)}%`;
 
             let influence_display = job_panel.add_display(value, image_source);
 
@@ -313,7 +313,9 @@ class Labour
                 close_dialog();
             });
             dialog_card.submit.addEventListener("click", (event) => {
-                __send(["labour_change_influence"], [`${job.name};${influence}`]);
+                if(Number.isInteger(parseInt(text_input.value.trim()))) {
+                    __send(["labour_change_influence"], [`${job.name};${text_input.value / 100}`]);
+                }
             });
         });
     }

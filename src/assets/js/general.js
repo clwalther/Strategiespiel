@@ -96,7 +96,7 @@ class General
                 for(let index = 0; index < elements.length; index++) {
                     elements[index].innerText = new Date(time_ellapsed).toISOString().slice(11, -5);
                 }
-            }, 999, this.data.general.times.times);
+            }, 500, this.data.general.times.times);
         }
     }
 }
