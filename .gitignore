@@ -2,6 +2,7 @@
 .env
 .env.old
 *.conf
+*.md
 
 # FOLDERS
 /*.d

@@ -29,9 +29,9 @@
     <!-- NAVIGATION BAR -->
     <nav>
         <a href="/">Strategiespiel</a><i>/</i>
-        <a href="/die-zauberer-schulen">Die-Zauberer-Schulen</a><i>/</i>
-        <a href="/die-zauberer-schulen/ministerium-schulverwaltung">Ministerium-Schulverwaltung</a><i>/</i>
-        <a href="/die-zauberer-schulen/ministerium-schulverwaltung/interface"><b>Interface</b></a>
+        <a href="/die-zauber-schulen">Die-Zauber-Schulen</a><i>/</i>
+        <a href="/die-zauber-schulen/ministerium-schulverwaltung">Ministerium-Schulverwaltung</a><i>/</i>
+        <a href="/die-zauber-schulen/ministerium-schulverwaltung/interface"><b>Interface</b></a>
         <div>
             <time></time>
         </div>
@@ -71,8 +71,10 @@
         <!-- BUILDINGS -->
         <article id="buildings">
             <h2>Ausbau-bau-baum</h2>
-            <div class="noselect" id="building-tree">
-                <svg id="buildings-connections"></svg>
+            <div class="noselect">
+                <div id="building-tree">
+                    <svg id="buildings-connections"></svg>
+                </div>
             </div>
         </article>
     </section>

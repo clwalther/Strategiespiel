@@ -1,8 +1,5 @@
 <?php
 
-define('MAX_BASE_POINTS', 5, true);
-define('MAX_ADVANCED_POINTS', 2, true);
-
 class Labour
 {
     function __construct() {
@@ -68,31 +65,39 @@ class Labour
     }
 
     // === ACTIONS ===
-    // TODO: change influence
     public function change_influence(string $value): void {
-        $bundel = explode(";", $value);
-
-        $job_name = $bundel[0];
-        $influence = floatval($bundel[1]);
-
         // aquires the file contents
         $file = file_get_contents(DATA_FILE_PATH);
         $file = json_decode($file, true);
+        // bundel: <job_name;influence>
+        $bundel = explode(";", $value);
+        // extracts the information out of bundel
+        $job_name = $bundel[0];
+        $influence = floatval($bundel[1]);
 
+        // combined points total
         $combined_points = 0;
-        $group_specific_points = array();
 
+        // loops through all teams
         foreach($file["general"]["teams"] as $group_id => $group_name) {
+            // gets the total points making up the influence in a job
+            // 1.: worker points
+            // 2.: (+) extra added points
             $group_points = $this->general->get_points_workers(intval($group_id), $job_name);
             $group_points += $this->general->get_points_extra(intval($group_id), $job_name);
 
+            // adds the group specific points to one value
             $combined_points += $group_points;
-            $group_specific_points[$group_id] = $group_points;
         }
 
-        $add_points = $influence * ($combined_points - $group_specific_points[$this->group_id]) / (1 - $influence);
+        $group_worker_points = $this->general->get_points_workers(intval($this->group_id), $job_name);
+        $group_extra_points = $this->general->get_points_extra(intval($this->group_id), $job_name);
 
-        $this->database->update("LABOUR", [$job_name => $add_points - $this->general->get_points_workers(intval($this->group_id), $job_name)], ["group_id" => $this->group_id]);
+        // p_group_extra = (I * (SUM:[p] - p_group) / (1 - I)) - p_group_worker
+        $add_points = ($influence * ($combined_points - ($group_worker_points + $group_extra_points))
+            / (1 - $influence)) - $group_worker_points;
+
+        $this->database->update("LABOUR", [$job_name => $add_points], ["group_id" => $this->group_id]);
     }
 
     public function delete_worker(string $id): void {

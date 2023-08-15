@@ -1,10 +1,8 @@
 <?php
 
-// include "global.php"; //TODO Jobarray Global machen
-
 class InfluenceCalculator {
 
-    private $jobIdSkillsIdArray;
+    private $jobSkillsIdArray;
     private $skillsMultiplikatorArray;
 
     function __construct() {

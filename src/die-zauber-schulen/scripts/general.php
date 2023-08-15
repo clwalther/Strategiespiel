@@ -1,7 +1,8 @@
 <?php
 
-define('BACKUP_FILE_PATH', "/var/www/html/Strategiespiel/conf.d/backups/die-zauberer-schulen/", true);
-define('DATA_FILE_PATH', '/var/www/html/Strategiespiel/src/assets/data/die-zauberer-schulen.json', true);
+define('BACKUP_FILE_PATH', "/var/www/html/Strategiespiel/conf.d/backups/die-zauber-schulen/", true);
+define('DATA_FILE_PATH', '/var/www/html/Strategiespiel/src/assets/data/die-zauber-schulen.json', true);
+define('CLOCK_FILE_PATH', '/var/www/html/Strategiespiel/src/die-zauber-schulen/scripts/Clock.php', true);
 
 define('BASE_SKILL_STATES', 8, true);
 define('ADVANCED_SKILL_STATES', 4, true);
@@ -104,8 +105,12 @@ class General
     public function start(): void {
         // creates a safety backup
         $this->backup("BFR_STRT");
+
+        // runs the idenpendant clock in the backend
+        // shell_exec(sprintf("php %s", CLOCK_FILE_PATH));
         // writes a start time log into time-database
         $this->database->insert("TIME", ["time" => time(), "type" => 1]);
+
         // creates a safety backup
         $this->backup("PST_STRT");
     }

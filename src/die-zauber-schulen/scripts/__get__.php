@@ -11,6 +11,7 @@ include "./teachers.php";
 include "./labour.php";
 include "./prestige.php";
 
+
 $buildings = new Buildings();
 $students  = new Students();
 $teachers  = new Teachers();

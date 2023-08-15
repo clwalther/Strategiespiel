@@ -29,9 +29,9 @@
 	<!-- NAVIGATION BAR -->
 	<nav>
 		<a href="/">Strategiespiel</a><i>/</i>
-		<a href="/die-zauberer-schulen">Die-Zauberer-Schulen</a><i>/</i>
-		<a href="/die-zauberer-schulen/ministerium-arbeit">Ministerium-Arbeit</a><i>/</i>
-		<a href="/die-zauberer-schulen/ministerium-arbeit/interface"><b>Interface</b></a>
+		<a href="/die-zauber-schulen">Die-Zauber-Schulen</a><i>/</i>
+		<a href="/die-zauber-schulen/ministerium-arbeit">Ministerium-Arbeit</a><i>/</i>
+		<a href="/die-zauber-schulen/ministerium-arbeit/interface"><b>Interface</b></a>
 		<div>
 			<time></time>
 		</div>

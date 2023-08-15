@@ -100,7 +100,7 @@ function close_dialog() {
 async function __send(keys, values) {
     // create the XMLHttpRequest (post)
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", `/die-zauberer-schulen/scripts/__send__.php?Team=${team_id}`, true);
+    xhr.open("POST", `/die-zauber-schulen/scripts/__send__.php?Team=${team_id}`, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(get_message_string(keys, values));
 
@@ -108,7 +108,7 @@ async function __send(keys, values) {
 }
 
 async function __get() {
-    let response = await fetch(`/die-zauberer-schulen/scripts/__get__.php?Team=${team_id}`);
+    let response = await fetch(`/die-zauber-schulen/scripts/__get__.php?Team=${team_id}`);
     let data = await response.json();
     initialize(data, team_id);
 }

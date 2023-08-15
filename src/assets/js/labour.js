@@ -91,7 +91,7 @@ class Labour
             job_slot.appendChild(job_panel.generate());
 
             let image_source = "../../../../assets/imgs/percent.svg";
-            let value = `${String(job.influence * 100).substring(0, 7)}%`;
+            let value = `${Math.round(job.influence * 100 * 10000) / 10000}%`;
 
             let influence_display = job_panel.add_display(value, image_source);
 
@@ -302,8 +302,8 @@ class Labour
                 Andere Teams werden daher Prozentual verlieren`;
 
             text_input.type = "number";
-            text_input.placeholder = `${job.influence * 100}%`;
-            text_input.value = `${job.influence * 100}`;
+            text_input.placeholder = `${Math.round(job.influence * 100 * 10000) / 10000}%`;
+            text_input.value = `${Math.round(job.influence * 100 * 10000) / 10000}`;
 
             dialog_card.header.innerText = `Ändere Einfluss in Job ${job.name}`;
             dialog_card.cancel.innerText = "Abbrechen";

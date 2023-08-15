@@ -11,7 +11,7 @@ class Database
 
     function __construct() {
         // environment variables
-        $this->database_name = "WIZARD_SCHOOLS";
+        $this->database_name = "MAGIC_SCHOOLS";
         $this->servername    = "localhost";
         $this->user_login    = "Et76ESefdCzTzkHHeSJxrexePDbC8m";
         $this->user_name     = "PjFrmotTq";

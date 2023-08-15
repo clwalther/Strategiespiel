@@ -32,7 +32,7 @@ class Teachers
         // loops through all buildings in a knot
         foreach($knot as $building_name => $building) {
             // if correct element found return counter
-            if($teacher == $building["teacher"]) {
+            if($teacher == $building["perks"]["Lehrer"]) {
                 $building_id = $this->general->get_building_id($building_name);
                 $is_included = $this->general->get_building_status($building_id, $this->group_id);
             }

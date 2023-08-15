@@ -1,13 +1,6 @@
 <?php
 
-define('DATA_FILE_PATH', '/var/www/html/Strategiespiel/src/assets/data/die-zauberer-schulen.json', true);
-
-define('BASE_SKILL_STATES', 7, true);
-define('ADVANCED_SKILL_STATES', 3, true);
-
-define('BUILDING_STATES', 2, true);
-
-class GraduatesCalculator {
+class GraduatesGenerator {
     function __construct() {
         global $database;
         global $general;
@@ -20,17 +13,17 @@ class GraduatesCalculator {
         $file = json_decode($file, true);
 
         $this->buildingsJson = $file["buildings"];
-        $generalJson = $file["general"];
+        $this->generalJson = $file["general"];
 
         $this->tribePerkSumArray = array();
-        foreach ($generalJson['subjects'] as $subject) {
+        foreach ($this->generalJson['subjects'] as $subject) {
             $this->tribePerkSumArray[$subject] = 0;
         }
 
-        $this->addBuildingPerksWithArray($generalJson['initial_skillperks'], $this->tribePerkSumArray);
+        $this->addBuildingPerksWithArray($this->generalJson['initial_skillperks'], $this->tribePerkSumArray);
     }
 
-    public function calculateNewGraduate($groupId) {
+    private function calculateNewGraduate($groupId) {
         $perkSumArray = $this->createPerkSumArray();
         $this->iterateBuildings($this->buildingsJson, $groupId, $perkSumArray);
         $this->iterateTeachers($groupId, $perkSumArray);
@@ -132,7 +125,9 @@ class GraduatesCalculator {
 
     private function addBuildingPerksWithArray($perkArray, &$perkSumArray) {
         foreach ($perkArray as $key => $value) {
-            $perkSumArray[$key] += $value*3; //TODO Stellschraube
+            if(in_array($key, $this->generalJson["subjects"])) {
+                $perkSumArray[$key] += $value*3; //TODO Stellschraube
+            }
         }
     }
 
@@ -185,6 +180,36 @@ class GraduatesCalculator {
         $group = $this->database->select_where("SCHOOL_ADMIN", [$table], ["group_id" => $group_id]);
 
         return $group[0][$table];
+    }
+
+    public function generate_graduate(int $group_id): void {
+        // fetches and inserts a graduate into STUDENTS database for given group
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        // generating the student
+        $student = $this->calculateNewGraduate($group_id);
+
+        // converting
+        $generate_value = 0;
+
+        foreach($student as $skill_name => $skill_value) {
+            // aquire skill index for skill name
+            $skill_index = array_search($skill_name, $file["general"]["subjects"]);
+
+            // compresses the skill value into student representation
+            $generate_value = $this->general->add_base($generate_value, $skill_index, $skill_value);
+        }
+
+        // getting student ready for insertion
+        $new_student = [
+            "group_id" => $group_id,
+            "value" => $generate_value
+        ];
+
+        // inserting student
+        $this->database->insert("STUDENTS", $new_student);
     }
 }
 

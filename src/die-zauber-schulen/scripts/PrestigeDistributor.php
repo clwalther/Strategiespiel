@@ -1,35 +1,32 @@
 <?php
 
-class PrestigeDistributer {
-
-    private $prestigeDistributionArray;
-    private $prestigeDistributionArraySize;
-    private $jobarray;
-
+class PrestigeDistributer
+{
     function __construct() {
         global $database;
+        global $general;
 
         $this->database = $database;
+        $this->general = $general;
+
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $this->file = json_decode($file, true);
+
+
         $this->prestigeDistributionArray = [300, 200, 100]; //TODO Stellschraube
         $this->prestigeDistributionArraySize = count($this->prestigeDistributionArray);
-        $this->jobarray = ["Medimagier", "Auror", "Ministeriumsbeamter", "Drachenwärter",
-            "Magiezoologe", "Zauberstabschreinermeister", "Quidditchprofi"];
     }
 
     /**
      * Führt die Prestige-Verteilung für alle Jobs durch.
      */
     public function distributePrestigeOfAllJobs() {
-        //echo var_dump($this->database->select("LABOUR", ["*"])[2]["group_id"]);
-        foreach ($this->jobarray as $job) {
-            echo "Job: $job<br>";
-            $columns = ["group_id", $job];
-            $influenceArray = $this->database->select("LABOUR", $columns);
-            $sortedGroupIds = $this->getPlacementArrayByInfluence($influenceArray, $job);
-            echo var_dump($sortedGroupIds);
+        foreach ($this->file["general"]["jobs"] as $job_name) {
+            $influence_array = $this->general->get_influence($job_name);
+            $sortedGroupIds = $this->getPlacementArrayByInfluence($influence_array, $job_name);
             $this->distributePrestige($sortedGroupIds);
         }
-        echo "Prestige-Verteilung abgeschlossen.";
     }
 
 
@@ -44,10 +41,10 @@ class PrestigeDistributer {
     private function getPlacementArrayByInfluence(array $influenceArray, string $job): array {
         // Zuerst erstellen wir ein neues Array, das die Keys und ihre Influence-Werte enthält
         $influenceData = array();
-        foreach ($influenceArray as $response) {
+        foreach ($influenceArray as $groupId => $influence) {
             // Nur Keys mit einem Influence-Wert größer als 0 hinzufügen
             if ($influence > 0) {
-                $influenceData[$response["group_id"]] = $response[$job];
+                $influenceData[$groupId] = $influence;
             }
         }
 
@@ -59,13 +56,6 @@ class PrestigeDistributer {
         return $sortedKeys;
     }
 
-    private function getPlacementArrayByInfluenceDELETE(array $influenceArray, string $job): array {
-        return $influenceArray
-            .filter(item => item.$job !== "0")
-            .sort((a, b) => parseInt(b.group_id) - parseInt(a.group_id))
-            .map(item => item.group_id);
-    }
-
     /**
      * Diese Funktion verteilt das Prestige anhand der Influence-Werte der Gruppen eines Jobs.
      * @param array $sortedGroupIds Ein Array mit den Gruppen-IDs, sortiert nach der Höhe ihrer Influence-Werte.
@@ -73,7 +63,8 @@ class PrestigeDistributer {
     private function distributePrestige($sortedGroupIds) {
         $groupsWithInfluence = count($sortedGroupIds);
         $iterations = min($groupsWithInfluence, $this->prestigeDistributionArraySize);
-        $prestigeArray = $this->database->select("LABOUR", ["group_id", "prestige"]);
+        // $prestigeArray = $this->database->select("LABOUR", ["group_id", "prestige"]);
+
         for ($i = 0; $i < $iterations; $i++) {
             $groupId = $sortedGroupIds[$i];
             $prestigeToAdd = $this->prestigeDistributionArray[$i];
@@ -81,20 +72,15 @@ class PrestigeDistributer {
         }
     }
 
-    private function setPrestige(int $groupId, int $prestige) {
-        $groupIdContition = ["group_id" => $groupId];
-        $this->database->update(LABOUR, ["prestige" => $prestige], $groupIdContition);
-    }
-
-    private function addPrestige(int $groupId, int $prestigeToAdd) {
+    private function addPrestige(int $groupId, float $prestigeToAdd) {
         $groupIdContition = ["group_id" => $groupId];
         $databaseReturn = $this->database->select_where("LABOUR", ["group_id", "prestige"], $groupIdContition);
-        $currentPrestige = $result[0]['prestige'];
-        $newPrestige = $currentPrestige + $prestigeToAdd;
-        $this->database->update(LABOUR, ["prestige" => $newPrestige], $groupIdContition);
-        echo "Gruppe ID: $groupId, Prestige: $prestige<br>";
-    }
 
+        $currentPrestige = $databaseReturn[0]['prestige'];
+        $newPrestige = $currentPrestige + $prestigeToAdd;
+
+        $this->database->update("LABOUR", ["prestige" => $newPrestige], $groupIdContition);
+    }
 }
 
 ?>
