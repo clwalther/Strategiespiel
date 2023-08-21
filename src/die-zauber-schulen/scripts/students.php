@@ -5,9 +5,11 @@ class Students
     function __construct() {
         global $database;
         global $general;
+        global $utils;
 
         $this->database = $database;
         $this->general = $general;
+        $this->utils = $utils;
         $this->group_id = $_GET["Team"];
     }
 
@@ -34,8 +36,8 @@ class Students
             for ($skill_index = 0; $skill_index < $n_skills; $skill_index++) {
                 // aquires all the skill attributes
                 $skill_name = $file["general"]["subjects"][$skill_index];
-                $base_value = $this->general->get_base($skill_repre, $skill_index);
-                $advanced_value = $this->general->get_advanced($skill_repre, $skill_index);
+                $base_value = $this->utils->get_base($skill_repre, $skill_index);
+                $advanced_value = $this->utils->get_advanced($skill_repre, $skill_index);
 
                 // assembles attributes in structre
                 $skill_struct = [

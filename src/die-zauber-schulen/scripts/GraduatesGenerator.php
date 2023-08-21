@@ -3,10 +3,10 @@
 class GraduatesGenerator {
     function __construct() {
         global $database;
-        global $general;
+        global $utils;
 
         $this->database = $database;
-        $this->general = $general;
+        $this->utils = $utils;
 
         //
         $file = file_get_contents(DATA_FILE_PATH);
@@ -107,7 +107,7 @@ class GraduatesGenerator {
 
     private function iterateBuildings($buildingRoot, $groupId, &$perkSumArray) {
         foreach ($buildingRoot as $key => $building) {
-            if($this->general->get_building_status($this->general->get_building_id($key), $groupId)){
+            if($this->utils->get_building_status($this->utils->get_building_id($key), $groupId)){
                 $this->addBuildingPerksWithArray($building["perks"], $perkSumArray);
             }
             if ($building["children"] != "none") {
@@ -156,8 +156,8 @@ class GraduatesGenerator {
             $skill_index = array_search($teacher, $file["general"]["subjects"]);
 
             // extracts the values from base and advanced representation
-            $base_value = $this->general->get_base($skill_repre, $skill_index);
-            $advanced_value = $this->general->get_advanced($skill_repre, $skill_index);
+            $base_value = $this->utils->get_base($skill_repre, $skill_index);
+            $advanced_value = $this->utils->get_advanced($skill_repre, $skill_index);
 
             // fills the teacher structure
             $teacher_struct = ["name" => $teacher, "base" => $base_value, "advanced" => $advanced_value];
@@ -199,17 +199,23 @@ class GraduatesGenerator {
             $skill_index = array_search($skill_name, $file["general"]["subjects"]);
 
             // compresses the skill value into student representation
-            $generate_value = $this->general->add_base($generate_value, $skill_index, $skill_value);
+            $generate_value = $this->utils->add_base($generate_value, $skill_index, $skill_value);
         }
 
-        // getting student ready for insertion
-        $new_student = [
-            "group_id" => $group_id,
-            "value" => $generate_value
-        ];
+        // makes sure that graduate never has no skills
+        if($generate_value > 0) {
+            // getting student ready for insertion
+            $new_student = [
+                "group_id" => $group_id,
+                "value" => $generate_value
+            ];
 
-        // inserting student
-        $this->database->insert("STUDENTS", $new_student);
+            // inserting student
+            $this->database->insert("STUDENTS", $new_student);
+        } else {
+            // recalls if no skills
+            $this->generate_graduate($group_id);
+        }
     }
 }
 

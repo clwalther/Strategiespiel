@@ -87,13 +87,15 @@ button {
 	border-radius: 8px;
 	border: 0;
 
-	background-color: var(--colour-green);
 	color: var(--colour-colour);
+	background-color: var(--colour-accent);
+
+	border: 1px solid var(--colour-border-edge);
 
 	cursor: pointer;
 }
 button:hover {
-	background-color: var(--colour-green-accent);
+	background-color: var(--colour-selected);
 }
 
 /* GLOBAL CLASSES */

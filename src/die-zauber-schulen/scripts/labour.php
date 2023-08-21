@@ -5,9 +5,11 @@ class Labour
     function __construct() {
         global $database;
         global $general;
+        global $utils;
 
         $this->database = $database;
         $this->general = $general;
+        $this->utils = $utils;
         $this->group_id = $_GET["Team"];
     }
 
@@ -22,11 +24,11 @@ class Labour
         // looping through all the workers as worker <job_name;influence>
         foreach($file["general"]["jobs"] as $job_name) {
             // reads all the workers with matching group id and job name
-            $influence = $this->general->get_influence($job_name)[$this->group_id];
+            $influence = $this->utils->get_influence($job_name)[$this->group_id];
             $workers = $this->database->select_where("WORKERS", ["value", "id"], ["job_name" => $job_name, "group_id" => $this->group_id]);
 
             // job structre
-            $job_struct = ["name" => $job_name, "influence" => $influence, "workers" => array()];
+            $job_struct = ["name" => $job_name, "influence" => $influence, "workers" => array(), "requirements" => $file["general"]["job_requirements"][$job_name]];
 
             foreach($workers as $worker) {
                 $worker_struct = ["id" => $worker["id"], "skills" => array()];
@@ -38,8 +40,8 @@ class Labour
                 for ($skill_index = 0; $skill_index < $n_skills; $skill_index++) {
                     // aquires all the skill attributes
                     $skill_name = $file["general"]["subjects"][$skill_index];
-                    $base_value = $this->general->get_base($skill_repre, $skill_index);
-                    $advanced_value = $this->general->get_advanced($skill_repre, $skill_index);
+                    $base_value = $this->utils->get_base($skill_repre, $skill_index);
+                    $advanced_value = $this->utils->get_advanced($skill_repre, $skill_index);
 
                     // assembles attributes in structre
                     $skill_struct = [
@@ -64,6 +66,29 @@ class Labour
         return $send_jobs;
     }
 
+    public function get_jobs_influence(): array {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        $jobs = array();
+
+        foreach($file["general"]["jobs"] as $job_name) {
+            $requirements = array();
+
+            foreach($file["general"]["job_requirements"][$job_name] as $skill_index) {
+                array_push($requirements, $file["general"]["subjects"][$skill_index]);
+            }
+
+            $jobs[$job_name] = [
+                "influence" => $this->utils->get_influence($job_name),
+                "requirements" => $requirements
+            ];
+        }
+
+        return $jobs;
+    }
+
     // === ACTIONS ===
     public function change_influence(string $value): void {
         // aquires the file contents
@@ -83,15 +108,15 @@ class Labour
             // gets the total points making up the influence in a job
             // 1.: worker points
             // 2.: (+) extra added points
-            $group_points = $this->general->get_points_workers(intval($group_id), $job_name);
-            $group_points += $this->general->get_points_extra(intval($group_id), $job_name);
+            $group_points = $this->utils->get_points_workers(intval($group_id), $job_name);
+            $group_points += $this->utils->get_points_extra(intval($group_id), $job_name);
 
             // adds the group specific points to one value
             $combined_points += $group_points;
         }
 
-        $group_worker_points = $this->general->get_points_workers(intval($this->group_id), $job_name);
-        $group_extra_points = $this->general->get_points_extra(intval($this->group_id), $job_name);
+        $group_worker_points = $this->utils->get_points_workers(intval($this->group_id), $job_name);
+        $group_extra_points = $this->utils->get_points_extra(intval($this->group_id), $job_name);
 
         // p_group_extra = (I * (SUM:[p] - p_group) / (1 - I)) - p_group_worker
         $add_points = ($influence * ($combined_points - ($group_worker_points + $group_extra_points))
@@ -123,11 +148,11 @@ class Labour
 
         $worker_id = $worker["id"];
         $worker_repre = floatval($worker["value"]);
-        $old_worker_value = $this->general->get_base($worker_repre, $skill_index);
+        $old_worker_value = $this->utils->get_base($worker_repre, $skill_index);
 
         // adds the delta to worker representation
         $worker_delta = $new_worker_value - $old_worker_value;
-        $worker = $this->general->add_base($worker_repre, $skill_index, $worker_delta);
+        $worker = $this->utils->add_base($worker_repre, $skill_index, $worker_delta);
 
         // updates the database
         $this->database->update("WORKERS", ["value" => $worker], ["id" => $worker_id]);
@@ -147,11 +172,11 @@ class Labour
         $worker_id = $worker["id"];
 
         $worker_repre = floatval($worker["value"]);
-        $old_worker_value = $this->general->get_advanced($worker_repre, $skill_index);
+        $old_worker_value = $this->utils->get_advanced($worker_repre, $skill_index);
 
         // adds the delta to worker representation
         $worker_delta = $new_worker_value - $old_worker_value;
-        $worker = $this->general->add_advanced($worker_repre, $skill_index, $worker_delta);
+        $worker = $this->utils->add_advanced($worker_repre, $skill_index, $worker_delta);
 
         // updates the database
         $this->database->update("WORKERS", ["value" => $worker], ["id" => $worker_id]);
@@ -169,11 +194,11 @@ class Labour
         $worker = $workers[0];
 
         $worker_repre = floatval($worker["value"]);
-        $old_worker_value = $this->general->get_base($worker_repre, $skill_index);
+        $old_worker_value = $this->utils->get_base($worker_repre, $skill_index);
 
         // adds the delta to worker representation
         $worker_delta = $new_worker_value - $old_worker_value;
-        $worker = $this->general->add_base($worker_repre, $skill_index, $worker_delta);
+        $worker = $this->utils->add_base($worker_repre, $skill_index, $worker_delta);
 
         // updates the database
         $this->database->update("WORKERS", ["value" => $worker], ["id" => $worker_id]);
@@ -191,11 +216,11 @@ class Labour
         $worker = $workers[0];
 
         $worker_repre = floatval($worker["value"]);
-        $old_worker_value = $this->general->get_advanced($worker_repre, $skill_index);
+        $old_worker_value = $this->utils->get_advanced($worker_repre, $skill_index);
 
         // adds the delta to worker representation
         $worker_delta = $new_worker_value - $old_worker_value;
-        $worker = $this->general->add_advanced($worker_repre, $skill_index, $worker_delta);
+        $worker = $this->utils->add_advanced($worker_repre, $skill_index, $worker_delta);
 
         // updates the database
         $this->database->update("WORKERS", ["value" => $worker], ["id" => $worker_id]);

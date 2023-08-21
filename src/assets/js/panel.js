@@ -25,7 +25,7 @@ class PanelCard
 
         header.innerText = this.name.length > 11 ? this.name.substring(0, 11) + "..." : this.name;
         this.paragraph.innerText = this.name;
-        this.action_image.src = "../../../../assets/imgs/edit.svg";
+        this.action_image.src = "../../../../assets/icons/edit.svg";
 
         header.appendChild(this.action_button);
         this.action_button.appendChild(this.action_image);

@@ -37,6 +37,19 @@ Teams lookup table  (always 12 entries):
         teamname VARCHAR(255) NOT NULL DEFAULT "TEAMNAME"
         );
 
+Event lookup table
+
+    EVENT:
+    ├── id: INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+    ├── name: VARCHAR(255) NOT NULL;
+    └── status: BOOL NOT NULL;
+
+    CREATE TABLE EVENT (
+        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        status BOOL NOT NULL
+    );
+
 ### Ministerium Schulverwaltung
 General school administration (always 12 entries):
 

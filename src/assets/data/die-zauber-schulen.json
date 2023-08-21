@@ -65,36 +65,36 @@
     },
 
     "buildings": {
-        "Erweiterungsflügel": {
+        "Erweiterungsfluegel": {
             "trivialname": "Erweiter-ungsflügel",
-            "requirements": [""],
 
+            "requirements": {},
             "perks": {"Zaubertränke": 0.04, "Zauberkunst": 0.04, "Geschichte": 0.04},
             "level": 1,
 
             "children": {
                 "Lehrerzimmer": {
                     "trivialname": "Lehrer-zimmer",
-                    "requirements": [""],
 
+                    "requirements": {},
                     "perks": {},
                     "level": 2,
 
                     "children": {
                         "Rektorenturm": {
                             "trivialname": "Rektoren-turm",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {},
                             "level": 4,
 
                             "children": "none"
                         },
 
-                        "Bibiliothek": {
-                            "trivialname": "Bibiliothek",
-                            "requirements": [""],
+                        "Bibliothek": {
+                            "trivialname": "Bibliothek",
 
+                            "requirements": {},
                             "perks": {"Zauberkunst": 0.14, "Geschichte": 0.25},
                             "level": 3,
 
@@ -103,20 +103,18 @@
                     }
                 },
 
-                "Große-Halle": {
+                "GroßeHalle": {
                     "trivialname": "Große Halle",
-                    "requirements": [""],
 
-
-                    "teacher": "",
+                    "requirements": {},
                     "perks": {"Absolventenzeit": 8},
                     "level": 2,
 
                     "children": {
                         "Atrium": {
                             "trivialname": "Atrium",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Zaubertränke": 0.08, "Zauberkunst": 0.19, "Besenfliegen": 0.13},
                             "level": 3,
 
@@ -125,8 +123,8 @@
 
                         "Astronomieturm": {
                             "trivialname": "Astronomie-turm",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Verteidigung": 0.35, "Geschichte": 0.2},
                             "level": 4,
 
@@ -137,18 +135,18 @@
             }
         },
 
-        "Lange-Galerie": {
-            "trivialname": "Lange Galerie",
-            "requirements": [""],
+        "LangeGallerie": {
+            "trivialname": "Lange Gallerie",
 
+            "requirements": {},
             "perks": {"Geschöpfe": 0.04, "Kräuterkunde": 0.04},
             "level": 1,
 
             "children": {
                 "Gemeinschaftsraum": {
                     "trivialname": "Gemein-schaftsraum",
-                    "requirements": [""],
 
+                    "requirements": {},
                     "perks": {"Zaubertränke": 0.06, "Zauberkunst": 0.06, "Verteidigung": 0.06,
                         "Geschichte": 0.06, "Geschöpfe": 0.06, "Kräuterkunde": 0.06, "Besenfliegen": 0.06},
                     "level": 2,
@@ -156,16 +154,16 @@
                     "children": {
                         "Wohnturm": {
                             "trivialname": "Wohnturm",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Absolventenanzahl": 2},
                             "level": 3,
 
                             "children": {
                                 "Eulerei": {
                                     "trivialname": "Eulerei",
-                                    "requirements": [""],
 
+                                    "requirements": {},
                                     "perks": {"Geschöpfe": 0.35, "Kräuterkunde": 0.2},
                                     "level": 4,
 
@@ -178,16 +176,16 @@
 
                 "Duellierzimmer": {
                     "trivialname": "Duellier-zimmer",
-                    "requirements": [""],
 
+                    "requirements": {},
                     "perks": {"Zauberkunst": 0.2, "Verteidigung": 0.2},
                     "level": 3,
 
                     "children":  {
-                        "Chambre-Séparée": {
+                        "ChambreSeparee": {
                             "trivialname": "Chambre-Séparée",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Verteidigung": 0.15, "Lehrer": "Verteidigung"},
                             "level": 5,
 
@@ -198,16 +196,16 @@
 
                 "Verlies": {
                     "trivialname": "Verlies",
-                    "requirements": [""],
 
+                    "requirements": {},
                     "perks": {"Zaubertränke": 0.2, "Verteidigung": 0.1},
                     "level": 2,
 
                     "children": {
                         "Laboratorium": {
                             "trivialname": "Labora-torium",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Lehrer": "Zaubertränke"},
                             "level": 3,
 
@@ -220,24 +218,24 @@
 
         "Parkanlage": {
             "trivialname": "Parkanlage",
-            "requirements": [""],
 
+            "requirements": {},
             "perks": {"Geschöpfe": 0.04, "Kräuterkunde": 0.04, "Besenfliegen": 0.04},
             "level": 1,
 
             "children": {
                 "Pavilion": {
                     "trivialname": "Pavilion",
-                    "requirements": [""],
 
+                    "requirements": {},
                     "perks": {"Zauberkunst": 0.2, "Geschichte": 0.1},
                     "level": 2,
 
                     "children": {
                         "Steinkreis": {
                             "trivialname": "Steinkreis",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Verteidigung": 0.1, "Geschichte": 0.35, "Geschöpfe": 0.1},
                             "level": 5,
 
@@ -248,16 +246,16 @@
 
                 "Kräutergarten": {
                     "trivialname": "Kräuter-garten",
-                    "requirements": [""],
 
+                    "requirements": {},
                     "perks": {"Zaubertränke": 0.14, "Kräuterkunde": 0.26},
                     "level": 3,
 
                     "children": {
                         "Gewächshaus": {
                             "trivialname": "Gewächs-haus",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Kräuterkunde": 0.1, "Lehrer": "Kräuterkunde"},
                             "level": 4,
 
@@ -268,24 +266,24 @@
 
                 "Wäldchen": {
                     "trivialname": "Wäldchen",
-                    "requirements": [""],
 
+                    "requirements": {},
                     "perks": {"Zaubertränke": 0.05, "Geschöpfe": 0.2, "Kräuterkunde": 0.05},
                     "level": 2,
 
                     "children": {
                         "Bootsanleger": {
                             "trivialname": "Bootsan-leger",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Zaubertränke": 0.2, "Geschöpfe": 0.06, "Kräuterkunde": 0.14},
                             "level": 3,
 
                             "children": {
                                 "Försterhütte": {
                                     "trivialname": "Försterhütte",
-                                    "requirements": [""],
 
+                                    "requirements": {},
                                     "perks": {"Geschöpfe": 0.07, "Kräuterkunde": 0.07, "Lehrer": "Geschöpfe"},
                                     "level": 5,
 
@@ -300,24 +298,24 @@
 
         "Besenhütte": {
             "trivialname": "Besenhütte",
-            "requirements": [""],
 
+            "requirements": {},
             "perks": {"Besenfliegen": 0.22, "Verteidigung": 0.08},
             "level": 2,
 
             "children": {
                 "Quidditchfeld": {
                     "trivialname": "Quidditch-feld",
-                    "requirements": [""],
 
+                    "requirements": {},
                     "perks": {"Lehrer": "Besenfliegen"},
                     "level": 3,
 
                     "children": {
                         "Quidditchtribünen": {
                             "trivialname": "Quiddtich-tribüne",
-                            "requirements": [""],
 
+                            "requirements": {},
                             "perks": {"Besenfliegen": 0.42, "Geschöpfe": 0.12},
                             "level": 5,
 

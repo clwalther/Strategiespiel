@@ -1,0 +1,131 @@
+/* === FONTS === */
+@font-face {
+    font-family: Arvo;
+    src: url(../fonts/Arvo/Arvo-Bold.ttf);
+}
+
+@font-face {
+    font-family: Caprasimo;
+    src: url(../fonts/Caprasimo/Caprasimo-Regular.ttf);
+}
+
+@font-face {
+    font-family: Khand;
+    src: url(../fonts/Khand/Khand-Regular.ttf);
+}
+
+/* === CLASSES === */
+.Parchment {
+    width: 90%;
+    height: 90%;
+
+    margin: 5%;
+}
+/* planes (specifics are coming as soon as JW releases new pictures) */
+.Hintergrund { z-index: 0; }
+.Bibliothek { z-index: 8;}
+.Erweiterungsflügel { z-index: 9;}
+.Base { z-index: 10; }
+.Rektorenturm { z-index: 11;}
+.Große-Halle { z-index: 12;}
+
+/* .Atrium { z-index: 12;}
+.Lehrerzimmer { z-index: 9;}
+.Gemeinschaftsraum { z-index: 7;}
+.Chambre-Séparée { z-index: 7;}
+.Lange-Galerie { z-index: 6;}
+.Laboratorium { z-index: 6;}
+.Duellierzimmer { z-index: 5;}
+.Eulerei { z-index: 2;}
+.Wohnturm { z-index: 1;} */
+
+
+
+/* === RULES === */
+body {
+    /* background: url(../../../assets/imgs/DieOrdenDerZauberschulen_Logo-03.png) no-repeat center center fixed; */
+    background-size: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+body div {
+    width: 50vw;;
+    height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: grid;
+    align-items: center;
+}
+body div img {
+    position: absolute;
+
+    width: 80%;
+
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+body .rows {
+    display: flex;
+    justify-content: space-evenly;
+
+    height: 50vh;
+    width: 100vw;
+}
+body .rows div {
+    display: block;
+    height: 50vh;
+    width: calc(50vh * 0.75);
+}
+body .rows div img {
+    position: absolute;
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+
+    border-radius: 8px;
+
+    margin: 16px;}
+body .rows div div {
+    width: calc(100% - 64px);
+    border-bottom: 2px black;
+    border-bottom-style: solid;
+    height: 33.334%;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+body .rows div div h1 {
+    font-family: Arvo;
+    color: black;
+    font-size: 27px;
+    letter-spacing: -0.038em;
+    font-weight: 500;
+    text-align: center;
+}
+body .rows div div h2 {
+    /* font-family: Khand; */
+    font-family: Caprasimo;
+    color: black;
+    font-size: 12px;
+    letter-spacing: 0.062em;
+    font-weight: 500;
+    text-align: center;
+}
+body .rows div div ol {
+    list-style-type: upper-roman;
+
+    text-align: center;
+    padding: 0;
+}
+body .rows div div ol li {
+    color: black;
+    font-family: Arvo;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    white-space: nowrap;
+}

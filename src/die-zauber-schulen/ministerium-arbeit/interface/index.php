@@ -8,13 +8,14 @@
 	<link rel="shortcut icon" href="../../../../assets/imgs/favicon-32x32.png" type="image/x-icon">
 
 	<!-- file specific script -->
-	<script src="../../../../assets/js/general.js"></script>
-	<script src="../../../../assets/js/dialog.js"></script>
-	<script src="../../../../assets/js/skill.js"></script>
+    <script src="../../../../assets/js/die-zauber-schulen/general/general.js"></script>
+    <script src="../../../../assets/js/die-zauber-schulen/interface/labour.js"></script>
+	<script src="../../../../assets/js/die-zauber-schulen/general/skill.js"></script>
+    <!-- standart scripts -->
 	<script src="../../../../assets/js/panel.js"></script>
-	<script src="../../../../assets/js/labour.js"></script>
-	<!-- main script (import last) -->
-	<script src="../../../../assets/js/script.js" async></script>
+    <script src="../../../../assets/js/dialog.js"></script>
+    <!-- main script (import last) -->
+    <script src="../../../../assets/js/script.js" async></script>
 
 	<!-- main stylesheet -->
 	<link rel="stylesheet" href="../../../../assets/css/style.css">
@@ -47,7 +48,7 @@
 	<section>
 		<!-- HEADER -->
         <header>
-            <img src="../../../../assets/imgs/group.svg">
+            <img src="../../../../assets/icons/group.svg">
             <h1 id="teamname"></h1>
         </header>
 

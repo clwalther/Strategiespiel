@@ -1,9 +1,11 @@
 <?php
 
 include "../../scripts/global.php";
-include "./general.php";
+include "./_general_.php";
+include "./_utils_.php";
 
-$general   = new General();
+$general = new General();
+$utils = new Utils();
 
 include "./buildings.php";
 include "./students.php";
@@ -117,6 +119,10 @@ foreach($_POST as $key => $values) {
 
             case "teachers_set_advanced":
                 $teachers->set_advanced($value);
+                break;
+
+            case "teacher_displacement_set":
+                $teachers->set_displacement($value);
                 break;
         }
     }

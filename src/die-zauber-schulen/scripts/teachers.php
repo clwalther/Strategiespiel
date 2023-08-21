@@ -5,9 +5,11 @@ class Teachers
     function __construct() {
         global $database;
         global $general;
+        global $utils;
 
         $this->database = $database;
         $this->general = $general;
+        $this->utils = $utils;
         $this->group_id = $_GET["Team"];
     }
 
@@ -33,8 +35,8 @@ class Teachers
         foreach($knot as $building_name => $building) {
             // if correct element found return counter
             if($teacher == $building["perks"]["Lehrer"]) {
-                $building_id = $this->general->get_building_id($building_name);
-                $is_included = $this->general->get_building_status($building_id, $this->group_id);
+                $building_id = $this->utils->get_building_id($building_name);
+                $is_included = $this->utils->get_building_status($building_id, $this->group_id);
             }
 
             // aquire the f(x+1) generation
@@ -68,14 +70,16 @@ class Teachers
             // if the skill_repre is greater than negative one -> teacher slot enabled
             if($this->is_loaded($teacher)) {
                 $n_skills = count($file["general"]["subjects"]);
+                // gets the teacher displacment
+                $add_value = floatval($this->database->select_where("SCHOOL_ADMIN", [$teacher."_displacement"], ["group_id" => $this->group_id])[0][$teacher."_displacement"]);
                 // teacher structure
-                $teacher_struct = ["name" => $teacher, "skills" => array()];
+                $teacher_struct = ["name" => $teacher, "skills" => array(), "add" => $add_value];
 
                 for ($skill_index = 0; $skill_index < $n_skills; $skill_index++) {
                     // aquires all the skill attributes
                     $skill_name = $file["general"]["subjects"][$skill_index];
-                    $base_value = $this->general->get_base($skill_repre, $skill_index);
-                    $advanced_value = $this->general->get_advanced($skill_repre, $skill_index);
+                    $base_value = $this->utils->get_base($skill_repre, $skill_index);
+                    $advanced_value = $this->utils->get_advanced($skill_repre, $skill_index);
 
                     // assembles attributes in structre
                     $skill_struct = [
@@ -110,11 +114,11 @@ class Teachers
         // aquires correct group from group id with specific teacher
         $teacher = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
         // aquires all the skill attributes
-        $old_base_value = $this->general->get_base(floatval($teacher[0][$subject]), $skill_index);
+        $old_base_value = $this->utils->get_base(floatval($teacher[0][$subject]), $skill_index);
         $base_delta = ($new_base_value - $old_base_value);
         echo $base_delta;
 
-        $base = $this->general->add_base(floatval($teacher[0][$subject]), $skill_index, $base_delta);
+        $base = $this->utils->add_base(floatval($teacher[0][$subject]), $skill_index, $base_delta);
 
         // updating the database
         $this->database->update("SCHOOL_ADMIN", [$subject => $base], ["group_id" => $this->group_id]);
@@ -130,13 +134,23 @@ class Teachers
         // aquires correct group from group id with specific teacher
         $teacher = $this->database->select_where("SCHOOL_ADMIN", [$subject], ["group_id" => $this->group_id]);
         // aquires all the skill attributes
-        $old_advanced_value = $this->general->get_advanced(floatval($teacher[0][$subject]), $skill_index);
+        $old_advanced_value = $this->utils->get_advanced(floatval($teacher[0][$subject]), $skill_index);
         $advanced_delta = ($new_advanced_value - $old_advanced_value);
 
-        $advanced = $this->general->add_advanced(floatval($teacher[0][$subject]), $skill_index, $advanced_delta);
+        $advanced = $this->utils->add_advanced(floatval($teacher[0][$subject]), $skill_index, $advanced_delta);
 
         // updating the database
         $this->database->update("SCHOOL_ADMIN", [$subject => $advanced], ["group_id" => $this->group_id]);
+    }
+
+    public function set_displacement(string $bundle): void {
+        $bundle = explode(";", $bundle);
+        // bundel => ubject;int(displacement)
+        $subject = $bundle[0];
+        $displacment = floatval($bundle[1]);
+
+        // updating the database
+        $this->database->update("SCHOOL_ADMIN", [$subject."_displacement" => $displacment], ["group_id" => $this->group_id]);
     }
 }
 ?>

@@ -8,9 +8,10 @@
     <link rel="shortcut icon" href="../assets/imgs/favicon-32x32.png" type="image/x-icon">
 
     <!-- file specific script -->
-    <script src="../../../../assets/js/general.js"></script>
+    <script src="../../../../assets/js/die-zauber-schulen/general/general.js"></script>
+    <script src="../../../../assets/js/die-zauber-schulen/general/navigate.js"></script>
+    <!-- standart scripts -->
     <script src="../../../../assets/js/dialog.js"></script>
-    <script src="../../../../assets/js/navigate.js"></script>
     <!-- main script (import last) -->
     <script src="../../../../assets/js/script.js" async></script>
 
@@ -35,11 +36,11 @@
         <h3>Directions</h3>
         <div id="team-drawer">
             <button onclick="window.open('./ministerium-arbeit', '_self')">
-                <img src="../assets/imgs/open_in_new.svg">
+                <img src="../assets/icons/open_in_new.svg">
                 <span>/Arbeit</span>
             </button>
             <button onclick="window.open('./ministerium-schulverwaltung', '_self')">
-                <img src="../assets/imgs/open_in_new.svg">
+                <img src="../assets/icons/open_in_new.svg">
                 <span>/Schulverwaltung</span>
             </button>
         </div>
@@ -61,6 +62,10 @@
             <p>
                 <button onclick="open_dialog('dialog-load-backup-0');">Lade Backup</button>
             </p>
+        </article>
+        <article>
+            <h3>Logs (not auto-reloading)</h3>
+            <p id="logs"></p>
         </article>
     </section>
 

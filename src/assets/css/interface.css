@@ -1,6 +1,13 @@
 /* STUDENTS */
     body section #students p button {
         margin-left: 16px;
+
+        background-color: var(--colour-green);
+
+        border: none;
+    }
+    body section #students p button:hover {
+        background-color: var(--colour-green-accent);
     }
     body dialog .students div div {
         height: 100%;
@@ -177,6 +184,10 @@
 /* PRESTIGE */
     body section #prestige p button {
         margin-left: 16px;
+
+        background-color: var(--colour-green);
+
+        border: none;
     }
 
 
@@ -262,6 +273,9 @@
 
         font-size: 9px;
     }
+    body section article div .panel p:last-child {
+        justify-content: space-evenly;
+    }
     body section article div .panel p span {
         display: flex;
         align-items: center;
@@ -283,7 +297,7 @@
         width: 28px;
     }
     body section article div .panel p span span {
-        margin-left: 8px;
+        margin-left: 2px;
     }
 
 /* SKILL CARD */
@@ -293,13 +307,13 @@
         padding: 0;
         margin-top: 6.25%;
         margin-bottom: 6.25%;
-        margin-left: 12.5%;
-        margin-right: 12.5%;
+        margin-left: 9%;
+        margin-right: 9%;
 
         border: 1px solid var(--colour-border-edge);
         border-radius: 16px;
 
-        width: 75%;
+        width: 82%;
         height: 75%;
 
         background-color: var(--colour-selected);

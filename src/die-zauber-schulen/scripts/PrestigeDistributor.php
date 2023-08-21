@@ -4,10 +4,10 @@ class PrestigeDistributer
 {
     function __construct() {
         global $database;
-        global $general;
+        global $utils;
 
         $this->database = $database;
-        $this->general = $general;
+        $this->utils = $utils;
 
         // aquires the file contents
         $file = file_get_contents(DATA_FILE_PATH);
@@ -23,7 +23,7 @@ class PrestigeDistributer
      */
     public function distributePrestigeOfAllJobs() {
         foreach ($this->file["general"]["jobs"] as $job_name) {
-            $influence_array = $this->general->get_influence($job_name);
+            $influence_array = $this->utils->get_influence($job_name);
             $sortedGroupIds = $this->getPlacementArrayByInfluence($influence_array, $job_name);
             $this->distributePrestige($sortedGroupIds);
         }

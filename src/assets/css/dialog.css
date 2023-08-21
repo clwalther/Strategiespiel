@@ -16,13 +16,14 @@ body dialog {
 body dialog div {
 	position: inherit;
 
-	height: calc(56vh - 16px);
-	width: calc(90vh - 16px);
+	height: min(56vh, 50vw);
+	width: min(90vh, 82vw);
 
-	margin-left:   calc(50vw - 45vh - 0.8px - 16px);
-	margin-right:  calc(50vw - 45vh - 0.8px - 16px);
-	margin-top:    calc(50vh - 28vh - 0.8px - 16px);
-	margin-bottom: calc(50vh - 28vh - 0.8px - 16px);
+	margin-left:   calc(50vw - min(90vh, 82vw) / 2 - 32px - 0.8px);
+	margin-right:  calc(50vw - min(90vh, 82vw) / 2 - 32px - 0.8px);
+
+	margin-top:    calc(50vh - min(56vh, 50vw) / 2 - 32px - 0.8px);
+	margin-bottom: calc(50vh - min(56vh, 50vw) / 2 - 32px - 0.8px);
 
 	border: 1px solid var(--colour-border-edge);
 	border-radius: 16px;

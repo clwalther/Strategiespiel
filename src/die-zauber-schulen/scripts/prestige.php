@@ -16,6 +16,22 @@ class Prestige
         return $prestige[0]["prestige"];
     }
 
+    public function get_teams_prestige() {
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        $prestige = array();
+
+        foreach($file["general"]["teams"] as $group_id => $_) {
+            $team_specific_prestige = $this->database->select_where("LABOUR", ["prestige"], ["group_id" => $group_id]);
+
+            $prestige[intval($group_id)] = floatval($team_specific_prestige[0]["prestige"]);
+        }
+
+        return $prestige;
+    }
+
     // === ACTIONS ===
     public function add_value(string $value): void {
         // aqurie the old prestige value
