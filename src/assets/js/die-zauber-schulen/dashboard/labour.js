@@ -70,7 +70,7 @@ class Job
             let response = await fetch("/die-zauber-schulen/scripts/__get__.php?Team=undefined");
             this.data = await response.json();
 
-        }, 2 * 1000); // updating every 10 seconds
+        }, 2 * 1000); // updating every 2 seconds
     }
 
     generate_pie_chart(chart_housing) {

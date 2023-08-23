@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .card-container {
+    perspective: 1000px;
+  }
+  .card {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 2s ease-in-out;
+  }
+  .card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+  }
+  .card-front {
+    background: url('../../../assets/imgs/card.png') center/cover no-repeat;
+  }
+  .card-back {
+    background: url('../../../assets/imgs/card-back.png') center/cover no-repeat;
+    transform: rotateY(180deg);
+  }
+  .circle-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #3498db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .circle-text {
+    color: #fff;
+  }
+  .card-text {
+    margin-top: 10px;
+  }
+</style>
+<title>Card With Animated Circles</title>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card" id="animatedCard">
+      <div class="card-front" onclick="flipCard()">
+        <div class="circle-container">
+          <div class="circle-text">50%</div>
+        </div>
+        <div class="card-text" id="card-front-text1">
+          Example Card Text
+        </div>
+      </div>
+      <div class="card-back" onclick="flipCard()">
+        <div class="circle-container">
+          <div class="circle-text">75%</div>
+        </div>
+        <div class="card-text" id="card-back-text1">
+          Another Example Text
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <script>
+    const animatedCard = document.getElementById('animatedCard');
+    let isFlipped = false;
+
+    function flipCard() {
+      if (isFlipped) {
+        animatedCard.style.transform = 'rotateY(0deg)';
+      } else {
+        animatedCard.style.transform = 'rotateY(180deg)';
+      }
+      isFlipped = !isFlipped;
+    }
+
+    setInterval(flipCard, 5000);
+  </script>
+</body>
+</html>

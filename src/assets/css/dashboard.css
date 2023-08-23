@@ -1,3 +1,10 @@
+:root {
+    --ammount-of-displayed: 2;
+    --banner-image-ratio: calc(783 / 2533);
+    --border-edge-ratio: calc(384 / 2709);
+    --main-image-ratio: calc(2902 / 3412);
+}
+
 /* === FONTS === */
 @font-face {
     font-family: Arvo;
@@ -21,55 +28,183 @@
 
     margin: 5%;
 }
-/* planes (specifics are coming as soon as JW releases new pictures) */
+/* planes */
 .Hintergrund { z-index: 0; }
-.Bibliothek { z-index: 8;}
-.Erweiterungsflügel { z-index: 9;}
-.Base { z-index: 10; }
-.Rektorenturm { z-index: 11;}
-.Große-Halle { z-index: 12;}
 
-/* .Atrium { z-index: 12;}
-.Lehrerzimmer { z-index: 9;}
-.Gemeinschaftsraum { z-index: 7;}
-.Chambre-Séparée { z-index: 7;}
-.Lange-Galerie { z-index: 6;}
-.Laboratorium { z-index: 6;}
-.Duellierzimmer { z-index: 5;}
-.Eulerei { z-index: 2;}
-.Wohnturm { z-index: 1;} */
+.LangeGallerie { z-index: 101;}
+.Verlies { z-index: 102; }
+.Wohnturm { z-index: 103; }
+.Eulerei { z-index: 104;}
+.Duellierzimmer { z-index: 105;}
+.Laboratorium { z-index: 106; }
+.Gemeinschaftsraum { z-index: 107;}
+.ChambreSeparee { z-index: 108;}
 
+.Besenhuette { z-index: 201; }
+.Quidditchfeld { z-index: 202; }
+.Quidditchtribuenen { z-index: 203; }
 
+.Bibliothek { z-index: 301;}
+.Lehrerzimmer { z-index: 302; }
+.Erweiterungsfluegel { z-index: 303; }
+.Base { z-index: 304; }
+.Atrium { z-index: 305; }
+.Astronomieturm { z-index: 306; }
+.Rektorenturm { z-index: 307; }
+.GroßeHalle { z-index: 308; }
 
+.Bootsanleger { z-index: 408; }
+.Steinkreis { z-index: 407; }
+.Foersterhuette { z-index: 406; }
+.Waeldchen { z-index: 405; }
+.Gewaechshaus { z-index: 404; }
+.Kraeutergarten { z-index: 403; }
+.Pavilion { z-index: 402; }
+.Parkanlage { z-index: 401; }
+
+/*  */
+.active-schoool-display--1 {
+    left: -50vw;
+
+    display: grid;
+}
+.active-schoool-display-0 {
+    left: 0;
+
+    display: grid;
+}
+.active-schoool-display-1 {
+    left: 50vw;
+
+    display: grid;
+}
+.active-schoool-display-2 {
+    left: 100vw;
+
+    display: grid;
+}
 /* === RULES === */
 body {
-    /* background: url(../../../assets/imgs/DieOrdenDerZauberschulen_Logo-03.png) no-repeat center center fixed; */
-    background-size: auto;
+    background: url(../../../assets/imgs/BlauerSamtBackground2.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
+
 body div {
-    width: 50vw;;
+    position: absolute;
+    left: 100vw;
+
+    width: calc(100vw / var(--ammount-of-displayed));
     height: 100vh;
 
-    position: relative;
+    display: none;
+    align-items: center;
 
-    overflow: hidden;
+    transition: left 1s linear;
+}
+/* HEADER */
+body div header {
+    width: min(100%, auto);
+    height: min(calc(100vw / var(--ammount-of-displayed) * 0.65 * var(--banner-image-ratio)), calc(100vw - 100vw / var(--ammount-of-displayed) * var(--main-image-ratio)));
 
     display: grid;
+    justify-items: center;
     align-items: center;
 }
-body div img {
-    position: absolute;
+    /* TITLE */
+    body div header h1 {
+        position: absolute;
 
-    width: 80%;
+        font-size: 2.3vw;
+        font-family: HarryPotter;
 
-    margin-left: 10%;
-    margin-right: 10%;
+        height: calc(100vw / var(--ammount-of-displayed) * 0.65 * var(--banner-image-ratio));
+        width: 100%;
+
+        margin: 0;
+        padding-top: 9.65vw;
+        text-align: center;
+        color: black;
+    }
+    /* LABEL IMAGARY */
+    body div header img {
+        position: absolute;
+
+        width: calc(100vw / var(--ammount-of-displayed) * 0.65);
+    }
+
+/* SCHOOL CONATINER */
+body div div {
+    position: relative;
+    top: 0;
+    left: 0;;
+
+    display: inherit;
+
+    width: calc(100vw / var(--ammount-of-displayed) - 100vw / var(--ammount-of-displayed) * var(--border-edge-ratio) / 2);
+    height: calc(100vw / var(--ammount-of-displayed) * var(--main-image-ratio) - 100vw / var(--ammount-of-displayed) * var(--main-image-ratio) * var(--border-edge-ratio) / 2);
+
+    margin: calc(100vw / var(--ammount-of-displayed) * var(--border-edge-ratio) / 4);
 }
+    body div div img {
+        position: absolute;
 
+        width: 100%;
+        height: 100%;
+    }
+    body div div div {
+        position: absolute;
+        left: 0;
+        z-index: 600;
+
+        width: 100%;
+        height: calc(100% * var(--border-edge-ratio) / 2);
+
+        margin: 0;
+
+        overflow: visible;
+        display: block;
+
+        transition: none;
+    }
+    body div div .border-top {
+        z-index: 601;
+
+        top: calc(-100% * var(--border-edge-ratio) / 4);
+
+        transform: rotate(0deg);
+    }
+    body div div .border-left {
+        top: auto;
+        width: calc(100vw / var(--ammount-of-displayed) * var(--main-image-ratio) - 100vw / var(--ammount-of-displayed) * var(--main-image-ratio) * var(--border-edge-ratio) / 2);
+        left: -42%;
+        transform: rotate(270deg);
+    }
+    body div div .border-right {
+        top: auto;
+        width: calc(100vw / var(--ammount-of-displayed) * var(--main-image-ratio) - 100vw / var(--ammount-of-displayed) * var(--main-image-ratio) * var(--border-edge-ratio) / 2);
+        left: 57%;
+        transform: rotate(90deg);
+    }
+    body div div .border-bottom {
+        top: calc(100% - 100% * var(--border-edge-ratio) / 4);
+
+        transform: rotate(180deg);
+    }
+        body div div div img {
+            position: relative;
+            width: 50%;
+        }
+        body div div div img:first-child {
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+        }
+
+
+
+/* DIFFERENT DASAHBOARD */
 body .rows {
     display: flex;
     justify-content: space-evenly;
@@ -122,6 +257,7 @@ body .rows div div ol {
     padding: 0;
 }
 body .rows div div ol li {
+    list-style-type: upper-roman;
     color: black;
     font-family: Arvo;
     font-size: 16px;

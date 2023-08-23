@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Pie Chart</title>
+
+    <style>
+      .piechart {
+        margin-top: 300px;
+        display: block;
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        transition: background-image 3s ease-in-out; /* geht net */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    
+  </head>
+
+  <body>
+    <h1>Pie Chart</h1>
+
+    <script>
+        let colorArray = [
+          "#ff5733",
+          "#d32f2f",
+          "#b71c1c",
+          "#860707",
+          "#4B91FB",
+          "#0064FA",
+          "#2A518C",
+          "#00317A",
+          "#36B541",
+          "#2E9937",
+          "#00850B",
+          "#006608",
+        ];
+
+        function initPieChart(){
+            const pieChart = document.createElement("div");
+            pieChart.classList.add("piechart");
+            document.body.appendChild(pieChart);
+        }
+
+        initPieChart();
+
+        const influenceData = [10, 124, 23, 12, 35, 54, 14, 12, 48, 80, 20, 34];
+
+        function getAccDegreeArray(inputArray) {
+          const totalSum = inputArray.reduce((total, num) => total + num, 0);
+          if (totalSum === 0) {
+            return inputArray.map(() => 0);
+          }
+          let degreeArray = inputArray.map((value) => (value / totalSum) * 360);
+          for (i = 1; i < degreeArray.length; i++) {
+            degreeArray[i] += degreeArray[i - 1];
+          }
+          return degreeArray;
+        }
+
+        function updatePieChart(newInfluenceData) {
+          const accDegreeArray = getAccDegreeArray(newInfluenceData);
+          
+          const gradient = `conic-gradient(${colorArray
+            .map((color, index) => `${color} 0 ${accDegreeArray[index]}deg`)})`;
+          document.querySelector(".piechart").style.backgroundImage = gradient;
+        }
+          
+        updatePieChart(influenceData);
+
+        const influenceData2 = [10, 24, 23, 12, 35, 54, 14, 12, 48, 80, 20, 304];
+
+        setTimeout(() => {
+            updatePieChart(influenceData2);
+        }, 3000);
+    </script>
+  </body>
+</html>

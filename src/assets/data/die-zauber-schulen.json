@@ -244,7 +244,7 @@
                     }
                 },
 
-                "Kräutergarten": {
+                "Kraeutergarten": {
                     "trivialname": "Kräuter-garten",
 
                     "requirements": {},
@@ -252,7 +252,7 @@
                     "level": 3,
 
                     "children": {
-                        "Gewächshaus": {
+                        "Gewaechshaus": {
                             "trivialname": "Gewächs-haus",
 
                             "requirements": {},
@@ -264,7 +264,7 @@
                     }
                 },
 
-                "Wäldchen": {
+                "Waeldchen": {
                     "trivialname": "Wäldchen",
 
                     "requirements": {},
@@ -280,7 +280,7 @@
                             "level": 3,
 
                             "children": {
-                                "Försterhütte": {
+                                "Foersterhuette": {
                                     "trivialname": "Försterhütte",
 
                                     "requirements": {},
@@ -296,7 +296,7 @@
             }
         },
 
-        "Besenhütte": {
+        "Besenhuette": {
             "trivialname": "Besenhütte",
 
             "requirements": {},
@@ -312,7 +312,7 @@
                     "level": 3,
 
                     "children": {
-                        "Quidditchtribünen": {
+                        "Quidditchtribuenen": {
                             "trivialname": "Quiddtich-tribüne",
 
                             "requirements": {},
