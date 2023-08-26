@@ -17,9 +17,9 @@
             "Besenfliegen": 0.1
         },
 
-        "inital_graduates_interval": 10,
-        "inital_graduates_issue": 1,
-        "presige_interval": 10,
+        "inital_graduates_interval": 13,
+        "inital_graduates_issue": 3,
+        "presige_interval": 1,
         "backup_interval": 5,
 
         "teams": {
@@ -53,8 +53,7 @@
             "Ministeriumsbeamter": [3, 1, 5],
             "Drachenwärter":       [4, 1, 6],
             "Magiezoologe":        [4, 5, 6],
-            "Zauberstabschreinermeister":
-                                   [5, 3, 1],
+            "Zauberstabschreinermeister": [5, 3, 1],
             "Quidditchprofi":      [6, 0, 3]
         },
 
@@ -64,11 +63,30 @@
         ]
     },
 
+    "events": {
+        "fire-of-hogwarts": {
+            "weights": {
+                "Holzbalken": 0.161812,
+                "Steinziegel": 0.242178,
+                "Sand": 0.485437,
+                "Stoff": 1.086957,
+                "Metall": 1.035993,
+                "Möbel": 1.572393,
+                "Glas": 1.213592,
+                "Baumstämme": 0.242718,
+                "Fels": 0.242718,
+                "Wolle": 0.543478,
+                "Erz": 0.609756,
+                "Hymnen": 0.002344
+            }
+        }
+    },
+
     "buildings": {
         "Erweiterungsfluegel": {
             "trivialname": "Erweiter-ungsflügel",
 
-            "requirements": {},
+            "requirements": {"Baumstämme": 12, "Fels": 5},
             "perks": {"Zaubertränke": 0.04, "Zauberkunst": 0.04, "Geschichte": 0.04},
             "level": 1,
 
@@ -76,16 +94,16 @@
                 "Lehrerzimmer": {
                     "trivialname": "Lehrer-zimmer",
 
-                    "requirements": {},
-                    "perks": {},
+                    "requirements": {"Fels": 7, "Holzbalken": 8, "Steinziegel": 5, "Stoff": 2, "Metall": 2},
+                    "perks": {"Lehrermultiplikator": 0.2},
                     "level": 2,
 
                     "children": {
                         "Rektorenturm": {
                             "trivialname": "Rektoren-turm",
 
-                            "requirements": {},
-                            "perks": {},
+                            "requirements": {"Metall": 6, "Möbel": 4, "Glas": 3},
+                            "perks": {"Lehrermultiplikator": 0.4},
                             "level": 4,
 
                             "children": "none"
@@ -94,7 +112,7 @@
                         "Bibliothek": {
                             "trivialname": "Bibliothek",
 
-                            "requirements": {},
+                            "requirements": {"Holzbalken": 9, "Steinziegel": 4, "Stoff": 3, "Hymnen": 1000},
                             "perks": {"Zauberkunst": 0.14, "Geschichte": 0.25},
                             "level": 3,
 
@@ -106,15 +124,15 @@
                 "GroßeHalle": {
                     "trivialname": "Große Halle",
 
-                    "requirements": {},
-                    "perks": {"Absolventenzeit": 8},
+                    "requirements": {"Baumstämme": 6, "Holzbalken": 13, "Steinziegel": 7, "Metall": 3},
+                    "perks": {"Absolventenzeit": 11},
                     "level": 2,
 
                     "children": {
                         "Atrium": {
                             "trivialname": "Atrium",
 
-                            "requirements": {},
+                            "requirements": {"Fels": 3, "Erz": 5, "Holzbalken": 7, "Steinziegel": 13},
                             "perks": {"Zaubertränke": 0.08, "Zauberkunst": 0.19, "Besenfliegen": 0.13},
                             "level": 3,
 
@@ -124,7 +142,7 @@
                         "Astronomieturm": {
                             "trivialname": "Astronomie-turm",
 
-                            "requirements": {},
+                            "requirements": {"Steinziegel": 8, "Metall": 7, "Glas": 4},
                             "perks": {"Verteidigung": 0.35, "Geschichte": 0.2},
                             "level": 4,
 
@@ -138,7 +156,7 @@
         "LangeGallerie": {
             "trivialname": "Lange Gallerie",
 
-            "requirements": {},
+            "requirements": {"Baumstämme": 9, "Fels": 8},
             "perks": {"Geschöpfe": 0.04, "Kräuterkunde": 0.04},
             "level": 1,
 
@@ -146,7 +164,7 @@
                 "Gemeinschaftsraum": {
                     "trivialname": "Gemein-schaftsraum",
 
-                    "requirements": {},
+                    "requirements": {"Baumstämme": 3, "Fels": 5, "Holzbalken": 6, "Stoff": 5},
                     "perks": {"Zaubertränke": 0.06, "Zauberkunst": 0.06, "Verteidigung": 0.06,
                         "Geschichte": 0.06, "Geschöpfe": 0.06, "Kräuterkunde": 0.06, "Besenfliegen": 0.06},
                     "level": 2,
@@ -155,15 +173,15 @@
                         "Wohnturm": {
                             "trivialname": "Wohnturm",
 
-                            "requirements": {},
-                            "perks": {"Absolventenanzahl": 2},
+                            "requirements": {"Steinziegel": 4, "Stoff": 6, "Möbel": 1, "Glas": 1},
+                            "perks": {"Absolventenzeit": 9},
                             "level": 3,
 
                             "children": {
                                 "Eulerei": {
                                     "trivialname": "Eulerei",
 
-                                    "requirements": {},
+                                    "requirements": {"Steinziegel": 2, "Metall": 5, "Möbel": 3, "Glas": 3},
                                     "perks": {"Geschöpfe": 0.35, "Kräuterkunde": 0.2},
                                     "level": 4,
 
@@ -177,7 +195,7 @@
                 "Duellierzimmer": {
                     "trivialname": "Duellier-zimmer",
 
-                    "requirements": {},
+                    "requirements": {"Holzbalken": 14, "Steinziegel": 4, "Stoff": 3, "Möbel": 1},
                     "perks": {"Zauberkunst": 0.2, "Verteidigung": 0.2},
                     "level": 3,
 
@@ -185,7 +203,7 @@
                         "ChambreSeparee": {
                             "trivialname": "Chambre-Séparée",
 
-                            "requirements": {},
+                            "requirements": {"Steinziegel": 2, "Metall": 6, "Möbel": 6},
                             "perks": {"Verteidigung": 0.15, "Lehrer": "Verteidigung"},
                             "level": 5,
 
@@ -197,7 +215,7 @@
                 "Verlies": {
                     "trivialname": "Verlies",
 
-                    "requirements": {},
+                    "requirements": {"Baumstämme": 6, "Fels": 5, "Erz": 7},
                     "perks": {"Zaubertränke": 0.2, "Verteidigung": 0.1},
                     "level": 2,
 
@@ -205,7 +223,7 @@
                         "Laboratorium": {
                             "trivialname": "Labora-torium",
 
-                            "requirements": {},
+                            "requirements": {"Baumstämme": 4, "Steinziegel": 7, "Metall": 3, "Glas": 1, "Hymnen": 500},
                             "perks": {"Lehrer": "Zaubertränke"},
                             "level": 3,
 
@@ -219,7 +237,7 @@
         "Parkanlage": {
             "trivialname": "Parkanlage",
 
-            "requirements": {},
+            "requirements": {"Baumstämme": 13, "Sand": 2},
             "perks": {"Geschöpfe": 0.04, "Kräuterkunde": 0.04, "Besenfliegen": 0.04},
             "level": 1,
 
@@ -227,7 +245,7 @@
                 "Pavilion": {
                     "trivialname": "Pavilion",
 
-                    "requirements": {},
+                    "requirements": {"Baumstämme": 7, "Holzbalken": 8, "Steinziegel": 6, "Sand": 5},
                     "perks": {"Zauberkunst": 0.2, "Geschichte": 0.1},
                     "level": 2,
 
@@ -235,7 +253,7 @@
                         "Steinkreis": {
                             "trivialname": "Steinkreis",
 
-                            "requirements": {},
+                            "requirements": {"Fels": 22, "Erz": 8, "Sand": 8},
                             "perks": {"Verteidigung": 0.1, "Geschichte": 0.35, "Geschöpfe": 0.1},
                             "level": 5,
 
@@ -247,7 +265,7 @@
                 "Kraeutergarten": {
                     "trivialname": "Kräuter-garten",
 
-                    "requirements": {},
+                    "requirements": {"Fels": 5, "Erz": 2, "Holzbalken": 5, "Sand": 5, "Hymnen": 1000},
                     "perks": {"Zaubertränke": 0.14, "Kräuterkunde": 0.26},
                     "level": 3,
 
@@ -255,7 +273,7 @@
                         "Gewaechshaus": {
                             "trivialname": "Gewächs-haus",
 
-                            "requirements": {},
+                            "requirements": {"Steinziegel": 2, "Metall": 6, "Möbel": 6},
                             "perks": {"Kräuterkunde": 0.1, "Lehrer": "Kräuterkunde"},
                             "level": 4,
 
@@ -267,7 +285,7 @@
                 "Waeldchen": {
                     "trivialname": "Wäldchen",
 
-                    "requirements": {},
+                    "requirements": {"Baumstämme": 9, "Holzbalken": 8, "Sand": 7},
                     "perks": {"Zaubertränke": 0.05, "Geschöpfe": 0.2, "Kräuterkunde": 0.05},
                     "level": 2,
 
@@ -275,7 +293,7 @@
                         "Bootsanleger": {
                             "trivialname": "Bootsan-leger",
 
-                            "requirements": {},
+                            "requirements": {"Baumstämme": 10, "Fels": 2, "Holzbalken": 13, "Metall": 3},
                             "perks": {"Zaubertränke": 0.2, "Geschöpfe": 0.06, "Kräuterkunde": 0.14},
                             "level": 3,
 
@@ -283,7 +301,7 @@
                                 "Foersterhuette": {
                                     "trivialname": "Försterhütte",
 
-                                    "requirements": {},
+                                    "requirements": {"Holzbalken": 11, "Metall": 7, "Möbel": 3, "Glas": 2},
                                     "perks": {"Geschöpfe": 0.07, "Kräuterkunde": 0.07, "Lehrer": "Geschöpfe"},
                                     "level": 5,
 
@@ -299,7 +317,7 @@
         "Besenhuette": {
             "trivialname": "Besenhütte",
 
-            "requirements": {},
+            "requirements": {"Baumstämme": 4, "Fels": 6, "Wolle": 4, "Holzbalken": 7, "Hymnen": 500},
             "perks": {"Besenfliegen": 0.22, "Verteidigung": 0.08},
             "level": 2,
 
@@ -307,7 +325,7 @@
                 "Quidditchfeld": {
                     "trivialname": "Quidditch-feld",
 
-                    "requirements": {},
+                    "requirements": {"Holzbalken": 4, "Sand": 9, "Metall": 3},
                     "perks": {"Lehrer": "Besenfliegen"},
                     "level": 3,
 
@@ -315,7 +333,7 @@
                         "Quidditchtribuenen": {
                             "trivialname": "Quiddtich-tribüne",
 
-                            "requirements": {},
+                            "requirements": {"Holzbalken": 13, "Sand": 9, "Stoff": 4},
                             "perks": {"Besenfliegen": 0.42, "Geschöpfe": 0.12},
                             "level": 5,
 

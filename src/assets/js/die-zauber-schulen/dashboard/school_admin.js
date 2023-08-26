@@ -15,12 +15,14 @@ class School
 
                 let group_container = document.createElement("div");
                 let school_container = document.createElement("div");
+                let info_container = document.createElement("div");
                 let background = document.createElement("img");
                 let base = document.createElement("img");
 
                 let header = document.createElement("header");
                 let title = document.createElement("h1");
                 let banner = document.createElement("img");
+                let order_img = document.createElement("img");
 
                 let border_top = document.createElement("div");
                 let border_left = document.createElement("div");
@@ -39,8 +41,14 @@ class School
                 this.buildings.push(group_container);
 
                 body.appendChild(group_container);
-                group_container.appendChild(header);
-                group_container.append(school_container);
+                body.appendChild(info_container);
+
+                info_container.appendChild(header);
+                info_container.appendChild(order_img);
+
+
+                group_container.appendChild(school_container);
+                group_container.appendChild(info_container);
 
                 school_container.appendChild(border_top);
                 school_container.appendChild(border_left);
@@ -68,7 +76,7 @@ class School
                 title.id = `${group_id}-title`;
 
                 banner.src = "../../../assets/imgs/banner.png";
-                banner.style.transform = "none";
+                order_img.src = `../../../assets/imgs/order/schulorden${Math.floor(group_id / 3)}.png`;
 
                 border_top.classList.add("border-top");
                 border_left.classList.add("border-left");
@@ -153,7 +161,7 @@ class School
 
     change_buildings() {
         setInterval(() => {
-            const displayed_buildings = 2;
+            const displayed_buildings = 1;
 
             for (let building_index = -1; building_index <= displayed_buildings; building_index++) {
                 let old_building = this.buildings[(this.access_buildings + building_index - 1) % this.buildings.length];

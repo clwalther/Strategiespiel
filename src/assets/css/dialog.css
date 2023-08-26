@@ -45,6 +45,10 @@ body dialog .enabled-dialog {
 body dialog div h1 {
     font-size: 28px;
 
+    white-space: nowrap;
+
+    overflow: hidden;
+
     margin: 0px;
 }
 body dialog div div p {
@@ -102,7 +106,6 @@ body dialog div div input[type="checkbox"] {
     margin: 10px;
 
     cursor: pointer;
-
     filter: brightness(85%) saturate(100%) contrast(50000%);
 }
 /* BOTTOM BUTTON CONTAINER */

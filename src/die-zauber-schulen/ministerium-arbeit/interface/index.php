@@ -68,6 +68,17 @@
             <h2>Arbeiter</h2>
             <div class="noselect" id="job-slot"></div>
         </article>
+
+		<!-- EVENT: BRAND VON HOGWARTS -->
+		<article id="fire-of-hogwarts" class="disabled-event">
+			<h2>Brand von Hogwarts</h2>
+			<p>
+				Anteil am Neubau: <code id="fire-of-hogwarts-share"></code>
+				<button onclick="open_dialog('dialog-fire-of-hogwarts-0');">
+					Einzahlen
+				</button>
+			</p>
+		</article>
 	</section>
 
 	<!-- DIALOG -->

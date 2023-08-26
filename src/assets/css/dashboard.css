@@ -64,28 +64,23 @@
 
 /*  */
 .active-schoool-display--1 {
-    left: -50vw;
+    left: -100vw;
 
-    display: grid;
+    display: flex;
 }
 .active-schoool-display-0 {
     left: 0;
 
-    display: grid;
+    display: flex;
 }
 .active-schoool-display-1 {
-    left: 50vw;
-
-    display: grid;
-}
-.active-schoool-display-2 {
     left: 100vw;
 
-    display: grid;
+    display: flex;
 }
 /* === RULES === */
 body {
-    background: url(../../../assets/imgs/BlauerSamtBackground2.jpg) no-repeat center center fixed;
+    background: url(../../../assets/imgs/order/background2.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -96,113 +91,150 @@ body div {
     position: absolute;
     left: 100vw;
 
-    width: calc(100vw / var(--ammount-of-displayed));
+    width: 100vw;
     height: 100vh;
 
     display: none;
     align-items: center;
+    justify-content: center;
 
     transition: left 1s linear;
 }
-/* HEADER */
-body div header {
-    width: min(100%, auto);
-    height: min(calc(100vw / var(--ammount-of-displayed) * 0.65 * var(--banner-image-ratio)), calc(100vw - 100vw / var(--ammount-of-displayed) * var(--main-image-ratio)));
 
-    display: grid;
-    justify-items: center;
-    align-items: center;
-}
-    /* TITLE */
-    body div header h1 {
-        position: absolute;
-
-        font-size: 2.3vw;
-        font-family: HarryPotter;
-
-        height: calc(100vw / var(--ammount-of-displayed) * 0.65 * var(--banner-image-ratio));
-        width: 100%;
-
-        margin: 0;
-        padding-top: 9.65vw;
-        text-align: center;
-        color: black;
-    }
-    /* LABEL IMAGARY */
-    body div header img {
-        position: absolute;
-
-        width: calc(100vw / var(--ammount-of-displayed) * 0.65);
-    }
-
-/* SCHOOL CONATINER */
 body div div {
     position: relative;
     top: 0;
-    left: 0;;
+    left: 0;
 
-    display: inherit;
+    width: calc(50vw - 64px);
+    height: calc(100vh - 64px);
 
-    width: calc(100vw / var(--ammount-of-displayed) - 100vw / var(--ammount-of-displayed) * var(--border-edge-ratio) / 2);
-    height: calc(100vw / var(--ammount-of-displayed) * var(--main-image-ratio) - 100vw / var(--ammount-of-displayed) * var(--main-image-ratio) * var(--border-edge-ratio) / 2);
+    margin: 32px;
 
-    margin: calc(100vw / var(--ammount-of-displayed) * var(--border-edge-ratio) / 4);
+    display: grid;
+
+    align-items: center;
+    justify-items: center;
 }
-    body div div img {
-        position: absolute;
+/* BUILDINGS */
+body div div:first-child img {
+    position: absolute;
+    top: calc(50vh - min(
+        calc(calc(50vw - 64px) * var(--main-image-ratio)),
+        calc(100vh - 64px)
+        ) / 2);
 
-        width: 100%;
-        height: 100%;
-    }
-    body div div div {
-        position: absolute;
-        left: 0;
-        z-index: 600;
+    width: min(
+        calc(50vw - 64px),
+        calc(calc(100vh - 64px) / var(--main-image-ratio))
+        );
+    height: min(
+        calc(calc(50vw - 64px) * var(--main-image-ratio)),
+        calc(100vh - 64px)
+        );
+}
+body div div div {
+    position: absolute;
+    top: auto;
+    left: auto;
 
-        width: 100%;
-        height: calc(100% * var(--border-edge-ratio) / 2);
+    width: min(
+        calc(50vw - 64px),
+        calc(calc(100vh - 64px) / var(--main-image-ratio))
+        );
+    height: calc(min(
+        calc(50vw - 64px),
+        calc(calc(100vh - 64px) / var(--main-image-ratio))
+        ) / 4 * var(--banner-image-ratio));
 
-        margin: 0;
+    display: flex;
+    margin: 0;
 
-        overflow: visible;
-        display: block;
+    transition: none !important;
 
-        transition: none;
-    }
-    body div div .border-top {
-        z-index: 601;
+    z-index: 700;
+}
+body div div:first-child > .border-top {
+    top: calc(
+        50vh - calc(min( calc(50vw - 64px), calc(calc(100vh - 64px) / var(--main-image-ratio)) ) / 4 * var(--banner-image-ratio) / 2)
+        -
+        min(calc(calc(50vw - 64px) * var(--main-image-ratio)), calc(100vh - 64px)) / 2);
 
-        top: calc(-100% * var(--border-edge-ratio) / 4);
+    z-index: 701;
+}
+body div div:first-child > .border-left {
+    top: calc(50vh - calc(min( calc(50vw - 64px), calc(calc(100vh - 64px) / var(--main-image-ratio)) ) / 4 * var(--banner-image-ratio) / 2));
+    left: calc(min(calc(50vw - 64px), calc(calc(100vh - 64px) / var(--main-image-ratio))) / 4 * var(--banner-image-ratio) - min(calc(50vw - 64px), calc(calc(100vh - 64px) / var(--main-image-ratio))) / 2);
 
-        transform: rotate(0deg);
-    }
-    body div div .border-left {
-        top: auto;
-        width: calc(100vw / var(--ammount-of-displayed) * var(--main-image-ratio) - 100vw / var(--ammount-of-displayed) * var(--main-image-ratio) * var(--border-edge-ratio) / 2);
-        left: -42%;
-        transform: rotate(270deg);
-    }
-    body div div .border-right {
-        top: auto;
-        width: calc(100vw / var(--ammount-of-displayed) * var(--main-image-ratio) - 100vw / var(--ammount-of-displayed) * var(--main-image-ratio) * var(--border-edge-ratio) / 2);
-        left: 57%;
-        transform: rotate(90deg);
-    }
-    body div div .border-bottom {
-        top: calc(100% - 100% * var(--border-edge-ratio) / 4);
+    transform: rotate(270deg);
 
-        transform: rotate(180deg);
-    }
-        body div div div img {
-            position: relative;
-            width: 50%;
-        }
-        body div div div img:first-child {
-            -webkit-transform: scaleX(-1);
-            transform: scaleX(-1);
-        }
+    width: min(
+        calc(calc(50vw - 64px) * var(--main-image-ratio)),
+        calc(100vh - 64px)
+        );
+}
+body div div:first-child > .border-right {
+    top: calc(50vh - calc(min( calc(50vw - 64px), calc(calc(100vh - 64px) / var(--main-image-ratio)) ) / 4 * var(--banner-image-ratio) / 2));
+    left: calc(min(calc(50vw - 64px), calc(calc(100vh - 64px) / var(--main-image-ratio))) / 4 * var(--banner-image-ratio) + min(calc(50vw - 64px), calc(calc(100vh - 64px) / var(--main-image-ratio))) / 2);
 
+    transform: rotate(90deg);
 
+    width: min(
+        calc(calc(50vw - 64px) * var(--main-image-ratio)),
+        calc(100vh - 64px)
+        );
+}
+body div div:first-child > .border-bottom {
+    top: calc(
+        50vh - calc(min( calc(50vw - 64px), calc(calc(100vh - 64px) / var(--main-image-ratio)) ) / 4 * var(--banner-image-ratio) / 2)
+        +
+        min(calc(calc(50vw - 64px) * var(--main-image-ratio)), calc(100vh - 64px)) / 2);
+
+    transform: rotate(180deg);
+}
+body div div:first-child > div img {
+    position: relative;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 50%;
+}
+body div div:first-child > div img:first-child {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+/* INFORMATION */
+body div header {
+    position: relative;
+
+    width: calc(calc(50vw - 64px) * 0.8);
+}
+body div header img {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+
+    width: calc(calc(50vw - 64px) * 0.8);
+    height: calc(calc(50vw - 64px) * 0.8 * var(--banner-image-ratio));
+}
+body div header h1 {
+    width: calc(calc(50vw - 64px) * 0.8);
+    height: calc(calc(50vw - 64px) * 0.8 * var(--banner-image-ratio) * 0.2);
+
+    color: black;
+    text-align: center;
+
+    font-size: calc(calc(50vw - 64px) * 0.8 * var(--banner-image-ratio) * 0.2);
+    margin: 0;
+    margin-top: calc(calc(50vw - 64px) * 0.8 * var(--banner-image-ratio) * 0.47);
+    margin-bottom: calc(calc(50vw - 64px) * 0.8 * var(--banner-image-ratio) * 0.53);
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    font-family: Arvo;
+}
 
 /* DIFFERENT DASAHBOARD */
 body .rows {

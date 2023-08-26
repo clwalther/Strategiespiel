@@ -2,6 +2,8 @@ let team_drawer;
 let teamname;
 let prestige_accumulated;
 let job_slot;
+let fire_of_hogwarts;
+let fire_of_hogwarts_share;
 
 // === ROUTEES TEAM ===
 function route_team() {
@@ -327,6 +329,114 @@ class Labour
     }
 }
 
+// === EVENTS ===
+class Fire_Hogwarts
+{
+    constructor(data) {
+        this.data = data;
+
+        this.cache = JSON.parse(JSON.stringify(this.data.event.fire_of_hogwarts.data));
+        this.displays = Array();
+
+        this.enable_event();
+        this.display_total_share();
+        this.generate_dialog_card();
+    }
+
+    enable_event() {
+        if(this.data.event.fire_of_hogwarts.enabled) {
+            fire_of_hogwarts.classList.remove("disabled-event");
+        }
+    }
+
+    display_total_share() {
+        fire_of_hogwarts_share.innerText = this.data.event.fire_of_hogwarts.share;
+    }
+
+    generate_dialog_card() {
+        let dialog_card = new DialogCard("fire-of-hogwarts", 0);
+
+        dialog.appendChild(dialog_card.generate());
+
+        this.generate_sections(dialog_card.container);
+
+        dialog_card.header.innerText = "Zahle Rohstoffe, Veredlung und Hymnen ein";
+        dialog_card.cancel.innerText = "Schließen";
+        dialog_card.submit.innerText = "Einzahlen";
+
+        dialog_card.cancel.addEventListener("click", (event) => {
+            close_dialog();
+
+            this.cache = this.data.event.fire_of_hogwarts.data;
+
+            Object.keys(this.displays).forEach(section_name => {
+                let ressource = this.data.event.fire_of_hogwarts.data[section_name];
+
+                this.displays[section_name].innerText = ressource;
+            });
+        });
+        dialog_card.submit.addEventListener("click", (event) => {
+            let keys = Array(Object.keys(this.cache).length).fill("event_fire_of_hogwarts_set_ressource");
+            let values = Array();
+
+            Object.keys(this.cache).forEach(section_name => {
+                values.push(`${section_name};${this.cache[section_name]}`);
+            });
+
+            __send(keys, values);
+        });
+    }
+
+    generate_sections(parent) {
+        Object.keys(this.data.event.fire_of_hogwarts.data).forEach(section_name => {
+            let ressource = this.data.event.fire_of_hogwarts.data[section_name];
+
+            let container = document.createElement("div");
+            let header = document.createElement("h3");
+            let up_button = document.createElement("button");
+            let down_button = document.createElement("button");
+            let up_button_image = document.createElement("img");
+            let down_button_image = document.createElement("img");
+            let display = document.createElement("span");
+
+            parent.appendChild(container);
+            container.appendChild(header);
+            container.appendChild(up_button);
+            container.appendChild(display);
+            container.appendChild(down_button);
+            up_button.appendChild(up_button_image);
+            down_button.appendChild(down_button_image);
+
+            header.innerText = section_name;
+            display.innerText = ressource;
+
+            this.displays[section_name] = display;
+
+            up_button_image.src = "../../../assets/icons/addition.svg";
+            down_button_image.src = "../../../assets/icons/subtract.svg";
+
+            up_button.addEventListener("click", (evnet) => {
+                const INTERVAL = section_name == "Hymnen" ? 100 : 1;
+
+                this.cache[section_name] += INTERVAL;
+
+                display.innerText = ressource;
+                display.innerText += this.cache[section_name] - ressource >= 0 ? " +" : " -";
+                display.innerText += Math.abs(this.cache[section_name] - ressource);
+            });
+            down_button.addEventListener("click", (event) => {
+                const INTERVAL = section_name == "Hymnen" ? 100 : 1;
+
+                this.cache[section_name] -= INTERVAL;
+
+                display.innerText = ressource;
+                display.innerText += this.cache[section_name] - ressource >= 0 ? " +" : " -";
+                display.innerText += Math.abs(this.cache[section_name] - ressource);
+            });
+        });
+    }
+}
+
 function initialize(data, team_id) {
     // team
     team_drawer = document.getElementById("team-drawer");
@@ -335,10 +445,15 @@ function initialize(data, team_id) {
     prestige_accumulated = document.getElementById("prestige-accumulated");
     // jobs
     job_slot = document.getElementById("job-slot");
+    // events
+    // fire of hogwarts
+    fire_of_hogwarts = document.getElementById("fire-of-hogwarts");
+    fire_of_hogwarts_share = document.getElementById("fire-of-hogwarts-share");
 
     let general = new General(data, team_id);
     new Prestige(data, team_id);
     new Labour(data, team_id);
+    new Fire_Hogwarts(data, team_id);
 
     general.generate_team_drawer();
     general.generate_teamname();

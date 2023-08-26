@@ -12,12 +12,15 @@ include "./students.php";
 include "./teachers.php";
 include "./labour.php";
 include "./prestige.php";
+include "./events.php";
 
 $buildings = new Buildings();
 $students  = new Students();
 $teachers  = new Teachers();
 $labour    = new Labour();
 $prestige  = new Prestige();
+$fire_of_hogwarts = new Fire_of_Hogwarts();
+
 
 foreach($_POST as $key => $values) {
     // converts previously converted key back
@@ -78,15 +81,15 @@ foreach($_POST as $key => $values) {
                 break;
 
             case "labour_add_worker":
-                $labour->add_worker($value); // adds a new worker of given type
+                $labour->add_worker($value);
                 break;
 
             case "labour_add_base":
-                $labour->add_base($value); // set the base value for the last worker of given type
+                $labour->add_base($value);
                 break;
 
             case "labour_add_advanced":
-                $labour->add_advanced($value); // set the advanced value for the last worker of given type
+                $labour->add_advanced($value);
                 break;
 
             case "labour_delete_worker":
@@ -123,6 +126,20 @@ foreach($_POST as $key => $values) {
 
             case "teacher_displacement_set":
                 $teachers->set_displacement($value);
+                break;
+
+            // events
+            // fire of hogwarts
+            case "event_fire_of_hogwarts_start":
+                $fire_of_hogwarts->start($value);
+                break;
+
+            case "event_fire_of_hogwarts_stop":
+                $fire_of_hogwarts->stop();
+                break;
+
+            case "event_fire_of_hogwarts_set_ressource":
+                $fire_of_hogwarts->set_ressource($value);
                 break;
         }
     }

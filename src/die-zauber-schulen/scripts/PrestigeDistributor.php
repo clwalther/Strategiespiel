@@ -14,7 +14,7 @@ class PrestigeDistributer
         $this->file = json_decode($file, true);
 
 
-        $this->prestigeDistributionArray = [300, 200, 100]; //TODO Stellschraube
+        $this->prestigeDistributionArray = [30, 20, 10, 5, 3, 1]; //TODO Stellschraube
         $this->prestigeDistributionArraySize = count($this->prestigeDistributionArray);
     }
 
@@ -75,10 +75,8 @@ class PrestigeDistributer
     private function addPrestige(int $groupId, float $prestigeToAdd) {
         $groupIdContition = ["group_id" => $groupId];
         $databaseReturn = $this->database->select_where("LABOUR", ["group_id", "prestige"], $groupIdContition);
-
         $currentPrestige = $databaseReturn[0]['prestige'];
         $newPrestige = $currentPrestige + $prestigeToAdd;
-
         $this->database->update("LABOUR", ["prestige" => $newPrestige], $groupIdContition);
     }
 }

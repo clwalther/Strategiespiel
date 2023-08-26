@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Ministerium für Arbeit - Dashboard</title>
     <style>
       #cardspace {
@@ -19,21 +22,28 @@
       #prestigeDiv {
         float: left;
         width: 20%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /*margin-top: 50px;*/
       }
       /* Card-Stuff */
       body {
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
+        background: url(../../../assets/imgs/order/background2.jpg) center/cover no-repeat;
+        transition: background 30s ease-in-out;
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
+        width: 99%;  /* Anpassen der Breite auf 100% */
       }
       .card {
-        width: 200px;
-        height: 300px;
+        width: 25%;
+        aspect-ratio: 1/1.5;
         position: relative;
         transform-style: preserve-3d;
         transition: transform 2s ease-in-out;
@@ -49,20 +59,25 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        cursor: pointer;
       }
       .card-front {
-        background: url("../../../assets/imgs/card.png") center/cover no-repeat;
+        background: url(../../../assets/imgs/parchment.png) center/contain no-repeat;
       }
       .card-back {
-        background: url("../../../assets/imgs/card-back.png") center/cover
-          no-repeat;
+        background: url(../../../assets/imgs/parchment-back.png) center/contain no-repeat; /*TODO fix?*/
         transform: rotateY(180deg);
       }
       .card-text {
         margin-top: 10px;
+        font-size: 17px;
       }
-      /* Card-Stuff */
+      .job-icon {
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
       .piechart {
         aspect-ratio: 1/1;
         width: 78%;
@@ -71,7 +86,39 @@
         align-items: center;
         margin-bottom: 10px;
         border-radius: 50%;
-        transition: background-image 3s ease-in-out; /* geht net */
+        transition: background 0.5s ease-in-out;
+      /*  transition: background-image 3s ease-in-out; /* geht net */
+      }
+
+      /* BarChart-Stuff */
+
+      .barchart-stack {
+        transition: 5s;
+        flex: 1;
+      }
+      .barchart {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        width: 100%;
+        height: 80%;
+      }
+      .bar {
+        width: 80px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: 5s;
+        height: 100%;
+      }
+      .barchart-bottombar {
+        width: 100%;
+        height: 100px;
+        background-color: #a0a0a0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
       }
     </style>
   </head>
@@ -80,13 +127,13 @@
     <div id="cardspace">
       <div class="card-row">
         <div class="card" id="card1">
-          <div class="card-front" onclick="flipCard()">
+          <div class="card-front">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
-            <div class="card-text">Example Card Text</div>
+            <div class="card-text"></div>
           </div>
-          <div class="card-back" onclick="flipCard()">
+          <div class="card-back">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
@@ -95,13 +142,13 @@
         </div>
 
         <div class="card" id="card2">
-          <div class="card-front" onclick="flipCard()">
+          <div class="card-front">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
-            <div class="card-text">Example Card Text</div>
+            <div class="card-text"></div>
           </div>
-          <div class="card-back" onclick="flipCard()">
+          <div class="card-back">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
@@ -110,31 +157,29 @@
         </div>
 
         <div class="card" id="card3">
-          <div class="card-front" onclick="flipCard()">
+          <div class="card-front">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
-            <div class="card-text">Example Card Text</div>
+            <div class="card-text"></div>
           </div>
-          <div class="card-back" onclick="flipCard()">
+          <div class="card-back">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
             <div class="card-text">Another Example Text</div>
           </div>
         </div>
-
       </div>
       <div class="card-row">
-
         <div class="card" id="card4">
-          <div class="card-front" onclick="flipCard()">
+          <div class="card-front">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
-            <div class="card-text">Example Card Text</div>
+            <div class="card-text"></div>
           </div>
-          <div class="card-back" onclick="flipCard()">
+          <div class="card-back">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
@@ -143,13 +188,13 @@
         </div>
 
         <div class="card" id="card5">
-          <div class="card-front" onclick="flipCard()">
+          <div class="card-front">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
-            <div class="card-text">Example Card Text</div>
+            <div class="card-text"></div>
           </div>
-          <div class="card-back" onclick="flipCard()">
+          <div class="card-back">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
@@ -158,52 +203,39 @@
         </div>
 
         <div class="card" id="card6">
-          <div class="card-front" onclick="flipCard()">
+          <div class="card-front">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
-            <div class="card-text">Example Card Text</div>
+            <div class="card-text"></div>
           </div>
-          <div class="card-back" onclick="flipCard()">
+          <div class="card-back">
             <div class="piechart">
               <div class="job-icon"></div>
             </div>
             <div class="card-text">Another Example Text</div>
           </div>
         </div>
-        
       </div>
     </div>
 
     <!-- Der rechte Abschnitt -->
-    <div id="prestigeDiv"></div>
+    <div id="prestigeDiv">
+      <div class="barchart"></div>
+      <div class="barchart-bottombar">
+        <div style="background: url(../../../assets/imgs/order/schulorden0.png) center/contain no-repeat; height: 100%; width:100%"></div>
+        <div style="background: url(../../../assets/imgs/order/schulorden1.png) center/contain no-repeat; height: 100%; width:100%"></div>
+        <div style="background: url(../../../assets/imgs/order/schulorden2.png) center/contain no-repeat; height: 100%; width:100%"></div>
+      </div>
+    </div>
 
     <script>
       const screenWidth = window.screen.width;
       const screenHeight = window.screen.height;
       const body = document.body;
-      body.style.width = screenWidth / 2 + "px"; //TODO: Fix this
       body.style.height = screenHeight + "px";
 
-      const animatedCard = document.getElementsByClassName("card");
-      let isFlipped = false;
-
-      function flipCard() {
-        if (isFlipped) {
-          animatedCard[0].style.transform = "rotateY(0deg)";
-        } else {
-          animatedCard[0].style.transform = "rotateY(180deg)";
-        }
-        isFlipped = !isFlipped;
-      }
-
-      setInterval(flipCard, 5000);
-
       let colorArray = [
-        "#ff5733",
-        "#d32f2f",
-        "#b71c1c",
-        "#860707",
         "#4B91FB",
         "#0064FA",
         "#2A518C",
@@ -212,11 +244,68 @@
         "#2E9937",
         "#00850B",
         "#006608",
+        "#ff5733",
+        "#d32f2f",
+        "#b71c1c",
+        "#860707",
+        "#000000"
       ];
 
-      pieCharts = document.querySelectorAll(".piechart");
+      let lastTurnedCardIndex = 0;
+      let nonVisibleJobIndex = 7;
+      let cardsJobIDArray = [1, 2, 3, 4, 5, 6];
 
-      const influenceData = [10, 124, 23, 12, 35, 54, 14, 12, 48, 80, 20, 34];
+      setInterval(rotationalCardSwitch, 3000);
+
+      function rotationalCardSwitch() {
+        let turningCardIndex;
+        do {
+          turningCardIndex = Math.floor(Math.random() * 6) + 1;
+        } while (turningCardIndex === lastTurnedCardIndex);
+        lastTurnedCardIndex = turningCardIndex;
+        const newJobID = nonVisibleJobIndex;
+        nonVisibleJobIndex = cardsJobIDArray[turningCardIndex - 1];
+        cardsJobIDArray[turningCardIndex - 1] = newJobID;
+        updateCardsNonVisibleSide(turningCardIndex, newJobID);
+        flipCard(turningCardIndex);
+      }
+
+      async function updateCardsNonVisibleSide(cardIndex, jobID) {
+        const card = document.getElementById(`card${cardIndex}`);
+        const influenceData = await getInfluenceDataArray(jobID);
+        const currentRotation = getRotation(card.style.transform);
+        let cardBack;
+        if (currentRotation === "0deg") {
+          cardBack = card.querySelector(".card-front");
+        } else {
+          cardBack = card.querySelector(".card-back");
+        }
+        updatePieChart(cardBack, influenceData);
+        updateJobIconAndText(cardBack, jobID);
+      }
+
+      async function getInfluenceDataArray(jobID) {
+      //  return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10];
+        let response = await fetch(`/die-zauber-schulen/scripts/__get__.php?Team=undefined`);
+        let data = await response.json();
+        console.log(Object.values(Object.values(data.influence)[jobID - 1].influence));
+        return Object.values(Object.values(data.influence)[jobID - 1].influence);
+      }
+
+      function updateJobIconAndText(cardSide, jobID) {
+        cardSide.querySelector(".job-icon").
+          style.backgroundImage = `url("../../../assets/imgs/jobs/job${jobID}.png")`;
+        cardSide.querySelector(".card-text").innerHTML = `Job ${jobID}`;
+      }
+
+      function updatePieChart(cardSide, newInfluenceData) {
+        const accDegreeArray = getAccDegreeArray(newInfluenceData);
+
+        const gradient = `conic-gradient(${colorArray.map(
+          (color, index) => `${color} 0 ${accDegreeArray[index]}deg`
+        )})`;
+        cardSide.querySelector(".piechart").style.backgroundImage = gradient;
+      }
 
       function getAccDegreeArray(inputArray) {
         const totalSum = inputArray.reduce((total, num) => total + num, 0);
@@ -230,22 +319,118 @@
         return degreeArray;
       }
 
-      function updatePieChart(newInfluenceData) {
-        const accDegreeArray = getAccDegreeArray(newInfluenceData);
-
-        const gradient = `conic-gradient(${colorArray.map(
-          (color, index) => `${color} 0 ${accDegreeArray[index]}deg`
-        )})`;
-        document.querySelector(".piechart").style.backgroundImage = gradient;
+      function flipCard(cardIndex) {
+        var card = document.getElementById(`card${cardIndex}`);
+        var currentRotation = getRotation(card.style.transform);
+        // Wenn die aktuelle Rotation 0deg ist, drehe sie auf 180deg, andernfalls auf 0deg
+        if (currentRotation === "0deg") {
+          card.style.transform = "rotateY(180deg)";
+        } else if (currentRotation === "180deg") {
+          card.style.transform = "rotateY(0deg)";
+        }
       }
 
-      updatePieChart(influenceData);
+      // Hilfsfunktion, um die aktuelle Rotation aus dem transform-String zu extrahieren
+      function getRotation(transform) {
+        var matches = transform.match(/rotateY\(([^)]+)\)/);
+        return matches && matches[1] ? matches[1] : "0deg";
+      }
 
-      const influenceData2 = [10, 24, 23, 12, 35, 54, 14, 12, 48, 80, 20, 304];
+      // Barchart-Stuff
+
+      let prestigeBarchartComponents = [];
+
+      const orderCount = 3;
+      const teamCount = 4;
+
+      const barchart = document.querySelector(".barchart");
+
+      for (order = 0; order < orderCount; order++) {
+        const barComponent = document.createElement("div");
+        barComponent.classList.add("bar");
+        barchart.appendChild(barComponent);
+        const orderArray = [barComponent];
+        for (team = 0; team < teamCount; team++) {
+          const stackComponent = document.createElement("div");
+          stackComponent.classList.add("barchart-stack");
+          barComponent.appendChild(stackComponent);
+          stackComponent.style.backgroundColor =
+            colorArray[team + order * teamCount];
+          orderArray.push(stackComponent);
+        }
+        prestigeBarchartComponents[order] = orderArray;
+      }
+
+      async function updateBarchartAndBackground() {
+        const newPrestigeData = await getPrestigeArray();
+        let maxSum = 0;
+        let maxPosition = 2;
+
+        let prestigeSumArray = [];
+
+        for (order = 0; order < orderCount; order++) {
+          teamArray = newPrestigeData.slice(
+            order * teamCount,
+            (order + 1) * teamCount
+          );
+          const sum = sumArray(teamArray);
+          prestigeSumArray.push(sum);
+          if (sum > maxSum) {
+            maxSum = sum;
+            maxPosition = order;
+          }
+        }
+
+        document.body.style.backgroundImage = `url("../../../assets/imgs/order/background${maxPosition}.jpg")`;
+
+        let maxBarHeight;
+        if (maxSum <= 90*20) {
+          maxBarHeight = maxSum/20;
+        } else {
+          maxBarHeight = 90;
+        }
+
+        const factor = maxBarHeight / maxSum;
+
+        for (order = 0; order < orderCount; order++) {
+          prestigeBarchartComponents[order][0].style.height = `${
+            prestigeSumArray[order] * factor
+          }%`;
+          const teamsPercentageArray = getPercentageArray(
+            newPrestigeData.slice(order * teamCount, (order + 1) * teamCount)
+          );
+          for (team = 0; team < teamCount; team++) {
+            prestigeBarchartComponents[order][
+              team + 1
+            ].style.flex = `${teamsPercentageArray[team]}`;
+          }
+        }
+      }
+
+      async function getPrestigeArray(){
+      //  return [0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 50, 0];
+        let response = await fetch(`/die-zauber-schulen/scripts/__get__.php?Team=undefined`);
+        let data = await response.json();
+        return(Object.values(data.prestige));
+     //   return Object.keys(data.prestige);
+      }
+
+      function sumArray(array) {
+        return array.reduce((total, num) => total + num, 0);
+      }
+
+      function getPercentageArray(inputArray) {
+        const totalSum = inputArray.reduce((total, num) => total + num, 0);
+        if (totalSum === 0) {
+          return inputArray.map(() => 0);
+        }
+        return inputArray.map((value) => value / totalSum);
+      }
 
       setTimeout(() => {
-        updatePieChart(influenceData2);
-      }, 3000);
+        updateBarchartAndBackground();
+      }, 5000);
+
     </script>
   </body>
 </html>

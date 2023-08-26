@@ -360,7 +360,7 @@ class Buildings
                 let requirement_value = building.requirements[requirement_name];
                 let list_element = document.createElement("li");
                 requirements.appendChild(list_element);
-                list_element.innerText = requirement_value;
+                list_element.innerText = `${requirement_name}: ${requirement_value}`;
             });
 
             Object.keys(building.perks).forEach(perk_name => {

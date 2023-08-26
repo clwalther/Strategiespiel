@@ -25,8 +25,9 @@ class GraduatesGenerator {
 
     private function calculateNewGraduate($groupId) {
         $perkSumArray = $this->createPerkSumArray();
-        $this->iterateBuildings($this->buildingsJson, $groupId, $perkSumArray);
-        $this->iterateTeachers($groupId, $perkSumArray);
+        $teacherMultiplier = 0;
+        $this->iterateBuildings($this->buildingsJson, $groupId, $perkSumArray, $teacherMultiplier);
+        $this->iterateTeachers($groupId, $perkSumArray, $teacherMultiplier);
         $this->addDisplacements($groupId, $perkSumArray);
         return $this->createGraduate($perkSumArray);
     }
@@ -42,11 +43,11 @@ class GraduatesGenerator {
         $randomNumber = mt_rand(1, 100);
 
         switch (true) {
-            case ($randomNumber <= 10):
+            case ($randomNumber <= 8):
                 $this->prepareOneSubjectSpecialist($perkSumArray);
                 break;
 
-            case ($randomNumber <= 20):
+            case ($randomNumber <= 8+12):
                 $this->prepareTwoSubjectSpecialist($perkSumArray);
                 break;
 
@@ -55,24 +56,26 @@ class GraduatesGenerator {
                 break;
         }
 
+
         $graduate = [];
 
         foreach ($perkSumArray as $subject => $perkSum) {
-            $p = $perkSum / 7; // Wahrscheinlichkeit basierend auf perkSum
-            $graduate[$subject] = $this->generateBinomialRandom(7, $p);
+            $graduate[$subject] = $this->generateGaussianRandom($perkSum, 1.5, 0, 7);
         }
-
         return $graduate;
     }
 
-    private function generateBinomialRandom($n, $p) { //TODO: Stellschraube
-        $x = 0;
-        for ($i = 0; $i < $n; $i++) {
-            if (mt_rand() / mt_getrandmax() <= $p) {
-                $x++;
-            }
+    function generateGaussianRandom($mu, $sigma, $min, $max) { //TODO: Stellschraube
+        $u1 = mt_rand() / mt_getrandmax();
+        $u2 = mt_rand() / mt_getrandmax();
+        $z0 = sqrt(-2 * log($u1)) * cos(2 * M_PI * $u2);
+        $z = $mu + $sigma * $z0;
+        if ($z < $min) {
+            $z = 0;
+        } elseif ($z > $max) {
+            $z = $max;
         }
-        return $x;
+        return round($z);
     }
 
     private function prepareOneSubjectSpecialist(&$perkSumArray) {
@@ -92,7 +95,7 @@ class GraduatesGenerator {
             if (in_array($subject, $randomSubjects)) {
                 $value += 2;
             } else {
-                $value -= 1.2;
+                $value -= 1.3;
             }
         }
     }
@@ -105,34 +108,36 @@ class GraduatesGenerator {
         return array_merge([], $this->tribePerkSumArray);
     }
 
-    private function iterateBuildings($buildingRoot, $groupId, &$perkSumArray) {
+    private function iterateBuildings($buildingRoot, $groupId, &$perkSumArray, &$teacherMultiplier) {
         foreach ($buildingRoot as $key => $building) {
             if($this->utils->get_building_status($this->utils->get_building_id($key), $groupId)){
-                $this->addBuildingPerksWithArray($building["perks"], $perkSumArray);
+                $this->addBuildingPerksWithArray($building["perks"], $perkSumArray, $teacherMultiplier);
             }
             if ($building["children"] != "none") {
-                $this->iterateBuildings($building["children"], $groupId, $perkSumArray);
+                $this->iterateBuildings($building["children"], $groupId, $perkSumArray, $teacherMultiplier);
             }
         }
     }
 
-    private function iterateTeachers($groupId, &$perkSumArray) {
+    private function iterateTeachers($groupId, &$perkSumArray, $teacherMultiplier) {
         $teachers = $this->get_teachers($groupId);
         foreach ($teachers as $teacher) {
-            $this->addTeacherPerk($teacher["name"], ($teacher["base"]+$teacher["advanced"]), $perkSumArray);
+            $this->addTeacherPerk($teacher["name"], ($teacher["base"]+$teacher["advanced"]), $perkSumArray, $teacherMultiplier);
         }
     }
 
-    private function addBuildingPerksWithArray($perkArray, &$perkSumArray) {
+    private function addBuildingPerksWithArray($perkArray, &$perkSumArray, &$teacherMultiplier) {
         foreach ($perkArray as $key => $value) {
             if(in_array($key, $this->generalJson["subjects"])) {
-                $perkSumArray[$key] += $value*3; //TODO Stellschraube
+                $perkSumArray[$key] += $value*2.9; //TODO Stellschraube *3
+            } else if ($key === "Lehrermultiplikator") {
+                $teacherMultiplier += $value;
             }
         }
     }
 
-    private function addTeacherPerk($name, $skill, $perkSumArray) {
-        $perkSumArray[$name] += $skill/2.5; //TODO Stellschraube
+    private function addTeacherPerk($name, $skill, &$perkSumArray, $teacherMultiplier) {
+        $perkSumArray[$name] += $skill/(3.1-$teacherMultiplier); //TODO Stellschraube /2.5
     }
 
     // === ** ===

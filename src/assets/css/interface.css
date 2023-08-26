@@ -410,3 +410,52 @@
     body dialog div div .list .enabled-list-element {
         background-color: var(--colour-header-background);
     }
+
+/* EVENT */
+    body section .disabled-event {
+        filter: grayscale(1);
+        color: var(--colour-border-edge) !important;
+    }
+
+/* EVENT: FIRE OF HOGWARTS */
+    body section #fire-of-hogwarts p button {
+        margin-left: 16px;
+
+        background-color: var(--colour-green);
+
+        border: none;
+    }
+    body dialog .fire-of-hogwarts div {
+        display: flex;
+    }
+    body dialog .fire-of-hogwarts div div {
+        height: calc(100% - 32px);
+
+        margin: 16px;
+
+        display: grid;
+    }
+    body dialog .fire-of-hogwarts div div h3 {
+        display: block;
+        height: fit-content;
+
+        text-align: center;
+
+        margin-bottom: -100%;
+    }
+    body dialog .fire-of-hogwarts div div button {
+        display: block;
+
+        height: 80%;
+    }
+    body dialog .fire-of-hogwarts div div button img {
+        height: 32px;
+        width: 32px;
+    }
+    body dialog .fire-of-hogwarts div div span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 20px;
+    }
