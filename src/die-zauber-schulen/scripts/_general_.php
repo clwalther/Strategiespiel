@@ -160,7 +160,7 @@ class General
         $file = json_decode($file, true);
 
         // list of all the tables
-        $table_names = ["TIME", "TEAM", "SCHOOL_ADMIN", "STUDENTS", "LABOUR", "WORKERS", "FIRE_OF_HOGWARTS"];
+        $table_names = ["TIME", "TEAM", "SCHOOL_ADMIN", "STUDENTS", "LABOUR", "WORKERS", "FIRE_OF_HOGWARTS", "EVENT"];
 
         // deletes all entries from all tables
         foreach($table_names as $table_name) {
@@ -191,7 +191,7 @@ class General
             // FIRE_OF_HOGWARTS
             $this->database->insert("FIRE_OF_HOGWARTS",
             [
-                "gorup_id" => $group_id
+                "group_id" => $group_id
             ]);
         }
     }

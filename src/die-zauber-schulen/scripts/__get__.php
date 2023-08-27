@@ -42,9 +42,8 @@ if ($_GET["Team"] != "undefined") {
         "event" => [
             "fire_of_hogwarts" => [
                 "enabled" => $fire_of_hogwarts->is_enabled(),
-                "share" => $fire_of_hogwarts->get_share(),
-                "data" => $fire_of_hogwarts->get_ressources(),
-                "weights" => $fire_of_hogwarts->get_weights()
+                "share"   => $fire_of_hogwarts->get_share(),
+                "data"    => $fire_of_hogwarts->get_ressources()
             ]
         ]
     ];
@@ -60,7 +59,15 @@ if ($_GET["Team"] != "undefined") {
 
         "buildings" => $buildings->get_teams_progress(),
         "influence" => $labour->get_jobs_influence(),
-        "prestige"  => $prestige->get_teams_prestige()
+        "prestige"  => $prestige->get_teams_prestige(),
+
+        "event" => [
+            "fire_of_hogwarts" => [
+                "enabled" => $fire_of_hogwarts->is_enabled(),
+                "points"  => $fire_of_hogwarts->get_points(),
+                "time"    => $fire_of_hogwarts->get_time_ratio()
+            ]
+        ]
     ];
 }
 

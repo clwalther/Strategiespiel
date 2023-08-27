@@ -7,8 +7,13 @@
 
     <link rel="shortcut icon" href="../../../../assets/imgs/favicon-32x32.png" type="image/x-icon">
 
+    <!-- file specific script -->
+    <script src="../../../../assets/js/die-zauber-schulen/general/general.js"></script>
+    <script src="../../../../assets/js/die-zauber-schulen/general/navigate.js"></script>
+    <!-- standart scripts -->
+    <script src="../../../../assets/js/dialog.js"></script>
     <!-- main script (import last) -->
-    <script src="../../assets/js/script.js" async></script>
+    <script src="../../../../assets/js/script.js" async></script>
 
     <!-- main stylesheet -->
     <link rel="stylesheet" href="../../assets/css/style.css">
@@ -37,6 +42,17 @@
         </div>
     </aside>
     <section>
+        <article>
+            <p>
+                <button onclick="open_dialog('dialog-event-fire-of-hogwarts-start-0');">Start Event "Feuer von Hogwarts"</button>
+            </p>
+            <p>
+                <button onclick="open_dialog('dialog-event-fire-of-hogwarts-stop-0');">Stop Event "Feuer von Hogwarts"</button>
+            </p>
+        </article>
     </section>
+
+    <!-- DIALOG -->
+    <dialog id="dialog"></dialog>
 </body>
 </html>

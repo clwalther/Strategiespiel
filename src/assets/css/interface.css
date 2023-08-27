@@ -429,33 +429,46 @@
         display: flex;
     }
     body dialog .fire-of-hogwarts div div {
-        height: calc(100% - 32px);
+        padding: 4px;
+        margin: 0;
+        margin-bottom: 16px;
 
-        margin: 16px;
-
-        display: grid;
-    }
-    body dialog .fire-of-hogwarts div div h3 {
+        height: calc(100% - 4px);
         display: block;
+    }
+    body dialog .fire-of-hogwarts div div div {
+        position: absolute;
+        bottom: 0;
+
+        width: calc(100% - 4px);
+        padding: 0;
+
         height: fit-content;
-
-        text-align: center;
-
-        margin-bottom: -100%;
     }
-    body dialog .fire-of-hogwarts div div button {
+    body dialog .fire-of-hogwarts div div div h3 {
+        writing-mode: sideways-lr;
+        text-orientation: mixed;
+        line-height: 0.6;
+
+        margin-bottom: 8px;
+    }
+    body dialog .fire-of-hogwarts div div div button {
         display: block;
-
-        height: 80%;
+        width: 100%;
+        height: fit-content;
+        padding: 12px;
     }
-    body dialog .fire-of-hogwarts div div button img {
-        height: 32px;
-        width: 32px;
+    body dialog .fire-of-hogwarts div div div button img {
+        width: 100%;
     }
-    body dialog .fire-of-hogwarts div div span {
+    body dialog .fire-of-hogwarts div div div span {
         display: flex;
         justify-content: center;
         align-items: center;
 
-        font-size: 20px;
+        font-size: 14px;
+        line-height: 2;
+
+        white-space: nowrap;
+        overflow: visible;
     }

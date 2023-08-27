@@ -288,7 +288,12 @@
       //  return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10];
         let response = await fetch(`/die-zauber-schulen/scripts/__get__.php?Team=undefined`);
         let data = await response.json();
-        console.log(Object.values(Object.values(data.influence)[jobID - 1].influence));
+
+        if(data.event.fire_of_hogwarts.enabled) {
+          window.open("/die-zauber-schulen/ministerium-arbeit/event", "_self");
+        }
+
+        // console.log(Object.values(Object.values(data.influence)[jobID - 1].influence));
         return Object.values(Object.values(data.influence)[jobID - 1].influence);
       }
 
@@ -411,6 +416,11 @@
       //  return [0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 50, 0];
         let response = await fetch(`/die-zauber-schulen/scripts/__get__.php?Team=undefined`);
         let data = await response.json();
+
+        if(data.event.fire_of_hogwarts.enabled) {
+          window.open("/die-zauber-schulen/ministerium-arbeit/event", "_self");
+        }
+
         return(Object.values(data.prestige));
      //   return Object.keys(data.prestige);
       }

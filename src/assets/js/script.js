@@ -104,7 +104,7 @@ async function __send(keys, values) {
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(get_message_string(keys, values));
 
-    // xhr.onloadend = function(event) { location.reload(); }
+    xhr.onloadend = function(event) { location.reload(); }
 }
 
 async function __get() {

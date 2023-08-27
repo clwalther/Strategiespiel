@@ -335,7 +335,7 @@ class Fire_Hogwarts
     constructor(data) {
         this.data = data;
 
-        this.cache = JSON.parse(JSON.stringify(this.data.event.fire_of_hogwarts.data));
+        this.cache = Array();
         this.displays = Array();
 
         this.enable_event();
@@ -364,10 +364,16 @@ class Fire_Hogwarts
         dialog_card.cancel.innerText = "Schließen";
         dialog_card.submit.innerText = "Einzahlen";
 
+        Object.keys(this.data.event.fire_of_hogwarts.data).forEach(key => {
+            this.cache[key] = parseFloat(this.data.event.fire_of_hogwarts.data[key]);
+        });
+
         dialog_card.cancel.addEventListener("click", (event) => {
             close_dialog();
 
-            this.cache = this.data.event.fire_of_hogwarts.data;
+            Object.keys(this.data.event.fire_of_hogwarts.data).forEach(key => {
+                this.cache[key] = parseFloat(this.data.event.fire_of_hogwarts.data[key]);
+            });
 
             Object.keys(this.displays).forEach(section_name => {
                 let ressource = this.data.event.fire_of_hogwarts.data[section_name];
@@ -391,7 +397,8 @@ class Fire_Hogwarts
         Object.keys(this.data.event.fire_of_hogwarts.data).forEach(section_name => {
             let ressource = this.data.event.fire_of_hogwarts.data[section_name];
 
-            let container = document.createElement("div");
+            let outer_container = document.createElement("div");
+            let inner_container = document.createElement("div");
             let header = document.createElement("h3");
             let up_button = document.createElement("button");
             let down_button = document.createElement("button");
@@ -399,14 +406,16 @@ class Fire_Hogwarts
             let down_button_image = document.createElement("img");
             let display = document.createElement("span");
 
-            parent.appendChild(container);
-            container.appendChild(header);
-            container.appendChild(up_button);
-            container.appendChild(display);
-            container.appendChild(down_button);
+            parent.appendChild(outer_container);
+            outer_container.appendChild(inner_container);
+            inner_container.appendChild(header);
+            inner_container.appendChild(up_button);
+            inner_container.appendChild(display);
+            inner_container.appendChild(down_button);
             up_button.appendChild(up_button_image);
             down_button.appendChild(down_button_image);
 
+            outer_container.classList.add("noselect");
             header.innerText = section_name;
             display.innerText = ressource;
 

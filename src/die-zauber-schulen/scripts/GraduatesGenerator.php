@@ -1,6 +1,7 @@
 <?php
 
 class GraduatesGenerator {
+
     function __construct() {
         global $database;
         global $utils;
@@ -20,7 +21,7 @@ class GraduatesGenerator {
             $this->tribePerkSumArray[$subject] = 0;
         }
 
-        $this->addBuildingPerksWithArray($this->generalJson['initial_skillperks'], $this->tribePerkSumArray);
+        $this->addBuildingPerksWithExplicitPerkArray($this->generalJson['initial_skillperks'], $this->tribePerkSumArray);
     }
 
     private function calculateNewGraduate($groupId) {
@@ -132,6 +133,13 @@ class GraduatesGenerator {
                 $perkSumArray[$key] += $value*2.9; //TODO Stellschraube *3
             } else if ($key === "Lehrermultiplikator") {
                 $teacherMultiplier += $value;
+            }
+        }
+    }
+    private function addBuildingPerksWithExplicitPerkArray($perkArray, &$perkSumArray) {
+        foreach ($perkArray as $key => $value) {
+            if(in_array($key, $this->generalJson["subjects"])) {
+                $perkSumArray[$key] += $value*2.9; //TODO Stellschraube *3
             }
         }
     }

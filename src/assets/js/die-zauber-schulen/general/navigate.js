@@ -155,6 +155,56 @@ class Navigate
     display_logs() {
         logs_paragraph.innerText = this.data.general.logs;
     }
+
+    generate_event_fire_of_hogwarts_start_dialog() {
+        let dialog_card = new DialogCard("event-fire-of-hogwarts-start", 0);
+        let paragraph = document.createElement("p");
+        let text_input = document.createElement("input");
+
+        dialog.appendChild(dialog_card.generate());
+        dialog_card.container.appendChild(paragraph);
+        dialog_card.container.appendChild(text_input);
+
+        dialog_card.header.innerText = "Starte das Event Feuer an Hogwarts";
+        dialog_card.cancel.innerText = "Schließen";
+        dialog_card.submit.innerText = "Start";
+
+        paragraph.innerText = "";
+        text_input.type = "number";
+        text_input.placeholder = "Zeit in Minuten";
+        text_input.value = "";
+
+        dialog_card.cancel.addEventListener("click", (event) => {
+            close_dialog();
+            text_input.value = "";
+        })
+        dialog_card.submit.addEventListener("click", (event) => {
+            if(text_input.value != "") {
+                __send(["event_fire_of_hogwarts_start"], [text_input.value]);
+            }
+        });
+    }
+
+    generate_event_fire_of_hogwarts_stop_dialog() {
+        let dialog_card = new DialogCard("event-fire-of-hogwarts-stop", 0);
+        let paragraph = document.createElement("p");
+
+        dialog.appendChild(dialog_card.generate());
+        dialog_card.container.appendChild(paragraph);
+
+        dialog_card.header.innerText = "Stoppe das Event Feuer an Hogwarts";
+        dialog_card.cancel.innerText = "Schließen";
+        dialog_card.submit.innerText = "Stop";
+
+        paragraph.innerText = "";
+
+        dialog_card.cancel.addEventListener("click", (event) => {
+            close_dialog();
+        })
+        dialog_card.submit.addEventListener("click", (event) => {
+            __send(["event_fire_of_hogwarts_stop"], [true]);
+        });
+    }
 }
 
 
@@ -171,5 +221,7 @@ function initialize(data, team_id) {
     navigate.generate_reset_dialog_card();
     navigate.generate_backup_dialog_card();
     navigate.generate_load_backup_dialog_card();
+    navigate.generate_event_fire_of_hogwarts_start_dialog();
+    navigate.generate_event_fire_of_hogwarts_stop_dialog();
     navigate.display_logs();
 }
