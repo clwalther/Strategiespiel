@@ -40,6 +40,9 @@ body aside div button {
     font-size: 14px;
 
     cursor: pointer;
+
+    white-space: nowrap;
+    overflow: hidden;
 }
 body aside div button:hover {
     background-color: var(--colour-accent);

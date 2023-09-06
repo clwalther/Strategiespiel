@@ -3,6 +3,7 @@ class General
     constructor(data, team_id) {
         this.data = data;
         this.team_id = team_id;
+        this.time_loaded = Date.now();
 
         this.teamname = this.data.general.teams[this.team_id - 1].teamname;
     }
@@ -77,7 +78,7 @@ class General
 
     generate_time_interval() {
         if(this.data.general.times.is_running != null) {
-            setInterval(function(times) {
+            setInterval(function(times, now, loaded) {
                 // compute ellapsed time
                 let time_ellapsed = 0;
 
@@ -88,7 +89,7 @@ class General
                 }
 
                 if(times[times.length - 1].type == 1) {
-                    time_ellapsed += Date.now() - times[times.length - 1].time * 1000;
+                    time_ellapsed += (now - times[times.length - 1].time) * 1000 + Date.now() - loaded;
                 }
 
                 // display
@@ -97,7 +98,7 @@ class General
                 for(let index = 0; index < elements.length; index++) {
                     elements[index].innerText = new Date(time_ellapsed).toISOString().slice(11, -5);
                 }
-            }, 500, this.data.general.times.times);
+            }, 500, this.data.general.times.times, this.data.general.time_now, this.time_loaded);
         }
     }
 }

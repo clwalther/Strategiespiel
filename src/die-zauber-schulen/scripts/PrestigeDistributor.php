@@ -67,6 +67,10 @@ class PrestigeDistributer
 
         for ($i = 0; $i < $iterations; $i++) {
             $groupId = $sortedGroupIds[$i];
+
+            $time = $this->get_ellapsed_time();
+            $mutiplier = $this->get_multiiplier($time);
+
             $prestigeToAdd = $this->prestigeDistributionArray[$i];
             $this->addPrestige($groupId, $prestigeToAdd);
         }
@@ -78,6 +82,36 @@ class PrestigeDistributer
         $currentPrestige = $databaseReturn[0]['prestige'];
         $newPrestige = $currentPrestige + $prestigeToAdd;
         $this->database->update("LABOUR", ["prestige" => $newPrestige], $groupIdContition);
+    }
+
+    private function get_multiiplier(int $time): int {
+        // returns a int which is aquired by linera time function and rounded to next corresponding integer
+        $delta = $this->file["general"]["linear_prestige_change"]["delta"];
+        $minutes = $this->file["general"]["linear_prestige_change"]["minutes"];
+
+        $gradient = $delta / ($minutes * 60);
+        $mul = $time * $gradient + 1;
+
+        return round($mul);
+    }
+
+    private function get_ellapsed_time(): int {
+        // returns the ellapsed time in seconds
+        // direvied from unix time string
+        $time_logs = $this->database->select("TIME", ["time", "type"]);
+        $ellapsed_time = 0;
+
+        for ($time_index = 0; $time_index < sizeof($time_logs) - 1; $time_index++) {
+            if($time_logs[$time_index]["type"] == 1) {
+                $ellapsed_time += ($time_logs[$time_index + 1]["time"] - $time_logs[$time_index]["time"]);
+            }
+
+        }
+        if($time_logs[sizeof($time_logs) - 1]["type"] == 1) {
+            $ellapsed_time += (time() - $time_logs[sizeof($time_logs) - 1]["time"]) ;
+        }
+
+        return $ellapsed_time;
     }
 }
 

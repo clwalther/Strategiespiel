@@ -17,6 +17,11 @@
             "Besenfliegen": 0.1
         },
 
+        "linear_prestige_change": {
+            "minutes": 30,
+            "delta": 1
+        },
+
         "inital_graduates_interval": 13,
         "inital_graduates_issue": 3,
         "presige_interval": 1,

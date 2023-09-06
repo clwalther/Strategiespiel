@@ -14,12 +14,16 @@ include "./labour.php";
 include "./prestige.php";
 include "./events.php";
 
+include "./GraduatesGenerator.php";
+
 $buildings = new Buildings();
 $students  = new Students();
 $teachers  = new Teachers();
 $labour    = new Labour();
 $prestige  = new Prestige();
 $fire_of_hogwarts = new Fire_of_Hogwarts();
+
+$graduates_generator = new GraduatesGenerator();
 
 
 if ($_GET["Team"] != "undefined") {
@@ -29,6 +33,7 @@ if ($_GET["Team"] != "undefined") {
             "teams"     => $general->get_teams(),
             "times"     => $general->get_times(),
             "skills"    => $general->get_skills(),
+            "time_now"  => $general->get_time_now()
         ],
         "labour" => [
             "jobs"      => $labour->get_requirements(),
@@ -54,12 +59,14 @@ if ($_GET["Team"] != "undefined") {
             "teams"   => $general->get_teams(),
             "times"   => $general->get_times(),
             "backups" => $general->get_backups(),
-            "logs"    => $general->get_logs()
+            "logs"    => $general->get_logs(),
+            "time_now"  => $general->get_time_now()
         ],
 
         "buildings" => $buildings->get_teams_progress(),
         "influence" => $labour->get_jobs_influence(),
         "prestige"  => $prestige->get_teams_prestige(),
+        "displacement" => $graduates_generator->get_gaussian_displacement(),
 
         "event" => [
             "fire_of_hogwarts" => [

@@ -30,6 +30,7 @@ class GraduatesGenerator {
         $this->iterateBuildings($this->buildingsJson, $groupId, $perkSumArray, $teacherMultiplier);
         $this->iterateTeachers($groupId, $perkSumArray, $teacherMultiplier);
         $this->addDisplacements($groupId, $perkSumArray);
+
         return $this->createGraduate($perkSumArray);
     }
 
@@ -66,7 +67,7 @@ class GraduatesGenerator {
         return $graduate;
     }
 
-    function generateGaussianRandom($mu, $sigma, $min, $max) { //TODO: Stellschraube
+    private function generateGaussianRandom($mu, $sigma, $min, $max) { //TODO: Stellschraube
         $u1 = mt_rand() / mt_getrandmax();
         $u2 = mt_rand() / mt_getrandmax();
         $z0 = sqrt(-2 * log($u1)) * cos(2 * M_PI * $u2);
@@ -136,6 +137,7 @@ class GraduatesGenerator {
             }
         }
     }
+
     private function addBuildingPerksWithExplicitPerkArray($perkArray, &$perkSumArray) {
         foreach ($perkArray as $key => $value) {
             if(in_array($key, $this->generalJson["subjects"])) {
@@ -149,6 +151,30 @@ class GraduatesGenerator {
     }
 
     // === ** ===
+    public function get_gaussian_displacement() {
+        // returns the main concentration of the gaussian curve for each subject
+
+        // aquires the file contents
+        $file = file_get_contents(DATA_FILE_PATH);
+        $file = json_decode($file, true);
+
+        $displacement = array();
+
+        foreach($file["general"]["teams"] as $group_id => $_) {
+            // COPIED FROM calculateNewGraduate()
+            $perk_sum_array = $this->createPerkSumArray();
+            $teacherMultiplier = 0;
+            $this->iterateBuildings($this->buildingsJson, $group_id, $perk_sum_array, $teacherMultiplier);
+            $this->iterateTeachers($group_id, $perk_sum_array, $teacherMultiplier);
+            $this->addDisplacements($group_id, $perk_sum_array);
+            // NOT VALIDATED CODE ^^ CAUTION
+
+            $displacement[$group_id] = $perk_sum_array;
+        }
+
+        return $displacement;
+    }
+
     private function get_teachers(int $group_id) {
         // aquires the file contents
         $file = file_get_contents(DATA_FILE_PATH);

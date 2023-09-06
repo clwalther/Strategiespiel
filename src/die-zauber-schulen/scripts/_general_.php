@@ -39,6 +39,7 @@ class General
         // returning the all folder enties in backup folder without the two standart dot-folders
         return array_values(array_diff(scandir(BACKUP_FILE_PATH), array('..', '.')));
     }
+
     // start/pause/reset
     public function get_times(): array {
         // reqads all time logs from database
@@ -54,6 +55,11 @@ class General
         // returns the time array object
         return $send_times;
     }
+
+    public function get_time_now(): int {
+        return time();
+    }
+
     // teams
     public function get_teams(): array {
         // reads and returns the team array object
@@ -76,15 +82,11 @@ class General
 
         return $skills_set;
     }
-    // events
-    public function get_events() {
-
-    }
 
     // === BACKUPS ===
     public function backup(string $name = "STNDRT"): void {
         // list of all the tables
-        $table_names = ["TIME", "TEAM", "SCHOOL_ADMIN", "STUDENTS", "LABOUR", "WORKERS"];
+        $table_names = ["TIME", "TEAM", "SCHOOL_ADMIN", "STUDENTS", "LABOUR", "WORKERS", "EVENT", "FIRE_OF_HOGWARTS"];
 
         // path to backup folder with timestamp
         $time_struct = date("Y-m-d H:i:s", time());
@@ -107,7 +109,7 @@ class General
         $this->backup("BFR-LDNG");
 
         // list of all the tables
-        $table_names = ["TIME", "TEAM", "SCHOOL_ADMIN", "STUDENTS", "LABOUR", "WORKERS"];
+        $table_names = ["TIME", "TEAM", "SCHOOL_ADMIN", "STUDENTS", "LABOUR", "WORKERS", "EVENT", "FIRE_OF_HOGWARTS"];
 
         // loops through all the tables
         foreach ($table_names as $table_name) {
@@ -221,15 +223,6 @@ class General
         $name = $bundle[1];
 
         $this->database->update("TEAM", ["teamname" => $name], ["group_id" => $id]);
-    }
-
-    // === EVENTS ===
-    public function start_event(string $value): void {
-
-    }
-
-    public function end_event(): void {
-
     }
 }
 
