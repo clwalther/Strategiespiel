@@ -1,8 +1,9 @@
 # FILES
 .env
 .env.old
-*.conf
 *.md
 
 # FOLDERS
+imgs
 /*.d
+!conf.d

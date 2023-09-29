@@ -1,0 +1,91 @@
+/* ASIDE */
+body aside {
+    width:  calc(var(--aside-width) - 32px);
+    height: calc(100% - 64px);
+
+    box-shadow: 0.5px 0.5px 1px var(--colour-border-edge);
+
+    display: grid;
+    align-content: start;
+
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* CAPTION */
+body aside h3 {
+    font-size: 18px;
+    margin: 18px;
+}
+
+/* CONTAINER */
+body aside div {
+    width: 100%;
+    display: inherit;
+}
+
+/* ELEMENTS */
+body aside div button {
+    height: 32px;
+
+    border-radius: 8px;
+    border: 0;
+    padding: 0;
+
+    background-color: var(--colour-background);
+    color: var(--colour-text);
+
+    display: flex;
+    align-items: center;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+body aside div button:hover {
+    background-color: var(--colour-accent);
+}
+body aside div .active_button {
+    background-color: var(--colour-selected);
+}
+body aside div button img {
+    height: 24px;
+    width: 24px;
+
+    margin: 0;
+    margin-left: 16px;
+    margin-right: 8px;
+}
+
+/* NAVIGATION BAR */
+body nav {
+	height: calc(var(--nav-height) - 32px);
+	width: calc(100% - 32px);
+
+	display: flex;
+	align-items: center;
+
+	padding: 16px;
+	box-shadow: 0.5px 0.5px 1px var(--colour-border-edge);
+
+	font-size: 14px;
+	font-family: Roboto-Regular;
+
+	background-color: var(--colour-header-background);
+}
+body nav a {
+	text-decoration: none;
+	color: var(--colour-colour);
+	white-space: nowrap;
+}
+body nav div {
+	position: absolute;
+	right: 0;
+
+	display: flex;
+
+	padding: 24px;
+}

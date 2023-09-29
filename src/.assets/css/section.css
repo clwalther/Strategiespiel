@@ -1,0 +1,152 @@
+body section {
+    position: absolute;
+    right: 0;
+    top: 64px;
+
+    padding: 32px;
+
+    height: calc(100% - var(--nav-height)  - 64px);
+    width:  calc(100% - var(--aside-width) - 64px);
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--colour-border-edge) transparent;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/* HEADER */
+body section header {
+    display: flex;
+    align-items: center;
+}
+body section header img {
+    width: 32px;
+    height: 32px;
+}
+body section header h1 {
+    white-space: nowrap;
+
+    margin: 0;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+body section header button {
+    border: 1px solid var(--colour-border-edge);
+    border-radius: 8px;
+    padding: 0;
+
+    background-color: var(--colour-accent);
+
+    height: 32px;
+    width: 32px;
+
+    cursor: pointer;
+}
+body section header button:hover {
+    background-color: var(--colour-accent);
+}
+body section header button img {
+    width:  calc(32px - 8px);
+    height: calc(32px - 8px);
+
+    margin: 4px;
+}
+
+/* ARTICLE */
+body section article {
+    width: 100%;
+
+    margin: 0;
+    margin-top: 8px;
+    padding: 0;
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid var(--colour-border-edge);
+
+    overflow: hidden;
+}
+body section article h2 {
+    padding-left: 4%;
+    padding-right: 4%;
+
+    font-size: 20px;
+}
+body section article h3 {
+    font-size: 16px;
+
+    text-align: justify;
+
+    padding-left: 8%;
+    padding-right: 8%;
+}
+body section article p {
+    font-size: 14px;
+
+    text-align: justify;
+
+    padding-left: 8%;
+    padding-right: 8%;
+
+    letter-spacing: 0.049em;
+    line-height: 1.5;
+}
+
+/* ACTION CONATINER */
+body section article .action-container {
+    width: min(80%, 766px);
+
+    margin-top: 32px;
+    margin-bottom: 32px;
+    margin-left: max(10%, calc(50% - 766px / 2));
+    margin-right: max(10%, calc(50% - 766px / 2));
+
+    border: 1px solid var(--colour-border-edge);
+    border-radius: 8px;
+}
+body section article .action-container section {
+    position: relative;
+
+    top: 0;
+    right: 0;
+
+    height: auto;
+    width: auto;
+
+    padding: 0;
+    border-bottom: 1px solid var(--colour-border-edge);
+    margin-right: 32px;
+    margin-left: 32px;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+body section article .action-container section:last-child {
+    border: none;
+}
+body section article .action-container section div {
+    padding: 8px;
+}
+body section article .action-container section button {
+    white-space: nowrap;
+}
+body section article .action-container section div h3 {
+    font-size: 17px;
+    font-weight: 600;
+
+    line-height: 1.7;
+
+    margin: 0;
+    padding: 0;
+}
+body section article .action-container section div p {
+    margin: 0;
+    padding: 0;
+
+    line-height: 1.6;
+
+    white-space: break-spaces;
+}
