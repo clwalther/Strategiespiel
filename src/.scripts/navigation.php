@@ -10,6 +10,7 @@ class Navigation
         $hyperlink->inner_text = "Strategiespiel";
         $spacer->inner_text = "/";
         $hyperlink->attributes["href"] = "/";
+        $hyperlink->attributes["target"] = "_self";
 
         echo $hyperlink->get_html().$spacer->get_html();
 
@@ -23,21 +24,22 @@ class Navigation
 
     public static function construct_drawer(string $path): void {
         $files = scandir($path);
-        $button = Document::create_element("button");
+        $link = Document::create_element("a");
         $image = Document::create_element("img");
         $span = Document::create_element("span");
 
-        $button->append_child($image);
-        $button->append_child($span);
+        $link->append_child($image);
+        $link->append_child($span);
 
         $image->attributes["src"] = "/.assets/icons/open_in_new.svg";
 
         foreach ($files as $filename) {
             if (!is_file($path . '/' . $filename) && substr($filename, 0, 1) != "." || $filename == "..") {
-                $button->attributes["onclick"] = sprintf("window.open('./%s', '_self')", $filename);
+                $link->attributes["href"] = sprintf("./%s", $filename);
+                $link->attributes["target"] = "_self";
                 $span->inner_text = $filename == ".." ? $filename : "/".self::upper_case($filename);
 
-                echo $button->get_html();
+                echo $link->get_html();
             }
         }
     }

@@ -1,43 +1,81 @@
 <?php
 
 // TODO: fetch the value from .conf file
-define('TEAMS', 'TEAM');
-define('STUDENTS', 'STUDENTS');
+define('TEAMS', 'teams');
+define('STUDENTS', 'students');
+define('EXCHANGES', 'exchanges');
+define('TRANSACTIONS', 'transactions');
 
 
 class Display
 {
+    // DRAWERS
     public static function teams(): void {
         global $database;
 
         $teams = $database->select(TEAMS, ["*"]);
 
         foreach ($teams as $team) {
-            $button = Document::create_element("button");
+            $link = Document::create_element("a");
             $image = Document::create_element("img");
             $span = Document::create_element("span");
 
-            $button->append_child($image);
-            $button->append_child($span);
+            $link->append_child($image);
+            $link->append_child($span);
 
-            $button->attributes["onclick"] = sprintf("window.open('./index.php?team=%s', '_self');", $team["group_id"]);
+            $link->attributes["href"] = sprintf("./index.php?team=%s", $team["team_id"]);
+            $link->attributes["target"] = "_self";
             $image->attributes["src"] = "/../.assets/icons/group.svg";
-            $span->inner_text = sprintf("#%s - %s", $team["group_id"], $team["teamname"]);
+            $span->inner_text = sprintf("#%s - %s", $team["team_id"], $team["name"]);
 
-            if($team["group_id"] == $_GET["team"]) { $button->add_class("active_button"); }
+            if($team["team_id"] == $_GET["team"]) { $link->add_class("active_link"); }
 
-            echo $button->get_html();
+            echo $link->get_html();
         }
     }
 
+    public static function exchanges(): void {
+        global $database;
+
+        $exchanges = $database->select(EXCHANGES, ["*"]);
+
+        foreach ($exchanges as $exchange) {
+            $link = Document::create_element("a");
+            $image = Document::create_element("img");
+            $span = Document::create_element("span");
+
+            $link->append_child($image);
+            $link->append_child($span);
+
+            $link->attributes["href"] = sprintf("./index.php?exchange=%s", $exchange["exchange_id"]);
+            $link->attributes["target"] = "_self";
+            $image->attributes["src"] = "/../.assets/icons/trending-up.svg";
+            $span->inner_text = sprintf("%s", $exchange["name"]);
+
+            if($exchange["exchange_id"] == $_GET["exchange"]) { $link->add_class("active_link"); }
+
+            echo $link->get_html();
+        }
+    }
+
+    // ARTICLES
     public static function teamname(): void {
         global $database;
 
-        $team = $database->select_where(TEAMS, ["teamname"], ["group_id" => $_GET["team"]]);
+        $team = $database->select_where(TEAMS, ["name"], ["team_id" => $_GET["team"]]);
 
-        echo "#".$_GET["team"]." - ".$team[0]["teamname"];
+        echo "#".$_GET["team"]." - ".$team[0]["name"];
     }
 
+    public static function exchangename(): void {
+        global $database;
+
+        $exchange = $database->select_where(EXCHANGES, ["name"], ["exchange_id" => $_GET["exchange"]]);
+
+        echo $exchange[0]["name"]." - <i>tradevalue</i>";
+    }
+
+    // DIALOGS
     public static function start_resume(): void {
         $paragraph = Document::create_element("p");
         $dialog = Document::create_dialog("start-resume", "0");

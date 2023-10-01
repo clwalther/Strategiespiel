@@ -25,7 +25,9 @@ body aside div {
 }
 
 /* ELEMENTS */
-body aside div button {
+body aside div a {
+    display: block;
+
     height: 32px;
 
     border-radius: 8px;
@@ -44,14 +46,23 @@ body aside div button {
 
     white-space: nowrap;
     overflow: hidden;
+
+    text-decoration: none;
+
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
-body aside div button:hover {
+body aside div a:hover {
     background-color: var(--colour-accent);
 }
-body aside div .active_button {
+body aside div .active_link {
     background-color: var(--colour-selected);
 }
-body aside div button img {
+body aside div a img {
     height: 24px;
     width: 24px;
 

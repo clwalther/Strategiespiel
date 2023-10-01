@@ -4,11 +4,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- file specific script -->
-    <script src="../../../.assets/js/general/general.js"></script>
-	<script src="../../../.assets/js/general/skill.js"></script>
-    <script src="../../../.assets/js/interface/school-admin.js"></script>
-
     <?php include "../../../.scripts/imports.php"; ?>
     <?php include "../../.scripts/general.php"; ?>
     <?php include "../../.scripts/ministy-of-school-administration.php"; ?>

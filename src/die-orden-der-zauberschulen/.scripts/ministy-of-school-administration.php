@@ -9,7 +9,7 @@ class MinistryOfSchoolAdministrationDisplay
     public static function n_unfetched_students() {
         global $database;
 
-        $students = $database->select_where(STUDENTS, ["id"], ["group_id" => $_GET["team"]]);
+        $students = $database->select_where(STUDENTS, ["student_id"], ["team_id" => $_GET["team"]]);
 
         echo sizeof($students);
     }
