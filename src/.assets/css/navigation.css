@@ -20,7 +20,7 @@ body aside h3 {
 
 /* CONTAINER */
 body aside div {
-    width: 100%;
+    width: calc(var(--aside-width) - 32px);
     display: inherit;
 }
 
@@ -29,6 +29,7 @@ body aside div a {
     display: block;
 
     height: 32px;
+    width: 100%;
 
     border-radius: 8px;
     border: 0;
@@ -67,8 +68,13 @@ body aside div a img {
     width: 24px;
 
     margin: 0;
-    margin-left: 16px;
+    margin-left: 8px;
     margin-right: 8px;
+}
+body aside div a span {
+    width: calc(var(--aside-width) - 40px);
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 /* NAVIGATION BAR */

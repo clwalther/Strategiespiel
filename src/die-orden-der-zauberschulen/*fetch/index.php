@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <?php include "./.scripts/imports.php"; ?>
+    <?php include "../../.scripts/imports.php"; ?>
 </head>
 <body id="body">
 
@@ -20,15 +20,7 @@
     </aside>
 
     <section>
-        <header>
-            <h1>Strategiespiel</h1>
-        </header>
 
-        <article>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, expedita enim ad corporis impedit maxime ex in nostrum velit repudiandae totam excepturi quos accusamus voluptate, debitis nobis nam hic ipsum!
-            </p>
-        </article>
     </section>
 
 </body>

@@ -13,6 +13,9 @@ document.addEventListener("readystatechange", (event) => {
 window.addEventListener("load", (event) => {
     body.style.opacity = 1;
 });
+window.addEventListener("beforeunload", (event) => {
+    body.style.opacity = 0;
+});
 // keystroke detection TODO (doesn't work)
 window.addEventListener("keydown", (event) => {
     event.key == 27 ? close_dialog() : false; // key code 27 = ESCAPE

@@ -3,7 +3,7 @@
     include "/var/www/html/Strategiespiel/src/.scripts/document.php";
     include "/var/www/html/Strategiespiel/src/.scripts/navigation.php";
 
-    if ($_SERVER[REQUEST_URI] != '/') {
+    if ($_SERVER['REQUEST_URI'] != '/') {
         // include and initate only when in a specific game folder
         include "/var/www/html/Strategiespiel/src/.scripts/database.php";
         include "/var/www/html/Strategiespiel/src/.scripts/environment.php";

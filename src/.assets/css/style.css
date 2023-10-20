@@ -10,8 +10,12 @@
 
 	--colour-green: #20a239;
 	--colour-green-accent: #23bf41;
-	--colour-red: #972c13;
-	--colour-red-accent: #cf222e;
+	--colour-red: #a22020;
+	--colour-red-accent: #bf2323;
+	--colour-blue: #2034a2;
+	--colour-blue-accent: #2335bf;
+	--colour-yellow: #a29e20;
+	--colour-yellow-accent: #bcbf23;
 
 	/* VALUES */
 	--nav-height: 64px;
@@ -51,7 +55,7 @@ body {
 
 	opacity: 0;
 
-	transition: .6s opacity ease-in;
+    transition: opacity ease-in-out 0.6s;
 }
 
 /* PRE-REDEFINEMENT */
@@ -126,6 +130,15 @@ codeblock {
 
 	overflow-x: scroll;
 	overflow-y: scroll;
+}
+warning {
+	color: var(--colour-red);
+}
+caution {
+	color: var(--colour-yellow);
+}
+info {
+	color: var(--colour-blue);
 }
 
 /* GLOBAL CLASSES */

@@ -25,7 +25,11 @@
 	</aside>
 
     <section>
-        <h1><?php Display::exchangename(); ?></h1>
+        <?php if (in_array("exchange", array_keys($_GET))) { ?>
+            <h1><?php Display::exchangename(); ?></h1>
+        <?php } else if (in_array("team", array_keys($_GET))) { ?>
+            <h1><?php Display::teamname(); ?></h1>
+        <?php } ?>
     </section>
 
     <!-- DIALOG -->

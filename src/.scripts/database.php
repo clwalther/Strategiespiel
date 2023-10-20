@@ -166,7 +166,7 @@ class DatabaseHandler
         return implode($seperator, $new_array);
     }
 
-    private function format_query_response(object $query_response): array {
+    private function format_query_response($query_response): array {
         if($query_response->num_rows > 0) {
             $results = [];
             while($signle_result = $query_response->fetch_assoc()) {

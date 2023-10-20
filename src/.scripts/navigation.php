@@ -34,7 +34,7 @@ class Navigation
         $image->attributes["src"] = "/.assets/icons/open_in_new.svg";
 
         foreach ($files as $filename) {
-            if (!is_file($path . '/' . $filename) && substr($filename, 0, 1) != "." || $filename == "..") {
+            if ((!is_file($path . '/' . $filename) && substr($filename, 0, 1) != "." && substr($filename, 0, 1) != "*") || $filename == "..") {
                 $link->attributes["href"] = sprintf("./%s", $filename);
                 $link->attributes["target"] = "_self";
                 $span->inner_text = $filename == ".." ? $filename : "/".self::upper_case($filename);
@@ -45,7 +45,7 @@ class Navigation
     }
 
     public static function construct_title(): void {
-        $sub_paths = explode('/', $_SERVER[SCRIPT_NAME]);
+        $sub_paths = explode('/', $_SERVER['SCRIPT_NAME']);
         $curr_folder = $sub_paths[sizeof($sub_paths) - 2];
 
         if($curr_folder == '') {

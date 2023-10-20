@@ -28,7 +28,7 @@ class Display
             $image->attributes["src"] = "/../.assets/icons/group.svg";
             $span->inner_text = sprintf("#%s - %s", $team["team_id"], $team["name"]);
 
-            if($team["team_id"] == $_GET["team"]) { $link->add_class("active_link"); }
+            if(in_array("team", array_keys($_GET)) && $team["team_id"] == $_GET["team"]) { $link->add_class("active_link"); }
 
             echo $link->get_html();
         }
@@ -52,7 +52,7 @@ class Display
             $image->attributes["src"] = "/../.assets/icons/trending-up.svg";
             $span->inner_text = sprintf("%s", $exchange["name"]);
 
-            if($exchange["exchange_id"] == $_GET["exchange"]) { $link->add_class("active_link"); }
+            if(in_array("exchange", array_keys($_GET)) && $exchange["exchange_id"] == $_GET["exchange"]) { $link->add_class("active_link"); }
 
             echo $link->get_html();
         }
@@ -76,7 +76,7 @@ class Display
     }
 
     // DIALOGS
-    public static function start_resume(): void {
+    public static function dialog_start_resume(): void {
         $paragraph = Document::create_element("p");
         $dialog = Document::create_dialog("start-resume", "0");
         $dialog->container->append_child($paragraph);
@@ -89,7 +89,7 @@ class Display
         echo $dialog->get_html();
     }
 
-    public static function stop_pause(): void {
+    public static function dialog_stop_pause(): void {
         $paragraph = Document::create_element("p");
         $dialog = Document::create_dialog("stop-pause", "0");
         $dialog->container->append_child($paragraph);
@@ -102,7 +102,7 @@ class Display
         echo $dialog->get_html();
     }
 
-    public static function backup(): void {
+    public static function dialog_backup(): void {
         $paragraph = Document::create_element("p");
         $dialog = Document::create_dialog("backup", "0");
         $dialog->container->append_child($paragraph);
@@ -115,7 +115,7 @@ class Display
         echo $dialog->get_html();
     }
 
-    public static function load_backup(): void {
+    public static function dialog_load_backup(): void {
         $dialog = Document::create_dialog("load-backup", "0");
 
         $dialog->header->inner_text = "Load Backup";
