@@ -49,18 +49,18 @@
             <div class="action-container">
                 <section>
                     <div>
-                        <h3>Start or resume event "Brand von Hogwarts"</h3>
-                        <p>This will enable payment for event. CAUTION: this will have immediate affects!</p>
+                        <h3>Event <q>Brand von Hogwarts</q> Starten oder Fortfahren</h3>
+                        <p>Diese Aktion aktiviert Event and einzahlung für das Event. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution></p>
                     </div>
-                    <button onclick="open_dialog('start-resume-event', 'fire-of-hogwarts');">Start / Resume event</button>
+                    <button onclick="open_dialog('event-fire_of_hogwarts-start-resume', 0);">Start / Fortfahren</button>
                 </section>
 
                 <section>
                     <div>
-                        <h3>Stop or pause event "Brand von Hogwarts"</h3>
-                        <p>This will disable payment for event. CAUTION: this will have immediate affects!</p>
+                        <h3>Event <q>Brand von Hogwarts</q> Stoppen oder Pausieren</h3>
+                        <p>Diese Aktion deaktiviert Event and einzahlung für das Event. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution></p>
                     </div>
-                    <button onclick="open_dialog('stop-pause-event', 'fire-of-hogwarts');">Stop / Pause event</button>
+                    <button onclick="open_dialog('event-fire_of_hogwarts-stop-pause', 0);">Stop / Pause</button>
                 </section>
             </div>
         </article>
@@ -68,8 +68,8 @@
 
     <!-- DIALOG -->
     <dialog id="dialog">
-        <?php MinistryOfLabourDisplay::start_resume_event_fire_of_hogwarts(); ?>
-        <?php MinistryOfLabourDisplay::stop_pause_event_fire_of_hogwarts(); ?>
+        <?php DisplayMinistryOfLabour::create_dialog_event_fire_of_hogwarts_start_resume(); ?>
+        <?php DisplayMinistryOfLabour::create_dialog_event_fire_of_hogwarts_stop_pause(); ?>
     </dialog>
 </body>
 </html>

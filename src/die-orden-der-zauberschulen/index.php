@@ -92,10 +92,10 @@
 
     <!-- DIALOG -->
     <dialog id="dialog">
-        <?php echo Document::create_dialog_start_resume()->get_html(); ?>
-        <?php echo Document::create_dialog_stop_pause()->get_html(); ?>
-        <?php echo Document::create_dialog_create_backup()->get_html(); ?>
-        <?php echo Document::create_dialog_load_backup()->get_html(); ?>
+        <?php Document::create_dialog_start_resume(); ?>
+        <?php Document::create_dialog_stop_pause(); ?>
+        <?php Document::create_dialog_create_backup(); ?>
+        <?php Document::create_dialog_load_backup(); ?>
     </dialog>
 </body>
 </html>

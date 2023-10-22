@@ -16,11 +16,11 @@
 	<aside>
 		<h3>Exchanges</h3>
 		<div>
-            <?php Display::exchanges(); ?>
+            <?php DisplayGeneral::create_drawer_exchanges(); ?>
         </div>
         <h3>Teams</h3>
         <div>
-            <?php Display::teams(); ?>
+            <?php DisplayGeneral::create_drawer_teams(); ?>
         </div>
 	</aside>
 
@@ -28,12 +28,12 @@
         <?php if (in_array("exchange", array_keys($_GET))) { ?>
             <header>
                 <img src="../../../.assets/icons/trending-up.svg">
-                <h1><?php Display::exchangename(); ?></h1>
+                <?php DisplayGeneral::create_h1_exchangename(); ?>
             </header>
         <?php } else if (in_array("team", array_keys($_GET))) { ?>
             <header>
                 <img src="../../../.assets/icons/group.svg">
-                <h1><?php Display::teamname(); ?></h1>
+                <?php DisplayGeneral::create_h1_teamname(); ?>
             </header>
         <?php } ?>
     </section>

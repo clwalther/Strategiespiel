@@ -148,7 +148,7 @@ class Document
     }
 
     // specific and configured but standart elements
-    public static function create_dialog_start_resume(): Dialog {
+    public static function create_dialog_start_resume(): void {
         // create html elements
         $dialog = self::create_dialog("start-resume", 0);
         $paragraph = self::create_element("p");
@@ -163,10 +163,10 @@ class Document
 
         $paragraph->inner_text = "Start hintergrund Prozesse für Spiel. <caution>VORSICHT: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution>";
 
-        return $dialog;
+        echo $dialog->get_html();
     }
 
-    public static function create_dialog_stop_pause(): Dialog {
+    public static function create_dialog_stop_pause(): void {
         // create html elements
         $dialog = self::create_dialog("stop-pause", 0);
         $paragraph = self::create_element("p");
@@ -181,10 +181,10 @@ class Document
 
         $paragraph->inner_text = "Stoppe hintergund Prozese.";
 
-        return $dialog;
+        echo $dialog->get_html();
     }
 
-    public static function create_dialog_create_backup(): Dialog {
+    public static function create_dialog_create_backup(): void {
         // create html elements
         $dialog = self::create_dialog("create-backup", 0);
         $paragraph = self::create_element("p");
@@ -199,10 +199,10 @@ class Document
 
         $paragraph->inner_text = "Mache eine Sicherheitskopie des momentanen Spielstandes.";
 
-        return $dialog;
+        echo $dialog->get_html();
     }
 
-    public static function create_dialog_load_backup(): Dialog {
+    public static function create_dialog_load_backup(): void {
         // create html elements
         $dialog = self::create_dialog("load-backup", 0);
         $ordered_list = self::create_element("ol");
@@ -243,7 +243,7 @@ class Document
             }
         }
 
-        return $dialog;
+        echo $dialog->get_html();
     }
 
     /* TODO:

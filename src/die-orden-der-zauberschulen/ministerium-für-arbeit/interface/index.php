@@ -17,14 +17,14 @@
 	<aside>
 		<h3>Teams</h3>
 		<div>
-			<?php Display::teams(); ?>
+			<?php DisplayGeneral::create_drawer_teams(); ?>
 		</div>
 	</aside>
 
 	<section>
         <header>
             <img src="../../../.assets/icons/group.svg">
-            <h1><?php Display::teamname(); ?></h1>
+            <?php DisplayGeneral::create_h1_teamname(); ?>
         </header>
 
 		<article id="prestige">

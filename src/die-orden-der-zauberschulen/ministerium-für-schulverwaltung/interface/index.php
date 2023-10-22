@@ -17,14 +17,14 @@
 	<aside>
 		<h3>Teams</h3>
 		<div>
-            <?php Display::teams(); ?>
+            <?php DisplayGeneral::create_drawer_teams(); ?>
         </div>
 	</aside>
 
     <section>
         <header>
             <img src="../../../.assets/icons/group.svg">
-            <h1><?php Display::teamname(); ?></h1>
+            <?php DisplayGeneral::create_h1_teamname(); ?>
             <button onclick="open_dialog('dialog-general-name');">
                 <img src="../../../.assets/icons/edit.svg">
             </button>
@@ -34,7 +34,7 @@
             <h2>Schüler</h2>
             <p>
                 Unabgeholte Schüler:
-                <code><?php MinistryOfSchoolAdministrationDisplay::n_unfetched_students(); ?></code>
+                <?php DisplayMinistryOfSchoolAdministration::__(); ?>
                 <button onclick="open_dialog('dialog-students-0');">
                     Auszahlen
                 </button>
@@ -43,9 +43,7 @@
 
         <article id="teachers">
             <h2>Lehrer</h2>
-            <div class="noselect">
-                <?php MinistryOfSchoolAdministrationDisplay::teachers(); ?>
-            </div>
+            <?php DisplayMinistryOfSchoolAdministration::__(); ?>
         </article>
 
         <article id="buildings">

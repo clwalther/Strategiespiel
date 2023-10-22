@@ -1,33 +1,43 @@
 <?php
 
-class MinistryOfLabourDisplay
+class DisplayMinistryOfLabour
 {
     function __construct() {
 
     }
 
-    public static function start_resume_event_fire_of_hogwarts() {
+    public static function create_dialog_event_fire_of_hogwarts_start_resume(): void {
+        // create html elements
+        $dialog = Document::create_dialog("event-fire_of_hogwarts-start-resume", 0);
         $paragraph = Document::create_element("p");
-        $dialog = Document::create_dialog("start-resume-event", "fire-of-hogwarts");
+
+        // append child
         $dialog->container->append_child($paragraph);
 
-        $dialog->header->inner_text = 'Start or resume event "Brand von Hogwarts"';
-        $paragraph->inner_text = "This will enable payment for event. CAUTION: this will have immediate affects!";
+        // dialog conf
+        $dialog->header->inner_text = "Event <q>Brand von Hogwarts</q> Starten oder Fortfahren";
         $dialog->submit->attributes["onclick"] = "close_dialog();";
-        $dialog->submit->inner_text = "Start / Resume event";
+        $dialog->submit->inner_text = "Start / Fortfahren";
+
+        $paragraph->inner_text = "Diese Aktion aktiviert Event and einzahlung für das Event. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution>";
 
         echo $dialog->get_html();
     }
 
-    public static function stop_pause_event_fire_of_hogwarts() {
+    public static function create_dialog_event_fire_of_hogwarts_stop_pause(): void {
+        // create html elements
+        $dialog = Document::create_dialog("event-fire_of_hogwarts-stop-pause", 0);
         $paragraph = Document::create_element("p");
-        $dialog = Document::create_dialog("stop-pause-event", "fire-of-hogwarts");
+
+        // append child
         $dialog->container->append_child($paragraph);
 
-        $dialog->header->inner_text = 'Stop or pause event "Brand von Hogwarts"';
-        $paragraph->inner_text = "This will enable payment for event. CAUTION: this will have immediate affects!";
+        // dialog conf
+        $dialog->header->inner_text = "Event <q>Brand von Hogwarts</q> Stoppen oder Pausieren";
         $dialog->submit->attributes["onclick"] = "close_dialog();";
-        $dialog->submit->inner_text = "Stop / Pause event";
+        $dialog->submit->inner_text = "Stop / Pause";
+
+        $paragraph->inner_text = "Diese Aktion deaktiviert Event and einzahlung für das Event. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution>";
 
         echo $dialog->get_html();
     }
