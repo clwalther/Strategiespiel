@@ -72,6 +72,9 @@ body section article h2 {
 
     font-size: 20px;
 }
+body section article h2  i {
+    font-size: 13px;
+}
 body section article h3 {
     font-size: 16px;
 

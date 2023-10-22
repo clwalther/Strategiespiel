@@ -26,13 +26,18 @@
 
     <section>
         <?php if (in_array("exchange", array_keys($_GET))) { ?>
-            <h1><?php Display::exchangename(); ?></h1>
+            <header>
+                <img src="../../../.assets/icons/trending-up.svg">
+                <h1><?php Display::exchangename(); ?></h1>
+            </header>
         <?php } else if (in_array("team", array_keys($_GET))) { ?>
-            <h1><?php Display::teamname(); ?></h1>
+            <header>
+                <img src="../../../.assets/icons/group.svg">
+                <h1><?php Display::teamname(); ?></h1>
+            </header>
         <?php } ?>
     </section>
 
-    <!-- DIALOG -->
     <dialog></dialog>
 </body>
 </html>

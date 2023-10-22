@@ -4,11 +4,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- file specific script -->
-    <script src="../../.assets/js/general/general.js"></script>
-    <script src="../../.assets/js/interface/labour.js"></script>
-	<script src="../../.assets/js/general/skill.js"></script>
-
     <?php include "../../../.scripts/imports.php"; ?>
     <?php include "../../.scripts/general.php"; ?>
     <?php include "../../.scripts/ministy-of-labour.php"; ?>
@@ -27,13 +22,11 @@
 	</aside>
 
 	<section>
-		<!-- HEADER -->
         <header>
             <img src="../../../.assets/icons/group.svg">
             <h1><?php Display::teamname(); ?></h1>
         </header>
 
-		<!-- PRESTIGE -->
 		<article id="prestige">
 			<h2>Prestige</h2>
 			<p>
@@ -44,13 +37,11 @@
 			</p>
 		</article>
 
-		<!-- JOBS -->
         <article id="jobs">
             <h2>Arbeiter</h2>
             <div class="noselect" id="job-slot"></div>
         </article>
 
-		<!-- EVENT: BRAND VON HOGWARTS -->
 		<article id="fire-of-hogwarts" class="disabled-event">
 			<h2>Brand von Hogwarts</h2>
 			<p>

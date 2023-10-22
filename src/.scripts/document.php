@@ -58,7 +58,7 @@ class Dialog
     public $cancel;
     public $submit;
 
-    function __construct(string $name, string $id) {
+    function __construct(string $name, int $id) {
         $this->dialog = Document::create_element("div");
         $this->header = Document::create_element("h1");
         $this->container = Document::create_element("div");
@@ -80,8 +80,8 @@ class Dialog
         $this->cancel->attributes["onclick"] = "close_dialog();";
 
         $this->header->inner_text = sprintf("dialog-%s-%s", $name, $id);
-        $this->cancel->inner_text = "Cancel";
-        $this->submit->inner_text = "Submit";
+        $this->cancel->inner_text = "Abbrechen";
+        $this->submit->inner_text = "Bestätigen";
     }
 
     public function get_html(): string {
@@ -97,7 +97,7 @@ class Panel
     public $action_button;
     public $description;
 
-    function __construct(string $name, string $id) {
+    function __construct(string $name, int $id) {
         $this->panel = Document::create_element("div");
         $this->header = Document::create_element("h4");
         $this->action_button = Document::create_element("button");
@@ -139,12 +139,111 @@ class Document
         return new Element($tag);
     }
 
-    public static function create_dialog(string $name, string $id): Dialog {
+    public static function create_dialog(string $name, int $id): Dialog {
         return new Dialog($name, $id);
     }
 
-    public static function create_panel(string $name, string $id): Panel {
+    public static function create_panel(string $name, int $id): Panel {
         return new Panel($name, $id);
+    }
+
+    // specific and configured but standart elements
+    public static function create_dialog_start_resume(): Dialog {
+        // create html elements
+        $dialog = self::create_dialog("start-resume", 0);
+        $paragraph = self::create_element("p");
+
+        // append child
+        $dialog->container->append_child($paragraph);
+
+        // dialog conf
+        $dialog->header->inner_text = "Starten oder Fortfahren";
+        $dialog->submit->attributes["onclick"] = "close_dialog()";
+        $dialog->submit->inner_text = "Start / Fortfahren";
+
+        $paragraph->inner_text = "Start hintergrund Prozesse für Spiel. <caution>VORSICHT: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution>";
+
+        return $dialog;
+    }
+
+    public static function create_dialog_stop_pause(): Dialog {
+        // create html elements
+        $dialog = self::create_dialog("stop-pause", 0);
+        $paragraph = self::create_element("p");
+
+        // append child
+        $dialog->container->append_child($paragraph);
+
+        // dialog conf
+        $dialog->header->inner_text = "Stoppen oder Pausieren";
+        $dialog->submit->attributes["onclick"] = "close_dialog()";
+        $dialog->submit->inner_text = "Stop / Pause";
+
+        $paragraph->inner_text = "Stoppe hintergund Prozese.";
+
+        return $dialog;
+    }
+
+    public static function create_dialog_create_backup(): Dialog {
+        // create html elements
+        $dialog = self::create_dialog("create-backup", 0);
+        $paragraph = self::create_element("p");
+
+        // append child
+        $dialog->container->append_child($paragraph);
+
+        // dialog conf
+        $dialog->header->inner_text = "Backup";
+        $dialog->submit->attributes["onclick"] = "close_dialog()";
+        $dialog->submit->inner_text = "Backup";
+
+        $paragraph->inner_text = "Mache eine Sicherheitskopie des momentanen Spielstandes.";
+
+        return $dialog;
+    }
+
+    public static function create_dialog_load_backup(): Dialog {
+        // create html elements
+        $dialog = self::create_dialog("load-backup", 0);
+        $ordered_list = self::create_element("ol");
+
+        // append child
+        $dialog->container->append_child($ordered_list);
+
+        // dialog conf
+        $dialog->header->inner_text = "Lade Backup";
+        $dialog->submit->attributes["onclick"] = "close_dialog()";
+
+        // create backup list
+        $game_name = explode("/", $_SERVER['PHP_SELF'])[1];
+        $conf_folder_path = "/var/www/html/Strategiespiel/conf.d/";
+        $backup_folder_path = $conf_folder_path.$game_name."/backups.d/";
+
+        foreach (scandir($backup_folder_path) as $content_name) {
+            // check for content_name for being a valid backup folder
+            // [ ] TODO: make better check for valid backup
+            if ((!is_file($backup_folder_path.$content_name) && substr($content_name, 0, 1) != "." && substr($content_name, 0, 1) != "*")) {
+                // create html elements for each list element
+                $list_item = self::create_element("li");
+                $button = self::create_element("button");
+                $image = self::create_element("img");
+                $span_date = self::create_element("span");
+                $span_type = self::create_element("span");
+
+                $ordered_list->append_child($list_item);
+                $list_item->append_child($button);
+                $button->append_child($image);
+                $button->append_child($span_date);
+                $button->append_child($span_type);
+
+                // element conf
+                $image->attributes["src"] = "/.assets/icons/shield.svg";
+                $span_date->inner_text = explode(";", $content_name)[0];
+                $span_type->inner_text = explode(";", $content_name)[1];
+            }
+        }
+
+        return $dialog;
     }
 
     /* TODO:

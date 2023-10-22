@@ -16,6 +16,8 @@
 	--colour-blue-accent: #2335bf;
 	--colour-yellow: #a29e20;
 	--colour-yellow-accent: #bcbf23;
+	--colour-purple: #9520a2;
+	--colour-purple-accent: #9823bf;
 
 	/* VALUES */
 	--nav-height: 64px;
@@ -55,7 +57,7 @@ body {
 
 	opacity: 0;
 
-    transition: opacity ease-in-out 0.6s;
+    transition: opacity ease-in-out 0.2s;
 }
 
 /* PRE-REDEFINEMENT */
@@ -129,15 +131,25 @@ codeblock {
 	white-space: nowrap;
 
 	overflow-x: scroll;
-	overflow-y: scroll;
+	overflow-y: unset;
+}
+codeblock pre {
+	margin: 0;
+}
+fatal {
+	/* 3 */
+	color: var(--colour-purple);
 }
 warning {
+	/* 2 */
 	color: var(--colour-red);
 }
 caution {
+	/* 1 */
 	color: var(--colour-yellow);
 }
 info {
+	/* 0 */
 	color: var(--colour-blue);
 }
 

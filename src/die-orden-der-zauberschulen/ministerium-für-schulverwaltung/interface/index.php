@@ -22,7 +22,6 @@
 	</aside>
 
     <section>
-        <!-- HEADER -->
         <header>
             <img src="../../../.assets/icons/group.svg">
             <h1><?php Display::teamname(); ?></h1>
@@ -31,7 +30,6 @@
             </button>
         </header>
 
-        <!-- STUDENTS -->
         <article id="students">
             <h2>Schüler</h2>
             <p>
@@ -43,7 +41,6 @@
             </p>
         </article>
 
-        <!-- TEACHERS -->
         <article id="teachers">
             <h2>Lehrer</h2>
             <div class="noselect">
@@ -51,7 +48,6 @@
             </div>
         </article>
 
-        <!-- BUILDINGS -->
         <article id="buildings">
             <h2>Ausbau-bau-baum</h2>
             <div class="noselect">
@@ -62,7 +58,6 @@
         </article>
     </section>
 
-    <!-- DIALOG -->
     <dialog></dialog>
 </body>
 </html>

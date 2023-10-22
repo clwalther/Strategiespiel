@@ -20,7 +20,10 @@
     </aside>
 
     <section>
-        <h1>Ministerium für Schulverwaltung</h1>
+        <header>
+            <h1>Ministerium für Schulverwaltung</h1>
+        </header>
+
         <article>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo ea error facilis, distinctio nihil quasi adipisci repellat necessitatibus debitis vero nostrum saepe odio excepturi totam modi doloribus, blanditiis dolores optio!

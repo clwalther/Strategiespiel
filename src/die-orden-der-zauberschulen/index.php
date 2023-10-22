@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="./.assets/js/logs.js" defer></script>
+    <script src="../.assets/js/logs.js" defer></script>
 
     <?php include "../.scripts/imports.php"; ?>
     <?php include "./.scripts/general.php"; ?>
@@ -23,7 +23,10 @@
     </aside>
 
     <section>
-        <h1>Die Orden der Zauberschulen - Strategiespiel 2023</h1>
+        <header>
+            <h1>Die Orden der Zauberschulen - Strategiespiel 2023</h1>
+        </header>
+
         <article>
             <p>
                 Beim diesjährigen Strategiespiel 2023 ”Die Zaubererschulen“ sollen die Teilnehmer passend zum Freizeit Thema ”Harry Potter“ in die faszinierende Welt der Magie und Zauberei eintauchen können.<br>
@@ -49,7 +52,7 @@
             <div class="action-container">
                 <section>
                     <div>
-                        <h3>Starten oder Fortführen</h3>
+                        <h3>Starten oder Fortfahren</h3>
                         <p>Start hintergrund Prozesse für Spiel. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution></p>
                     </div>
                     <button onclick="open_dialog('start-resume', '0');">Start / Fortfahren</button>
@@ -60,7 +63,7 @@
                         <h3>Stoppen oder Pausieren</h3>
                         <p>Stoppe hintergund Prozese.</p>
                     </div>
-                    <button onclick="open_dialog('stop-pause', '0');">Stop / Pause</button>
+                    <button onclick="open_dialog('stop-pause', 0);">Stop / Pause</button>
                 </section>
 
                 <section>
@@ -68,7 +71,7 @@
                         <h3>Backup</h3>
                         <p>Mache eine Sicherheitskopie des momentanen Spielstandes.</p>
                     </div>
-                    <button onclick="open_dialog('backup', '0');">Backup</button>
+                    <button onclick="open_dialog('create-backup', 0);">Backup</button>
                 </section>
 
                 <section>
@@ -76,23 +79,23 @@
                         <h3>Backup laden</h3>
                         <p>Lade eine bereits bestehende Sicherheitskopie als neuen Spielstand ein. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution></p>
                     </div>
-                    <button onclick="open_dialog('load-backup', '0');">Lade Backup</button>
+                    <button onclick="open_dialog('load-backup', 0);">Lade Backup</button>
                 </section>
             </div>
         </article>
 
         <article>
-            <h2>Logs</h2>
+            <h2>Logs<i id="logs-fetching-timedelta"></i></h2>
             <codeblock id="logs"></codeblock>
         </article>
     </section>
 
     <!-- DIALOG -->
     <dialog id="dialog">
-        <?php Display::dialog_start_resume(); ?>
-        <?php Display::dialog_stop_pause(); ?>
-        <?php Display::dialog_backup(); ?>
-        <?php Display::dialog_load_backup(); ?>
+        <?php echo Document::create_dialog_start_resume()->get_html(); ?>
+        <?php echo Document::create_dialog_stop_pause()->get_html(); ?>
+        <?php echo Document::create_dialog_create_backup()->get_html(); ?>
+        <?php echo Document::create_dialog_load_backup()->get_html(); ?>
     </dialog>
 </body>
 </html>

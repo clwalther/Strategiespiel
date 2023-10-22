@@ -14,8 +14,6 @@ body dialog {
 	background-color: rgba(0, 0, 0, 0.5);
 
     opacity: 0;
-
-    transition: opacity 0.5s;
 }
 body dialog[open] {
     opacity: 1;
@@ -115,6 +113,37 @@ body dialog div div input[type="checkbox"] {
     cursor: pointer;
     filter: brightness(85%) saturate(100%) contrast(50000%);
 }
+
+body dialog div div ol {
+    list-style-type: none;
+
+    margin: 0;
+    padding: 0;
+
+    height: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+body dialog div div ol li {
+    margin-top: 8px;
+}
+body dialog div div ol li button {
+    height: 36px;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+body dialog div div ol li .active-button {
+    background-color: var(--colour-background);
+}
+body dialog div div ol li button img {
+    height: 28px;
+    width: 28px;
+}
+
 /* BOTTOM BUTTON CONTAINER */
 body dialog div .button-container {
 	position: absolute;

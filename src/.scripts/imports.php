@@ -8,10 +8,10 @@
         include "/var/www/html/Strategiespiel/src/.scripts/database.php";
         include "/var/www/html/Strategiespiel/src/.scripts/environment.php";
 
-        $game_folder_name = explode("/", $_SERVER['PHP_SELF'])[1];
-        $game_folder_path = "/var/www/html/Strategiespiel/conf.d/";
+        $conf_folder_name = explode("/", $_SERVER['PHP_SELF'])[1];
+        $conf_folder_path = "/var/www/html/Strategiespiel/conf.d/";
 
-        $environment = new EnvironmentHandler($game_folder_path.$game_folder_name."/.env");
+        $environment = new EnvironmentHandler($conf_folder_path.$conf_folder_name."/.env");
 
         $database = new DatabaseHandler(
             $environment->get("DATABASE_NAME"),

@@ -13,7 +13,10 @@
     </nav>
 
     <aside>
-        <h3>Directions</h3>
+        <header>
+            <h3>Directions</h3>
+        </header>
+
         <div>
             <?php Navigation::construct_drawer(__DIR__); ?>
         </div>
