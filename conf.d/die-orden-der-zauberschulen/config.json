@@ -1,0 +1,56 @@
+{
+    "configuration": {
+        "teams": {
+            "1": "TEAMNAME",
+            "2": "TEAMNAME",
+            "3": "TEAMNAME",
+            "4": "TEAMNAME",
+            "5": "TEAMNAME",
+            "6": "TEAMNAME",
+            "7": "TEAMNAME",
+            "8": "TEAMNAME",
+            "9": "TEAMNAME",
+            "10": "TEAMNAME",
+            "11": "TEAMNAME",
+            "12": "TEAMNAME"
+        }
+    },
+
+    "general": {
+        "subjects": [
+            "Zaubertränke",
+            "Zauberkunst",
+            "Verteidigung",
+            "Geschichte",
+            "Geschöpfe",
+            "Kräuterkunde",
+            "Besenfliegen"
+        ],
+
+        "base_skill": 7,
+        "advanced_skill": 3
+    },
+
+
+    "ministry-of-labour": {
+
+    },
+
+    "ministry-of-school-administration": {
+        "buildings": {
+            "erweiterungsfluegel": {
+
+                "children": {
+
+                }
+            },
+
+            "grosse-halle": {
+
+                "children": {
+
+                }
+            }
+        }
+    }
+}

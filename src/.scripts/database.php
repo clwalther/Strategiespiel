@@ -9,7 +9,7 @@ class DatabaseHandler
     private $user_login;
     private $user_name;
 
-    function __construct($database_name, $servername, $user_login, $user_name) {
+    function __construct(string $database_name, string $servername, string $user_login, string $user_name) {
         // environment variables
         $this->database_name = $database_name;
         $this->servername    = $servername;

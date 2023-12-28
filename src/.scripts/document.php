@@ -158,10 +158,11 @@ class Document
 
         // dialog conf
         $dialog->header->inner_text = "Starten oder Fortfahren";
-        $dialog->submit->attributes["onclick"] = "close_dialog()";
+        $dialog->submit->attributes["onclick"] = "send('START GAME;');";
         $dialog->submit->inner_text = "Start / Fortfahren";
 
-        $paragraph->inner_text = "Start hintergrund Prozesse für Spiel. <caution>VORSICHT: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution>";
+        $paragraph->inner_text = "Start hintergrund Prozesse für Spiel. <warning><b>VORSICHT</b>:
+            Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</warning>";
 
         echo $dialog->get_html();
     }
@@ -176,7 +177,7 @@ class Document
 
         // dialog conf
         $dialog->header->inner_text = "Stoppen oder Pausieren";
-        $dialog->submit->attributes["onclick"] = "close_dialog()";
+        $dialog->submit->attributes["onclick"] = "send('STOP GAME;');";
         $dialog->submit->inner_text = "Stop / Pause";
 
         $paragraph->inner_text = "Stoppe hintergund Prozese.";
@@ -194,7 +195,7 @@ class Document
 
         // dialog conf
         $dialog->header->inner_text = "Backup";
-        $dialog->submit->attributes["onclick"] = "close_dialog()";
+        $dialog->submit->attributes["onclick"] = "send('BACKUP GAME;');";
         $dialog->submit->inner_text = "Backup";
 
         $paragraph->inner_text = "Mache eine Sicherheitskopie des momentanen Spielstandes.";
@@ -203,54 +204,64 @@ class Document
     }
 
     public static function create_dialog_load_backup(): void {
-        // create html elements
+        // create dialog
         $dialog = self::create_dialog("load-backup", 0);
-        $ordered_list = self::create_element("ol");
-
-        // append child
-        $dialog->container->append_child($ordered_list);
 
         // dialog conf
         $dialog->header->inner_text = "Lade Backup";
-        $dialog->submit->attributes["onclick"] = "close_dialog()";
+        $dialog->submit->attributes["onclick"] = "close_dialog();";
 
-        // create backup list
-        $game_name = explode("/", $_SERVER['PHP_SELF'])[1];
+        // aquire backups
         $conf_folder_path = "/var/www/html/Strategiespiel/conf.d/";
+        $game_name = explode("/", $_SERVER['PHP_SELF'])[1];
         $backup_folder_path = $conf_folder_path.$game_name."/backups.d/";
+        $folder_contents = scandir($backup_folder_path);
 
-        foreach (scandir($backup_folder_path) as $content_name) {
-            // check for content_name for being a valid backup folder
-            // [ ] TODO: make better check for valid backup
-            if ((!is_file($backup_folder_path.$content_name) && substr($content_name, 0, 1) != "." && substr($content_name, 0, 1) != "*")) {
-                // create html elements for each list element
-                $list_item = self::create_element("li");
-                $button = self::create_element("button");
-                $image = self::create_element("img");
-                $span_date = self::create_element("span");
-                $span_type = self::create_element("span");
+        if (count($folder_contents) > 2) { // 2 are the two standart folders "." and ".."
+            // create html ordered list
+            $ordered_list = self::create_element("ol");
 
-                $ordered_list->append_child($list_item);
-                $list_item->append_child($button);
-                $button->append_child($image);
-                $button->append_child($span_date);
-                $button->append_child($span_type);
+            // append child
+            $dialog->container->append_child($ordered_list);
 
-                // element conf
-                $image->attributes["src"] = "/.assets/icons/shield.svg";
-                $span_date->inner_text = explode(";", $content_name)[0];
-                $span_type->inner_text = explode(";", $content_name)[1];
+            foreach ($folder_contents as $content_name) {
+                // check for content_name for being a valid backup folder
+                // [ ] TODO: make better check for valid backup
+                if ((!is_file($backup_folder_path.$content_name) && substr($content_name, 0, 1) != "." && substr($content_name, 0, 1) != "*")) {
+                    // create html elements for each list element
+                    $list_item = self::create_element("li");
+                    $button = self::create_element("button");
+                    $image = self::create_element("img");
+                    $span_date = self::create_element("span");
+                    $span_type = self::create_element("span");
+
+                    $ordered_list->append_child($list_item);
+                    $list_item->append_child($button);
+                    $button->append_child($image);
+                    $button->append_child($span_date);
+                    $button->append_child($span_type);
+
+                    // element conf
+                    $image->attributes["src"] = "/.assets/icons/shield.svg";
+                    $span_date->inner_text = explode(";", $content_name)[0];
+                    $span_type->inner_text = explode(";", $content_name)[1];
+                }
             }
+        } else {
+            // create html paragraph
+            $paragraph = self::create_element("p");
+
+            // append child
+            $dialog->container->append_child($paragraph);
+
+            // paragraph config
+            $paragraph->inner_text = "Es wurden keine Backups gefunden.<br><info><b>INFORMATION</b>: Der Server hat wahrscheinlich <b>keine</b>
+                Probleme beim zugreifen auf die Backups. Wenn Sie definitiv ein Backup hier erwarten sollten Sie entweder die Seite neuladen
+                oder einen Admin kontaktieren.</info>";
         }
 
         echo $dialog->get_html();
     }
-
-    /* TODO:
-     *
-     * [ ] get an element from already existing html code and be able to add children etc.
-     *
-     */
 }
 
 ?>

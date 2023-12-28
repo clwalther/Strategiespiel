@@ -50,7 +50,7 @@
                 <section>
                     <div>
                         <h3>Event <q>Brand von Hogwarts</q> Starten oder Fortfahren</h3>
-                        <p>Diese Aktion aktiviert Event and einzahlung für das Event. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution></p>
+                        <p>Diese Aktion aktiviert Event and einzahlung für das Event. <warning><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</warning></p>
                     </div>
                     <button onclick="open_dialog('event-fire_of_hogwarts-start-resume', 0);">Start / Fortfahren</button>
                 </section>
@@ -58,7 +58,7 @@
                 <section>
                     <div>
                         <h3>Event <q>Brand von Hogwarts</q> Stoppen oder Pausieren</h3>
-                        <p>Diese Aktion deaktiviert Event and einzahlung für das Event. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution></p>
+                        <p>Diese Aktion deaktiviert Event and einzahlung für das Event. <warning><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</warning></p>
                     </div>
                     <button onclick="open_dialog('event-fire_of_hogwarts-stop-pause', 0);">Stop / Pause</button>
                 </section>

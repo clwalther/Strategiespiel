@@ -57,7 +57,7 @@ body {
 
 	opacity: 0;
 
-    transition: opacity ease-in-out 0.2s;
+    transition: opacity ease-in-out 0.4s;
 }
 
 /* PRE-REDEFINEMENT */
@@ -136,21 +136,30 @@ codeblock {
 codeblock pre {
 	margin: 0;
 }
+
 fatal {
-	/* 3 */
+	/* 5 */
 	color: var(--colour-purple);
 }
-warning {
-	/* 2 */
+error {
+	/* 4 */
 	color: var(--colour-red);
 }
-caution {
-	/* 1 */
+warning {
+	/* 3 */
 	color: var(--colour-yellow);
 }
-info {
-	/* 0 */
+notice {
+	/* 2 */
 	color: var(--colour-blue);
+}
+info {
+	/* 1 */
+	color: var(--colour-green);
+}
+debug {
+	/* 0 */
+	color: var(--colour-colour);
 }
 
 /* GLOBAL CLASSES */

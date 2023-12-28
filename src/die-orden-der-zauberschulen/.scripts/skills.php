@@ -2,10 +2,6 @@
 
 class Skills
 {
-    function __construct() {
-
-    }
-
     public static function interpreted(int $representation): array {
 
     }

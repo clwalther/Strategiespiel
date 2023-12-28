@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="../.assets/js/logs.js" defer></script>
-
     <?php include "../.scripts/imports.php"; ?>
     <?php include "./.scripts/general.php"; ?>
+
+    <script src="../.assets/js/logs.js" defer></script>
 </head>
 <body id="body">
     <nav>
@@ -53,7 +53,7 @@
                 <section>
                     <div>
                         <h3>Starten oder Fortfahren</h3>
-                        <p>Start hintergrund Prozesse für Spiel. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution></p>
+                        <p>Start hintergrund Prozesse für Spiel. <warning><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</warning></p>
                     </div>
                     <button onclick="open_dialog('start-resume', '0');">Start / Fortfahren</button>
                 </section>
@@ -77,7 +77,7 @@
                 <section>
                     <div>
                         <h3>Backup laden</h3>
-                        <p>Lade eine bereits bestehende Sicherheitskopie als neuen Spielstand ein. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution></p>
+                        <p>Lade eine bereits bestehende Sicherheitskopie als neuen Spielstand ein. <warning><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</warning></p>
                     </div>
                     <button onclick="open_dialog('load-backup', 0);">Lade Backup</button>
                 </section>

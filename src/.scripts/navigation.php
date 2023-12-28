@@ -34,7 +34,7 @@ class Navigation
         $image->attributes["src"] = "/.assets/icons/open_in_new.svg";
 
         foreach ($files as $filename) {
-            if ((!is_file($path . '/' . $filename) && substr($filename, 0, 1) != "." && substr($filename, 0, 1) != "*") || $filename == "..") {
+            if ((!is_file($path . '/' . $filename) && substr($filename, 0, 1) != "." && substr($filename, 0, 1) != "*") || ($filename == ".." && $path != $_SERVER["DOCUMENT_ROOT"])) {
                 $link->attributes["href"] = sprintf("./%s", $filename);
                 $link->attributes["target"] = "_self";
                 $span->inner_text = $filename == ".." ? $filename : "/".self::upper_case($filename);
@@ -46,12 +46,15 @@ class Navigation
 
     public static function construct_title(): void {
         $sub_paths = explode('/', $_SERVER['SCRIPT_NAME']);
+        $parent_folder = $sub_paths[sizeof($sub_paths) - 3];
         $curr_folder = $sub_paths[sizeof($sub_paths) - 2];
 
         if($curr_folder == '') {
             echo "Strategiespiel";
+        } else if (sizeof($sub_paths) - 2 == 1) {
+            echo sprintf("%s | Strategiespiel", self::upper_case($curr_folder));
         } else {
-            echo self::upper_case($curr_folder);
+            echo sprintf("%s | %s", self::upper_case($curr_folder), self::upper_case($parent_folder));
         }
     }
 

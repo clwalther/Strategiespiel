@@ -1,0 +1,36 @@
+body dialog #dialog-students-0 div:not(.button-container) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body dialog #dialog-students-0 div:not(.button-container) div {
+    display: grid;
+    align-content: end;
+
+    height: 100%;
+}
+body dialog #dialog-students-0 div:not(.button-container) div div:first-child {
+    display: flex;
+
+    height: 100%;
+    width: 100%;
+}
+body dialog #dialog-students-0 div:not(.button-container) div div:last-child {
+    display: flex;
+
+    height: 20px;
+    width: 100%;
+}
+body dialog #dialog-students-0 div:not(.button-container) div div:last-child button {
+    width: 18px;
+    height: 18px;
+}
+body dialog #dialog-students-0 div:not(.button-container) button {
+    height: 48px;
+    width: 48px;
+
+    border-radius: 50%;
+
+    padding: 0;
+}
+

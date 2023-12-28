@@ -19,7 +19,7 @@ class DisplayMinistryOfLabour
         $dialog->submit->attributes["onclick"] = "close_dialog();";
         $dialog->submit->inner_text = "Start / Fortfahren";
 
-        $paragraph->inner_text = "Diese Aktion aktiviert Event and einzahlung für das Event. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution>";
+        $paragraph->inner_text = "Diese Aktion aktiviert Event and einzahlung für das Event. <warning><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</warning>";
 
         echo $dialog->get_html();
     }
@@ -37,7 +37,7 @@ class DisplayMinistryOfLabour
         $dialog->submit->attributes["onclick"] = "close_dialog();";
         $dialog->submit->inner_text = "Stop / Pause";
 
-        $paragraph->inner_text = "Diese Aktion deaktiviert Event and einzahlung für das Event. <caution><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</caution>";
+        $paragraph->inner_text = "Diese Aktion deaktiviert Event and einzahlung für das Event. <warning><b>VORSICHT</b>: Diese Aktion hat direkte und möglicherweise schwerwiegende Konsequenzen!</warning>";
 
         echo $dialog->get_html();
     }
