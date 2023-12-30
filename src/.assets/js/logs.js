@@ -1,11 +1,11 @@
 (() => {
+    const levels = ["debug", "info", "notice", "warning", "error", "fatal"];
+
+    let codeblock = document.getElementById("logs");
+    let fetch_timedelta = document.getElementById("logs-fetching-timedelta");
+
     // === LOGS ===
     async function fetch_logs() {
-        const levels = ["debug", "info", "notice", "warning", "error", "fatal"];
-
-        let codeblock = document.getElementById("logs");
-        let fetch_timedelta = document.getElementById("logs-fetching-timedelta");
-
         let primary_time = performance.now();
         let fetched_logs = await fetch("./*fetch/logs/");
         let secondary_time = performance.now();

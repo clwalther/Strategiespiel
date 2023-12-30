@@ -158,7 +158,7 @@ class Document
 
         // dialog conf
         $dialog->header->inner_text = "Starten oder Fortfahren";
-        $dialog->submit->attributes["onclick"] = "send('START GAME;');";
+        $dialog->submit->attributes["onclick"] = "send('START GAME;'); close_dialog(); location.reload();";
         $dialog->submit->inner_text = "Start / Fortfahren";
 
         $paragraph->inner_text = "Start hintergrund Prozesse für Spiel. <warning><b>VORSICHT</b>:
@@ -177,7 +177,7 @@ class Document
 
         // dialog conf
         $dialog->header->inner_text = "Stoppen oder Pausieren";
-        $dialog->submit->attributes["onclick"] = "send('STOP GAME;');";
+        $dialog->submit->attributes["onclick"] = "send('STOP GAME;'); close_dialog(); location.reload();";
         $dialog->submit->inner_text = "Stop / Pause";
 
         $paragraph->inner_text = "Stoppe hintergund Prozese.";
@@ -195,7 +195,7 @@ class Document
 
         // dialog conf
         $dialog->header->inner_text = "Backup";
-        $dialog->submit->attributes["onclick"] = "send('BACKUP GAME;');";
+        $dialog->submit->attributes["onclick"] = "send('BACKUP GAME;'); close_dialog(); location.reload();";
         $dialog->submit->inner_text = "Backup";
 
         $paragraph->inner_text = "Mache eine Sicherheitskopie des momentanen Spielstandes.";
